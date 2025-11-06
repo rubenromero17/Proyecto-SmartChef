@@ -1,0 +1,88 @@
+.fondo {
+  --background: #e9cbb4;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.container {
+  text-align: center;
+  padding: 20px;
+  color: #5b4031;
+}
+
+.logo {
+  width: 130px;
+  margin: 40px auto 10px;
+}
+
+.titulo {
+  font-family: 'Poppins', sans-serif;
+  color: #5b4031;
+  font-weight: 700;
+  letter-spacing: 1px;
+  font-size: 24px;
+  margin: 5px 0 0 0;
+}
+
+.subtitulo {
+  color: #876b5d;
+  font-size: 14px;
+  margin-top: 2px;
+  letter-spacing: 1px;
+}
+
+.descripcion {
+  font-size: 14px;
+  margin: 20px 0;
+  color: #5b4031;
+}
+
+.login-box {
+  background-color: #d7bca4;
+  padding: 20px;
+  border-radius: 8px;
+  border: 1px solid #b7957c;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.input-item {
+  --background: transparent;
+  margin-bottom: 10px;
+
+  ion-label {
+    color: #5b4031;
+    font-size: 14px;
+    font-weight: 500;
+  }
+
+  ion-input {
+    background-color: #fff;
+    border-radius: 6px;
+    padding: 8px;
+    color: #5b4031;
+  }
+}
+
+.boton-iniciar {
+  --background: #d7bca4;
+  --color: #5b4031;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+  width: 50px;
+  height: 50px;
+  margin: 10px auto 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.boton-registrar {
+  margin-top: 20px;
+  color: #5b4031;
+  font-weight: bold;
+  font-size: 15px;
+  background-color: #d7bca4;
+  border-radius: 20px;
+  padding: 6px 20px;
+  text-transform: none;
+}
