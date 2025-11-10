@@ -1,14 +1,21 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
+import { CommonModule } from '@angular/common';
+import {RouterModule} from '@angular/router';
+import { IonicModule } from '@ionic/angular';
+
 
 @Component({
   selector: 'app-inicio',
-  templateUrl: './inicio.page.html',
-  styleUrls: ['./inicio.page.scss'],
+  standalone : true,
+  imports:[CommonModule, RouterModule, IonicModule],
+  templateUrl: './inicio.component.html',
+  styleUrls: ['./inicio.component.scss'],
 })
 export class InicioPage {
 
-  constructor(private router: Router) {}
+  // eslint-disable-next-line @angular-eslint/prefer-inject
+  constructor(public router: Router) {}
 
   iniciarSesion() {
     console.log('Iniciando sesión...');
@@ -17,4 +24,5 @@ export class InicioPage {
   irARegistro() {
     this.router.navigate(['/registro']);
   }
+
 }

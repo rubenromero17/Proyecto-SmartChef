@@ -1,13 +1,20 @@
 import { Routes } from '@angular/router';
+import {RegistroComponent} from "./registro/registro.component";
 
 export const routes: Routes = [
   {
-    path: 'home',
-    loadComponent: () => import('./home/home.page').then((m) => m.HomePage),
+    path: 'inicio',
+    loadComponent: () =>
+      import('./inicio/inicio.component').then((m) => m.InicioPage),
+  },
+  {
+  path: 'registro',
+    loadComponent: () =>
+      import('./registro/registro.component').then(m => m.RegistroComponent),
   },
   {
     path: '',
-    redirectTo: 'home',
+    redirectTo: 'inicio',
     pathMatch: 'full',
   },
 ];

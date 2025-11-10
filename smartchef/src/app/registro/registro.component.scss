@@ -1,0 +1,146 @@
+$color-principal: #5b4031;
+
+// Fondo de la página
+ion-content.fondo::part(native) {
+  background: #e9cbb4;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  padding-top: 20px;
+}
+
+// Contenedor principal
+.container {
+  width: 100%;
+  max-width: 400px;
+  text-align: center;
+  padding: 0 20px;
+}
+
+// Logo en la esquina
+.logo-corner {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background-color: #d7bca4;
+  padding: 5px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+  }
+}
+
+// Icono de perfil
+.perfil-icon-container {
+  margin: 30px auto 10px;
+}
+
+.perfil-icon {
+  font-size: 80px;
+  color: $color-principal;
+}
+
+// Botón añadir foto
+.boton-foto {
+  --background: #d7bca4;
+  --color: $color-principal;
+  font-weight: 500;
+  margin-bottom: 30px;
+  border-radius: 20px;
+  padding: 5px 15px;
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.15);
+  transition: all 0.2s ease-in-out;
+}
+
+.boton-foto:hover {
+  --background: $color-principal;
+  --color: #fff;
+  transform: translateY(-1px);
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+}
+
+// Tarjeta del formulario
+.tarjeta-formulario {
+  background-color: #d7bca4;
+  padding: 15px 20px;
+  border-radius: 12px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  width: 100%;
+}
+
+// Inputs dentro de ion-item
+.input-item {
+  --background: transparent;
+  margin-bottom: 8px;
+  --inner-padding-bottom: 0;
+
+  ion-label {
+    color: $color-principal;
+    font-size: 14px;
+    font-weight: 500;
+    margin-bottom: 2px;
+  }
+
+  ion-input {
+    --background: #fff;
+    border-radius: 6px;
+    padding: 8px 10px;
+    color: $color-principal;
+    --placeholder-color: #876b5d;
+  }
+}
+
+// Eliminar borde inferior del último input
+.input-item.no-border-bottom {
+  --border-width-bottom: 0;
+}
+
+// Botones de navegación fijos en la parte inferior
+.botones-navegacion {
+  position: fixed;
+  bottom: 15px;
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+  padding: 0 30px;
+  max-width: 400px;
+  margin: 0 auto;
+}
+
+// Botón atrás y confirmar
+.boton-atras, .boton-confirmar {
+  --background: #d7bca4;
+  --color: $color-principal;
+  width: 70px;
+  height: 70px;
+  --border-radius: 50%;
+  font-size: 30px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  transition: all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+}
+
+// Hover botón atrás
+.boton-atras:hover {
+  transform: translateX(-5px) scale(1.05);
+  --background: $color-principal;
+  --color: #fff;
+}
+
+// Botón confirmar
+.boton-confirmar {
+  --background: $color-principal;
+  --color: #fff;
+}
+
+// Hover botón confirmar
+.boton-confirmar:hover {
+  transform: translateY(-5px) scale(1.1);
+  box-shadow: 0 8px 15px rgba(0, 0, 0, 0.3);
+}
