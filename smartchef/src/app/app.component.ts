@@ -1,5 +1,9 @@
 import { Component } from '@angular/core';
 import { IonApp, IonRouterOutlet } from '@ionic/angular/standalone';
+import {personOutline, checkmarkDoneCircleOutline,returnUpBackOutline,
+  checkmarkOutline,personAddOutline,heartOutline,
+  timeOutline,leafOutline,trendingUpOutline,homeOutline} from "ionicons/icons";
+import {addIcons} from "ionicons";
 
 @Component({
   selector: 'app-root',
@@ -7,5 +11,18 @@ import { IonApp, IonRouterOutlet } from '@ionic/angular/standalone';
   imports: [IonApp, IonRouterOutlet],
 })
 export class AppComponent {
-  constructor() {}
+  constructor() {
+    addIcons({
+      personOutline,
+      checkmarkDoneCircleOutline,
+      returnUpBackOutline,
+      checkmarkOutline,
+      personAddOutline,
+      heartOutline,
+      timeOutline,
+      leafOutline,
+      trendingUpOutline,
+      homeOutline,
+    })
+  }
 }

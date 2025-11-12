@@ -1,71 +1,86 @@
-<ion-content class="fondo">
-  <div class="container">
+<ion-content class="fondo-principal ion-padding">
+  <div class="contenedor-principal">
 
+    <div class="seccion-cabecera ion-text-center">
+      <ion-icon name="person-add-outline" class="icono-perfil-principal"></ion-icon>
 
-    <div class="logo-corner">
-      <img src="assets/icon/logoSmartChef_small.png" alt="Logo SC" />
+      <ion-button fill="clear" size="small" class="boton-foto">
+        Añadir foto Perfil
+      </ion-button>
     </div>
 
+    <ion-card class="tarjeta-formulario">
+      <ion-card-content class="contenido-tarjeta">
 
-    <div class="perfil-icon-container">
-      <ion-icon name="person-circle-outline" class="perfil-icon"></ion-icon>
+        <div>
+          <ion-item class="item-campo">
+            <ion-input
+              label="Nombre"
+              labelPlacement="stacked"
+              placeholder="Escriba su nombre"
+              class="input-valor"
+            ></ion-input>
+          </ion-item>
+
+          <ion-item class="item-campo">
+            <ion-input
+              label="Apellidos"
+              labelPlacement="stacked"
+              placeholder="Escriba sus apellidos"
+              class="input-valor"
+            ></ion-input>
+          </ion-item>
+
+          <ion-item class="item-campo">
+            <ion-input
+              label="Fecha Nacimiento"
+              labelPlacement="stacked"
+              type="date"
+              placeholder="Dia/Mes/Año"
+              class="input-valor"
+            ></ion-input>
+          </ion-item>
+
+          <ion-item class="item-campo">
+            <ion-input
+              label="Correo Electrónico"
+              labelPlacement="stacked"
+              type="email"
+              placeholder="Escriba su correo"
+              class="input-valor"
+            ></ion-input>
+          </ion-item>
+
+          <ion-item class="item-campo">
+            <ion-input
+              label="Dirección"
+              labelPlacement="stacked"
+              placeholder="Escriba su dirección"
+              class="input-valor"
+            ></ion-input>
+          </ion-item>
+
+          <ion-item class="item-campo">
+            <ion-input
+              label="Contraseña"
+              labelPlacement="stacked"
+              type="password"
+              placeholder="Escriba su contraseña"
+              class="input-valor"
+            ></ion-input>
+          </ion-item>
+        </div>
+      </ion-card-content>
+    </ion-card>
+
+    <div class="contenedor-botones">
+      <ion-button shape="round" class="boton-accion boton-volver" (click)="volverInicio()">
+        <ion-icon name="return-up-back-outline"></ion-icon>
+      </ion-button>
+
+      <ion-button shape="round" class="boton-accion boton-aceptar">
+        <ion-icon slot="icon-only" name="checkmark-outline"></ion-icon>
+      </ion-button>
     </div>
-
-
-    <ion-button fill="clear" class="boton-foto">
-      Añadir foto Perfil
-    </ion-button>
-
-
-    <div class="tarjeta-formulario">
-
-      <ion-item lines="none" class="input-item">
-        <ion-label position="stacked">Nombre</ion-label>
-        <ion-input type="text" value="Value"></ion-input>
-      </ion-item>
-
-
-      <ion-item lines="none" class="input-item">
-        <ion-label position="stacked">Apellidos</ion-label>
-        <ion-input type="text" value="Value"></ion-input>
-      </ion-item>
-
-
-      <ion-item lines="none" class="input-item">
-        <ion-label position="stacked">Fecha Nacimiento</ion-label>
-        <ion-input type="date" value="Value"></ion-input>
-      </ion-item>
-
-
-      <ion-item lines="none" class="input-item">
-        <ion-label position="stacked">Correo Electronico</ion-label>
-        <ion-input type="email" value="Value"></ion-input>
-      </ion-item>
-
-
-      <ion-item lines="none" class="input-item">
-        <ion-label position="stacked">Direccion</ion-label>
-        <ion-input type="text" value="Value"></ion-input>
-      </ion-item>
-
-
-      <ion-item lines="none" class="input-item no-border-bottom">
-        <ion-label position="stacked">Contraseña</ion-label>
-        <ion-input type="password" value="Value"></ion-input>
-      </ion-item>
-    </div>
-
-  </div>
-
-  <!-- Botones de Navegación (Fijos en la parte inferior) -->
-  <div class="botones-navegacion">
-    <!-- Botón Atrás -->
-    <ion-button class="boton-atras">
-      <ion-icon name="arrow-back-outline"></ion-icon>
-    </ion-button>
-    <!-- Botón Guardar/Confirmar -->
-    <ion-button class="boton-confirmar">
-      <ion-icon name="checkmark-outline"></ion-icon>
-    </ion-button>
   </div>
 </ion-content>

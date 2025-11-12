@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import {IonButton, IonContent, IonIcon, IonInput, IonItem, IonLabel} from "@ionic/angular/standalone";
-
+import {IonButton, IonCard, IonCardContent, IonCol, IonContent, IonGrid, IonIcon, IonInput, IonItem, IonLabel, IonRow} from "@ionic/angular/standalone";
+import {Router} from "@angular/router";
 @Component({
   selector: 'app-registro',
   templateUrl: './registro.component.html',
@@ -12,12 +12,23 @@ import {IonButton, IonContent, IonIcon, IonInput, IonItem, IonLabel} from "@ioni
     IonItem,
     IonLabel,
     IonInput,
-    IonContent
+    IonContent,
+    IonRow,
+    IonCol,
+    IonGrid,
+    IonCardContent,
+    IonCard
   ]
 })
 export class RegistroComponent {
 
-  constructor() { }
+  // eslint-disable-next-line @angular-eslint/prefer-inject
+  constructor( private router: Router) {
+  }
+
+  volverInicio():void {
+    this.router.navigate(['/volverAtras']);
+  }
 
 
 }

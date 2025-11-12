@@ -1,0 +1,29 @@
+.footer-nav {
+  --background: #e7c7af;
+  border-top-left-radius: 25px;
+  border-top-right-radius: 25px;
+  box-shadow: 0 -3px 8px rgba(0, 0, 0, 0.25);
+
+  .menu-inferior {
+    display: flex;
+    justify-content: space-around;
+    padding: 12px 0;
+
+    ion-button {
+      --color: #5d4037;
+      font-size: 26px;
+      transition: transform 0.2s, color 0.2s;
+
+      &:hover {
+        transform: scale(1.2);
+      }
+
+      &.activo {
+        --color: #f5e1d0;
+        background-color: #5d4037;
+        border-radius: 50%;
+        transform: scale(1.2);
+      }
+    }
+  }
+}

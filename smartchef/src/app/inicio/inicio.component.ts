@@ -3,6 +3,8 @@ import { Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import {RouterModule} from '@angular/router';
 import { IonicModule } from '@ionic/angular';
+import {bootstrapApplication} from "@angular/platform-browser";
+
 
 
 @Component({
@@ -23,6 +25,9 @@ export class InicioPage {
 
   irARegistro() {
     this.router.navigate(['/registro']);
+  }
+  irAhome(){
+    this.router.navigate(['/irAhome']);
   }
 
 }

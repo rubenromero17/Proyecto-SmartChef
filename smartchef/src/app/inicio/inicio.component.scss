@@ -3,6 +3,8 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  flex-direction: column;
+  min-height: 100vh;
 }
 
 .container {
@@ -12,8 +14,9 @@
 }
 
 .logo {
-  width: 130px;
-  margin: 40px auto 10px;
+  width: 120px;
+  margin: 30px auto 10px;
+  animation: fadeInDown 1s ease-in-out;
 }
 
 .titulo {
@@ -34,16 +37,24 @@
 
 .descripcion {
   font-size: 14px;
-  margin: 20px 0;
+  margin: 15px 0 25px;
   color: #5b4031;
 }
 
-.tarjeta-login {
-  background-color: #d7bca4;
-  padding: 20px;
-  border-radius: 8px;
-  border: 1px solid #b7957c;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+/* TARJETA CENTRADA Y MÁS ESTRECHA */
+.tarjeta-formulario {
+  background-color: #fff;
+  width: 90%;
+  max-width: 400px;
+  margin: 0 auto;
+  border-radius: 15px;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+
+  &:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.25);
+  }
 }
 
 .input-item {
@@ -59,29 +70,40 @@
   }
 
   ion-input {
-    background-color: #fff;
+    background-color: #f8f3ef;
     border-radius: 6px;
     padding: 8px;
     color: #5b4031;
   }
 }
 
+/* BOTÓN CENTRAL FLOTANTE CON EFECTO */
+.btn-login {
+  display: flex;
+  justify-content: center;
+  margin-top: -25px; /* Para que flote sobre la tarjeta */
+}
+
 .boton-iniciar {
   --background: #d7bca4;
   --color: #5b4031;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
-  width: 50px;
-  height: 50px;
-  margin: 10px auto 0;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  animation: bounceIn 0.8s ease;
+
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+
+  &:hover {
+    transform: scale(1.1);
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.3);
+  }
 }
 
-
-
+/* BOTÓN REGISTRAR */
 .boton-registrar {
-  margin-top: 20px;
+  margin-top: 25px;
   color: #5b4031;
   font-weight: bold;
   font-size: 15px;
@@ -89,31 +111,39 @@
   border-radius: 20px;
   padding: 6px 20px;
   text-transform: none;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+
+  &:hover {
+    background-color: #cfae8d;
+    transform: translateY(-2px);
+  }
 }
 
-boton-registrar:hover {
-  background-color: rgba(91, 64, 49, 0.1);
-}
-
-@keyframes efecto {
-  from{
+/* ANIMACIONES */
+@keyframes fadeInDown {
+  from {
     opacity: 0;
-    transform: translateY(30px);
-  }to{
-  opacity: 1;
-  transform: translateY(0);
-     }
+    transform: translateY(-30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
-.animacion{
-  opacity: 0;
-  animation: efecto 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+@keyframes bounceIn {
+  0% {
+    transform: scale(0.3);
+    opacity: 0;
+  }
+  50% {
+    transform: scale(1.1);
+    opacity: 1;
+  }
+  70% {
+    transform: scale(0.9);
+  }
+  100% {
+    transform: scale(1);
+  }
 }
-
-.logo { animation-delay: 0.1s; }
-.titulo { animation-delay: 0.3s; }
-.subtitulo { animation-delay: 0.4s; }
-.descripcion { animation-delay: 0.6s; }
-.tarjeta-login{ animation-delay: 0.8s; }
-.boton-registrar { animation-delay: 1.0s; }
-

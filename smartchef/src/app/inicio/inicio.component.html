@@ -1,4 +1,4 @@
-<ion-content class="fondo">
+<ion-content class="fondo" xmlns="http://www.w3.org/1999/html">
   <div class="container">
     <img src="assets/icon/logoSmartChef.png" alt="SmartChef Logo" class="logo" />
 
@@ -7,22 +7,26 @@
 
     <p class="descripcion">¡Convierte tus ingredientes en recetas inteligentes!</p>
 
-    <div class="tarjeta-login">
-      <ion-item lines="none" class="input-item">
-        <ion-label position="stacked">Email</ion-label>
-        <ion-input type="email" placeholder="Introduzca su correo"></ion-input>
-      </ion-item>
+    <ion-card class="tarjeta-formulario">
+      <ion-card-content class="contenido-tarjeta">
 
-      <ion-item lines="none" class="input-item">
-        <ion-label position="stacked">Contraseña</ion-label>
-        <ion-input type="password" placeholder="Intruduzca tu contraseña"></ion-input>
-      </ion-item>
+        <ion-item lines="none" class="input-item">
+          <ion-label position="stacked">Correo Electrónico</ion-label>
+          <ion-input type="email" placeholder="Escriba su correo"></ion-input>
+        </ion-item>
 
-      <div class="btn-login">
-        <ion-button expand="block" class="boton-iniciar" shape="round">
-          <ion-icon name="checkmark-circle-outline"></ion-icon>
-        </ion-button>
-      </div>
+        <ion-item lines="none" class="input-item">
+          <ion-label position="stacked">Contraseña</ion-label>
+          <ion-input type="password" placeholder="Escriba su contraseña"></ion-input>
+        </ion-item>
+
+      </ion-card-content>
+    </ion-card>
+
+    <div class="btn-login">
+      <ion-button expand="block" class="boton-iniciar" shape="round" (click)="irAhome()">
+        <ion-icon name="checkmark-done-circle-outline"></ion-icon>
+      </ion-button>
     </div>
 
     <ion-button fill="clear" class="boton-registrar" (click)="irARegistro()">

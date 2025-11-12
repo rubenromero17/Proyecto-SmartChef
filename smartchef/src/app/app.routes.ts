@@ -1,5 +1,4 @@
 import { Routes } from '@angular/router';
-import {RegistroComponent} from "./registro/registro.component";
 
 export const routes: Routes = [
   {
@@ -8,9 +7,19 @@ export const routes: Routes = [
       import('./inicio/inicio.component').then((m) => m.InicioPage),
   },
   {
-  path: 'registro',
+    path: 'registro',
     loadComponent: () =>
-      import('./registro/registro.component').then(m => m.RegistroComponent),
+      import('./registro/registro.component').then((m) => m.RegistroComponent),
+  },
+  {
+    path: 'volverAtras',
+    loadComponent: () =>
+      import('./inicio/inicio.component').then((m) => m.InicioPage),
+  },
+  {
+    path: 'irAhome',
+    loadComponent: () =>
+      import('./home/home.component').then((m) => m.HomeComponent),
   },
   {
     path: '',
