@@ -11,4 +11,6 @@ import { FormsModule } from '@angular/forms';
   standalone: true,
   imports: [IonicModule, CommonModule, FormsModule],
 })
-export class InicioComponent {}
+export class InicioComponent {
+
+}

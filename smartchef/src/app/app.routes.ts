@@ -22,6 +22,26 @@ export const routes: Routes = [
       import('./home/home.component').then((m) => m.HomeComponent),
   },
   {
+    path: 'irAinicioDesdeHome',
+    loadComponent: () =>
+      import('./inicio/inicio.component').then((m) => m.InicioPage),
+  },
+  {
+    path: 'irAinicioDesdeFavoritos',
+    loadComponent: () =>
+      import('./inicio/inicio.component').then((m) => m.InicioPage),
+  },
+  {
+    path: 'irAfavoritosDesdeHome',
+    loadComponent: () =>
+      import('./favoritos/favoritos.component').then((m) => m.FavoritosComponent),
+  },
+  {
+    path: 'irAfavoritosHomeDesdeHome',
+    loadComponent: () =>
+      import('./home-favoritos/home-favoritos.component').then((m) => m.HomeFavoritosComponent),
+  },
+  {
     path: '',
     redirectTo: 'inicio',
     pathMatch: 'full',

@@ -2,6 +2,22 @@ ion-content.fondo-principal {
   --background: #e9cbb4;
 }
 
+.boton-salida {
+  display: flex;
+  justify-content: flex-end;
+  padding: 0px;
+}
+
+.icono-salida {
+  font-size: 28px;
+  color: #5d4037;
+  transition: transform 0.2s;
+}
+
+.icono-salida:hover {
+  transform: scale(1.15);
+}
+
 .contenedor-principal {
   padding: 10px;
   max-width: 450px;
@@ -10,7 +26,7 @@ ion-content.fondo-principal {
 }
 
 .logo {
-  width: 40px;
+  width: 50px;
   margin: 8px auto;
   display: block;
 }
@@ -86,13 +102,6 @@ ion-content.fondo-principal {
     }
   }
 
-  .descripcion-receta {
-    font-size: 11px;
-    margin-bottom: 4px;
-    color: #5d4037;
-    line-height: 1.2;
-  }
-
   .hashtags {
     span {
       background: #f5e1d0;
@@ -104,13 +113,26 @@ ion-content.fondo-principal {
     }
   }
 
+  .boton-mas {
+    --color: #5d4037;
+    font-size: 12px;
+    margin-top: 4px;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+  }
+
   .icono-favorito {
     position: absolute;
     top: 8px;
     right: 8px;
     color: #5d4037;
-    font-size: 18px;
+    font-size: 20px;
+    transition: 0.2s;
+  }
+
+  .icono-favorito.activo {
+    color: #7b5a46;
+    transform: scale(1.1);
   }
 }
-
-

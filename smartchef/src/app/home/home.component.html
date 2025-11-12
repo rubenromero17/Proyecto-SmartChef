@@ -1,6 +1,10 @@
 <ion-content class="fondo-principal">
-
   <div class="contenedor-principal">
+
+
+    <div class="boton-salida">
+      <ion-icon name="close-outline" (click)="irAinicioDesdeHome()" class="icono-salida"></ion-icon>
+    </div>
 
 
     <div class="cabecera">
@@ -32,9 +36,19 @@
             <div class="hashtags">
               <span>#italiano</span> <span>#pasta</span>
             </div>
+
+            <ion-button size="small" fill="clear" class="boton-mas">
+              <ion-icon name="add-circle-outline"></ion-icon>
+            </ion-button>
           </ion-col>
         </ion-row>
-        <ion-icon name="heart-outline" class="icono-favorito"></ion-icon>
+
+        <ion-icon
+          [name]="favorito1 ? 'heart' : 'heart-outline'"
+          class="icono-favorito"
+          [class.activo]="favorito1"
+          (click)="toggleFavorito(1)">
+        </ion-icon>
       </ion-card>
 
       <ion-card class="tarjeta-receta">
@@ -52,9 +66,18 @@
             <div class="hashtags">
               <span>#saludable</span> <span>#vegetariano</span>
             </div>
+            <ion-button size="small" fill="clear" class="boton-mas">
+              <ion-icon name="add-circle-outline"></ion-icon>
+            </ion-button>
           </ion-col>
         </ion-row>
-        <ion-icon name="heart-outline" class="icono-favorito"></ion-icon>
+
+        <ion-icon
+          [name]="favorito2 ? 'heart' : 'heart-outline'"
+          class="icono-favorito"
+          [class.activo]="favorito2"
+          (click)="toggleFavorito(2)">
+        </ion-icon>
       </ion-card>
 
       <ion-card class="tarjeta-receta">
@@ -72,13 +95,22 @@
             <div class="hashtags">
               <span>#desayuno</span> <span>#tropical</span>
             </div>
+            <ion-button size="small" fill="clear" class="boton-mas">
+              <ion-icon name="add-circle-outline"></ion-icon>
+            </ion-button>
           </ion-col>
         </ion-row>
-        <ion-icon name="heart-outline" class="icono-favorito"></ion-icon>
+
+        <ion-icon
+          [name]="favorito3 ? 'heart' : 'heart-outline'"
+          class="icono-favorito"
+          [class.activo]="favorito3"
+          (click)="toggleFavorito(3)">
+        </ion-icon>
       </ion-card>
 
     </div>
   </div>
-
 </ion-content>
+
 <app-barra-navegacion></app-barra-navegacion>

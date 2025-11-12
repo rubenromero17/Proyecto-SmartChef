@@ -22,8 +22,6 @@ import {BarraNavegacionComponent} from "../barra-navegacion/barra-navegacion.com
     CommonModule,
     IonIcon,
     IonButton,
-    IonToolbar,
-    IonFooter,
     IonCard,
     IonRow,
     IonCol,
@@ -32,8 +30,24 @@ import {BarraNavegacionComponent} from "../barra-navegacion/barra-navegacion.com
   ]
 })
 export class HomeComponent {
+  favorito1 = false;
+  favorito2 = false;
+  favorito3 = false;
+
+  toggleFavorito(num: number) {
+    if (num === 1) this.favorito1 = !this.favorito1;
+    if (num === 2) this.favorito2 = !this.favorito2;
+    if (num === 3) this.favorito3 = !this.favorito3;
+  }
+
 
   // eslint-disable-next-line @angular-eslint/prefer-inject
   constructor(public router: Router) {}
 
+  irAinicioDesdeHome(){
+    this.router.navigate(['/irAinicioDesdeHome']);
+  }
+  irAfavoritosHomeDesdeHome(){
+    this.router.navigate(['/irAfavoritosHomeDesdeHome']);
+  }
 }
