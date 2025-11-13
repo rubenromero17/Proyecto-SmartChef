@@ -42,6 +42,36 @@ export const routes: Routes = [
       import('./home-favoritos/home-favoritos.component').then((m) => m.HomeFavoritosComponent),
   },
   {
+    path: 'irAperfilDesdeHome',
+    loadComponent: () =>
+      import('./pagina-perfil/pagina-perfil.component').then((m) => m.PaginaPerfilComponent),
+  },
+  {
+    path: 'irAbuscarDesdeHome',
+    loadComponent: () =>
+      import('./pagina-buscar/pagina-buscar.component').then((m) => m.PaginaBuscarComponent),
+  },{
+    path: 'irAhomeDesdeHome',
+    loadComponent: () =>
+      import('./home/home.component').then((m) => m.HomeComponent),
+  },
+  {
+    path: 'filtroTendencias',
+    loadComponent: () =>
+      import('./home/home.component').then((m) => m.HomeComponent),
+  },
+  {
+    path: 'filtroRecientes',
+    loadComponent: () =>
+      import('./home-recientes/home-recientes.component').then((m) => m.HomeRecientesComponent),
+  },
+  {
+    path: 'filtroFavoritos',
+    loadComponent: () =>
+      import('./home-favoritos/home-favoritos.component').then((m) => m.HomeFavoritosComponent),
+  },
+
+  {
     path: '',
     redirectTo: 'inicio',
     pathMatch: 'full',
