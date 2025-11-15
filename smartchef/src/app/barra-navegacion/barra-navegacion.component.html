@@ -3,7 +3,6 @@
     <div class="menu-inferior">
       <ion-button
         fill="clear"
-        [class.activo]="activo === 'home'"
         (click)="irAhomeDesdeHome()"
       >
         <ion-icon name="home-outline"></ion-icon>
@@ -11,7 +10,6 @@
 
       <ion-button
         fill="clear"
-        [class.activo]="activo === 'buscar'"
         (click)="irAbuscarDesdeHome()"
       >
         <ion-icon name="search-outline"></ion-icon>
@@ -19,7 +17,6 @@
 
       <ion-button
         fill="clear"
-        [class.activo]="activo === 'favoritos'"
         (click)="irAfavoritosDesdeHome()"
       >
         <ion-icon name="heart-outline"></ion-icon>
@@ -27,7 +24,6 @@
 
       <ion-button
         fill="clear"
-        [class.activo]="activo === 'perfil'"
         (click)="irAperfilDesdeHome()"
       >
         <ion-icon name="person-outline"></ion-icon>

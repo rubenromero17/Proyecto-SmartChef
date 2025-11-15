@@ -1,3 +1,75 @@
-<p>
-  pagina-buscar works!
-</p>
+<ion-content class="fondo-principal">
+  <div class="contenedor-principal">
+
+    <div class="cabecera">
+      <img src="assets/icon/logoSmartChef.png" alt="Logo" class="logo">
+
+
+      <div class="buscador-animado" [class.activo]="busquedaActiva">
+        <ion-icon name="search-outline" class="icono-buscar" (click)="toggleBusqueda()"></ion-icon>
+        <ion-input
+          type="text"
+          placeholder="Buscar receta..."
+          [(ngModel)]="busqueda"
+          (ionInput)="filtrarRecetas()"
+          class="campo-busqueda"
+        ></ion-input>
+      </div>
+
+      <ion-button fill="outline" class="boton-filtrar" (click)="toggleFiltro()">
+        <ion-icon name="funnel-outline"></ion-icon>
+        Filtrar
+      </ion-button>
+    </div>
+
+
+    <div *ngIf="mostrarFiltro" class="filtro-panel">
+      <h3>Filtrar por:</h3>
+
+      <div class="grupo-filtro">
+        <h4>Tipo de receta</h4>
+        <ion-checkbox [(ngModel)]="filtros.vegetariano">Vegetariano</ion-checkbox>
+        <ion-checkbox [(ngModel)]="filtros.sinGluten">Sin gluten</ion-checkbox>
+        <ion-checkbox [(ngModel)]="filtros.rapidas">Rápidas</ion-checkbox>
+        <ion-checkbox [(ngModel)]="filtros.economicas">Económicas</ion-checkbox>
+      </div>
+
+      <div class="grupo-filtro">
+        <h4>Ingredientes</h4>
+        <ion-input
+          placeholder="Ej: pasta, pollo..."
+          [(ngModel)]="filtros.ingredientes"
+        ></ion-input>
+      </div>
+
+      <ion-button expand="block" (click)="aplicarFiltros()">Aplicar filtros</ion-button>
+      <ion-button expand="block" fill="clear" color="medium" (click)="cerrarFiltro()">Cerrar</ion-button>
+    </div>
+
+
+    <div class="lista-recetas">
+      <ion-card class="tarjeta-receta" *ngFor="let receta of recetasFiltradas">
+        <ion-row>
+          <ion-col size="4">
+            <img [src]="receta.imagen" [alt]="receta.nombre" class="imagen-receta" />
+          </ion-col>
+          <ion-col size="8">
+            <h2 class="titulo-receta">{{ receta.nombre }}</h2>
+            <div class="info-receta">
+              <ion-icon name="time-outline"></ion-icon><span>{{ receta.tiempo }}</span>
+              <ion-icon name="people-outline"></ion-icon><span>{{ receta.personas }}</span>
+              <ion-icon name="leaf-outline"></ion-icon><span>{{ receta.ingredientes }} Ing</span>
+            </div>
+            <div class="hashtags">
+              <span *ngFor="let tag of receta.tags">#{{ tag }}</span>
+            </div>
+            <ion-icon name="add-circle-outline" class="icono-mas"></ion-icon>
+          </ion-col>
+        </ion-row>
+        <ion-icon name="heart-outline" class="icono-favorito"></ion-icon>
+      </ion-card>
+    </div>
+  </div>
+
+  <app-barra-navegacion></app-barra-navegacion>
+</ion-content>

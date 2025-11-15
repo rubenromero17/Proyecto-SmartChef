@@ -10,27 +10,25 @@ import { IonButton, IonFooter, IonIcon, IonToolbar } from '@ionic/angular/standa
   styleUrls: ['./barra-navegacion.component.scss'],
 })
 export class BarraNavegacionComponent {
-  activo: string = 'home';
+  activo: string = '';
 
   // eslint-disable-next-line @angular-eslint/prefer-inject
   constructor(public router: Router) {}
 
   irAfavoritosDesdeHome(){
-    this.activo = 'favoritos';
-    this.router.navigate(['/irAfavoritosDesdeHome']);
+    this.router.navigate(['/irAfavoritosDesdeHome'])
   }
+
   irAperfilDesdeHome(){
-    this.activo = 'perfil';
-    this.router.navigate(['/irAperfilDesdeHome']);
+    this.router.navigate(['/irAperfilDesdeHome'])
   }
 
   irAbuscarDesdeHome(){
-    this.activo = 'buscar';
-    this.router.navigate(['/irAbuscarDesdeHome']);
+    this.router.navigate(['/irAbuscarDesdeHome'])
   }
 
   irAhomeDesdeHome(){
-    this.activo = 'home';
-    this.router.navigate(['/irAhomeDesdeHome']);
+    this.router.navigate(['/irAhomeDesdeHome'])
   }
+
 }
