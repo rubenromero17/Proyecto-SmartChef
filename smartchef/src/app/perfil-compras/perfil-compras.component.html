@@ -1,3 +1,24 @@
-<p>
-  perfil-compras works!
-</p>
+<ion-content class="fondo-principal">
+
+  <app-tarjeta-chef></app-tarjeta-chef>
+
+  <div class="contenedor">
+
+
+    <div class="botones-top">
+      <button class="btn" (click)="perfilEstadisticas()">Estadísticas</button>
+      <button class="btn " (click)="perfilHistorial()">Historial</button>
+      <button class="btn activo" (click)="perfilCompras()">Compras</button>
+    </div>
+
+
+    <div class="lista-favoritos">
+      <div class="mensaje-vacio">
+        <ion-icon name="cart-outline"></ion-icon>
+        <p>No has realizado ninguna compra por el momento</p>
+      </div>
+    </div>
+  </div>
+
+  <app-barra-navegacion></app-barra-navegacion>
+</ion-content>

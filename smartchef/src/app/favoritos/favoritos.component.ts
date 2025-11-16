@@ -24,5 +24,12 @@ export class FavoritosComponent {
     this.router.navigate(['/irAinicioDesdeFavoritos']);
   }
 
+  favoritosColecciones(){
+    this.router.navigate(['/favoritosColecciones']);
+  }
+  coleccionesFavoritos(){
+    this.router.navigate(['/coleccionesFavoritos']);
+  }
+
 
 }

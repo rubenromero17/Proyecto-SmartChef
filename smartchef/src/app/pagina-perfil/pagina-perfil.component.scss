@@ -1,0 +1,93 @@
+.fondo-principal {
+  --background: #e9cbb4;
+}
+
+.contenedor {
+  padding: 15px;
+  padding-bottom: 80px;
+}
+
+.botones-top {
+  display: flex;
+  justify-content: space-between;
+  margin: 15px 0;
+
+
+  .btn {
+    background: transparent;
+    padding: 10px 20px;
+    color: black;
+    border-radius: 20px;
+    border: 2px solid #000;
+    font-weight: bold;
+    font-size: 14px;
+  }
+
+  .activo {
+    background: rgb(217, 176, 154);
+    box-shadow: 0 6px 4px rgba(0,0,0,0.25);
+
+  }
+}
+
+.stats-cajas {
+  display: flex;
+  justify-content: space-between;
+
+  .caja {
+    width: 48%;
+    background: #d4b8a0;
+    text-align: center;
+    padding: 15px;
+    border-radius: 10px;
+    border: 1px solid #000;
+    box-shadow: 0 3px 6px rgba(0,0,0,0.25);
+
+    ion-icon {
+      font-size: 20px;
+    }
+
+    h3 {
+      margin: 10px 0 5px;
+      font-size: 14px;
+    }
+
+    p {
+      font-size: 18px;
+      font-weight: bold;
+    }
+  }
+}
+
+.titulo-seccion {
+  margin-top: 20px;
+  margin-bottom: 10px;
+  font-weight: bold;
+  font-size: 16px;
+}
+
+
+.lista-cocinas {
+  .item {
+    margin-bottom: 10px;
+
+    span {
+      font-size: 14px;
+      display: block;
+      margin-bottom: 4px;
+    }
+
+    .barra {
+      background: #c6b4a6;
+      height: 8px;
+      border-radius: 10px;
+
+      .relleno {
+        width: 40%;
+        background: #8e8177;
+        height: 100%;
+        border-radius: 10px;
+      }
+    }
+  }
+}

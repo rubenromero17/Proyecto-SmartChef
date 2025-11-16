@@ -1,0 +1,83 @@
+.fondo-principal {
+  --background: #e9cbb4;
+  padding-bottom: 80px;
+}
+
+.contenedor-principal {
+  max-width: 420px;
+  width: 90%;
+  margin: auto;
+  text-align: center;
+}
+
+.seccion-cabecera {
+  margin-top: 20px;
+
+  .foto-perfil {
+    width: 110px;
+    height: 110px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 3px solid #5b4031;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.25);
+  }
+
+  .nombre-usuario {
+    font-size: 22px;
+    font-weight: 700;
+    margin-top: 12px;
+    color: #5b4031;
+  }
+
+  .boton-editar {
+    background-color: #d7bca4;
+    color: #5b4031;
+    border-radius: 20px;
+    margin-top: 10px;
+    text-transform: none;
+    font-weight: 500;
+    padding: 0 20px;
+
+    ion-icon {
+      margin-right: 6px;
+    }
+
+    &:hover {
+      transform: scale(1.05);
+      background-color: #cfae8d;
+    }
+  }
+}
+
+
+ion-card.tarjeta-formulario {
+  margin-top: 25px;
+  background-color: #ffffff;
+  border-radius: 15px;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+}
+
+.contenido-tarjeta {
+  padding: 15px;
+}
+
+.item-campo {
+  display: flex;
+  flex-direction: column;
+  text-align: left;
+  margin-bottom: 15px;
+
+  ion-label {
+    font-weight: bold;
+    color: #5b4031;
+    margin-bottom: 5px;
+  }
+
+  .valor {
+    background: #f8f3ef;
+    padding: 10px;
+    border-radius: 6px;
+    color: #5b4031;
+    font-size: 15px;
+  }
+}

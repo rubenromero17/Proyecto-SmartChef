@@ -1,10 +1,5 @@
 .fondo {
   --background: #e9cbb4;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-  min-height: 100vh;
 }
 
 .container {
@@ -41,7 +36,7 @@
   color: #5b4031;
 }
 
-/* TARJETA CENTRADA Y MÁS ESTRECHA */
+
 .tarjeta-formulario {
   background-color: #fff;
   width: 90%;
@@ -77,18 +72,17 @@
   }
 }
 
-/* BOTÓN CENTRAL FLOTANTE CON EFECTO */
 .btn-login {
   display: flex;
   justify-content: center;
-  margin-top: -25px; /* Para que flote sobre la tarjeta */
+  margin-top: -25px;
 }
 
 .boton-iniciar {
   --background: #d7bca4;
   --color: #5b4031;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
-  width: 60px;
+  width: 100px;
   height: 60px;
   border-radius: 50%;
   animation: bounceIn 0.8s ease;

@@ -50,4 +50,16 @@ export class HomeComponent {
   irAfavoritosHomeDesdeHome(){
     this.router.navigate(['/irAfavoritosHomeDesdeHome']);
   }
+  filtroFavoritos(){
+    this.router.navigate(['/filtroFavoritos']);
+  }
+  filtroRecientes(){
+    this.router.navigate(['/filtroRecientes']);
+  }
+  masInfoRecetas(){
+    this.router.navigate(['/masInfoRecetas']);
+  }
+  filtroTendencias(){
+    this.router.navigate(['/filtroTendencias']);
+  }
 }

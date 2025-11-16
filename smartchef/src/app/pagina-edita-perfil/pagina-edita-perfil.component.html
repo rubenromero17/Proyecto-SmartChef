@@ -1,3 +1,44 @@
-<p>
-  pagina-edita-perfil works!
-</p>
+<ion-content class="fondo-principal ion-padding">
+
+  <div class="contenedor-principal">
+
+    <div class="seccion-cabecera">
+      <img src="assets/icon/persona1.png" alt="Foto de perfil" class="foto-perfil">
+
+      <h2 class="nombre-usuario">Chef Julián</h2>
+
+      <ion-button fill="clear" class="boton-editar">
+        <ion-icon name="create-outline"></ion-icon> Editar perfil
+      </ion-button>
+    </div>
+
+    <ion-card class="tarjeta-formulario">
+      <ion-card-content class="contenido-tarjeta">
+
+        <ion-item class="item-campo">
+          <ion-label>Nombre Completo</ion-label>
+          <div class="valor">Julián Romero</div>
+        </ion-item>
+
+        <ion-item class="item-campo">
+          <ion-label>Fecha de Nacimiento</ion-label>
+          <div class="valor">12/03/1995</div>
+        </ion-item>
+
+        <ion-item class="item-campo">
+          <ion-label>Correo Electrónico</ion-label>
+          <div class="valor">julianchef.gmail.com</div>
+        </ion-item>
+
+        <ion-item class="item-campo">
+          <ion-label>Dirección</ion-label>
+          <div class="valor">Calle Cocina 123, Madrid</div>
+        </ion-item>
+
+      </ion-card-content>
+    </ion-card>
+
+  </div>
+
+  <app-barra-navegacion></app-barra-navegacion>
+</ion-content>

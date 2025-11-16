@@ -2,10 +2,10 @@
 
   <div class="contenedor">
 
+
     <div class="contenedor-imagen">
       <img src="./assets/icon/pastaCarbonara.png" class="imagen-receta" />
     </div>
-
 
     <h2 class="titulo">Pasta Carbonara Clásica</h2>
 
@@ -13,7 +13,6 @@
       <span>#italiano</span>
       <span>#pasta</span>
     </div>
-
 
     <div class="datos">
       <div><ion-icon name="time-outline"></ion-icon> 20 Min</div>
@@ -30,23 +29,26 @@
 
 
     <div class="toggle">
-      <button class="activo">Ingredientes</button>
-      <button (click)="cambiarAInstrucciones()">Instrucciones</button>
+      <button (click)="cambiarAIngredientes()">Ingredientes</button>
+      <button class="activo">Instrucciones</button>
+    </div>
+
+    <div class="lista">
+      <div class="item">Cocinar la pasta en agua con sal hasta que esté al dente</div>
+      <div class="item">Freír la panceta hasta que esté dorada y crujiente</div>
+      <div class="item">Batir huevos con queso parmesano y pimienta</div>
+      <div class="item">Mezclar pasta caliente con panceta y huevos fuera del fuego</div>
+      <div class="item">Servir inmediatamente con más queso</div>
     </div>
 
 
-    <div class="lista">
-      <div class="item">400g espaguetis</div>
-      <div class="item">200g panceta o tocino</div>
-      <div class="item">3 huevos grandes</div>
-      <div class="item">100g queso parmesano rallado</div>
-      <div class="item">2 dientes de ajo</div>
-      <div class="item">Pimienta negra recién molida</div>
-      <div class="item">Sal</div>
+    <div class="boton-salir">
+      <ion-icon name="arrow-back-outline" (click)="irAhomeDesdeHome()"></ion-icon>
     </div>
 
   </div>
+  <app-barra-navegacion></app-barra-navegacion>
 
 </ion-content>
 
-<app-barra-navegacion></app-barra-navegacion>
+

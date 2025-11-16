@@ -10,10 +10,17 @@
       <img src="assets/icon/logoSmartChef.png" alt="Logo" class="logo">
     </div>
 
+    <div class="botones-top">
+      <button class="btn" (click)="filtroTendencias()" >Tendencias</button>
+      <button class="btn" (click)="filtroRecientes()">Recientes</button>
+      <button class="btn activo" (click)="filtroFavoritos()">Favoritos</button>
+    </div>
+
+
 
     <div class="lista-favoritos">
       <div class="mensaje-vacio">
-        <ion-icon name="heart-outline"></ion-icon>
+        <ion-icon name="heart-circle-outline"></ion-icon>
         <p>Aún no tienes recetas en favoritos.</p>
       </div>
     </div>

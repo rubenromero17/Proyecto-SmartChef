@@ -20,7 +20,20 @@ export class HomeFavoritosComponent {
   // eslint-disable-next-line @angular-eslint/prefer-inject
   constructor(private router : Router) {
 
+
   }
 
+  filtroFavoritos(){
+    this.router.navigate(['/filtroFavoritos']);
+  }
+  filtroRecientes(){
+    this.router.navigate(['/filtroRecientes']);
+  }
+  masInfoRecetas(){
+    this.router.navigate(['/masInfoRecetas']);
+  }
+  filtroTendencias(){
+    this.router.navigate(['/filtroTendencias']);
+  }
 
 }

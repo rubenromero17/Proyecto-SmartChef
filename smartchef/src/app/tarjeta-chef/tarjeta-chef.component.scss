@@ -1,0 +1,47 @@
+.tarjeta-chef {
+  background: #80a3a3;
+  border-radius: 12px;
+  padding: 15px;
+  display: flex;
+  align-items: center;
+  gap: 15px;
+
+  .foto-perfil {
+    background: transparent;
+    border: none;
+    padding: 0;
+
+    img {
+      width: 70px;
+      height: 70px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 2px solid #00000050;
+    }
+  }
+
+  .info {
+    flex: 1;
+    color: white;
+
+    h2 {
+      margin: 0 0 10px;
+      font-size: 18px;
+    }
+
+    .stats {
+      display: flex;
+      justify-content: space-between;
+      text-align: center;
+
+      p {
+        font-size: 16px;
+        font-weight: bold;
+      }
+
+      span {
+        font-size: 11px;
+      }
+    }
+  }
+}

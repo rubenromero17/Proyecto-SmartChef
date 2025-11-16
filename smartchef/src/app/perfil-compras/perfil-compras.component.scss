@@ -1,0 +1,54 @@
+.fondo-principal {
+  --background: #e9cbb4;
+  padding-bottom: 80px;
+}
+
+.contenedor {
+  text-align: center;
+  padding: 20px;
+}
+
+.botones-top {
+  display: flex;
+  justify-content: space-between;
+  margin: 15px 0;
+
+
+  .btn {
+    background: transparent;
+    padding: 10px 20px;
+    color: black;
+    border-radius: 20px;
+    border: 2px solid #000;
+    font-weight: bold;
+    font-size: 14px;
+  }
+
+  .activo {
+    background: rgb(217, 176, 154);
+    box-shadow: 0 6px 4px rgba(0,0,0,0.25);
+
+  }
+}
+
+.lista-favoritos {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.mensaje-vacio {
+  text-align: center;
+  color: #5d4037;
+  margin-top: 50px;
+
+  ion-icon {
+    font-size: 100px;
+    color: #7b5a46;
+  }
+
+  p {
+    font-size: 20px;
+    margin-top: 8px;
+  }
+}

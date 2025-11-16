@@ -12,10 +12,10 @@
     </div>
 
 
-    <div class="filtros">
-      <ion-button fill="solid" class="boton-filtro activo">Tendencias</ion-button>
-      <ion-button fill="outline" class="boton-filtro">Recientes</ion-button>
-      <ion-button fill="outline" class="boton-filtro">Favoritos</ion-button>
+    <div class="botones-top">
+      <button class="btn activo"(click)="filtroTendencias()" >Tendencias</button>
+      <button class="btn" (click)="filtroRecientes()">Recientes</button>
+      <button class="btn" (click)="filtroFavoritos()">Favoritos</button>
     </div>
 
 
@@ -37,8 +37,8 @@
               <span>#italiano</span> <span>#pasta</span>
             </div>
 
-            <ion-button size="small" fill="clear" class="boton-mas">
-              <ion-icon name="add-circle-outline"></ion-icon>
+            <ion-button size="small" fill="clear" class="boton-mas" (click)="masInfoRecetas()">
+              <ion-icon name="add-circle-outline" ></ion-icon>
             </ion-button>
           </ion-col>
         </ion-row>

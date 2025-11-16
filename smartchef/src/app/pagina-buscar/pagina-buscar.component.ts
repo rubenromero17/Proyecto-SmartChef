@@ -160,4 +160,7 @@ export class PaginaBuscarComponent {
         r.tags.some((tag) => tag.toLowerCase().includes(texto))
     );
   }
+  masInfoRecetas(){
+    this.router.navigate(['/masInfoRecetas']);
+  }
 }

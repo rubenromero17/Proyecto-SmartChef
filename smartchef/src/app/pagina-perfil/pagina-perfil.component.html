@@ -1,3 +1,62 @@
-<p>
-  pagina-perfil works!
-</p>
+<ion-content class="fondo-principal">
+
+  <div class="contenedor">
+
+    <app-tarjeta-chef
+      nombre="Chef Julián"
+      [recetas]="0"
+      [favoritos]="0"
+      [semana]="0">
+    </app-tarjeta-chef>
+
+    <div class="botones-top">
+      <button class="btn activo" (click)="perfilEstadisticas">Estadísticas</button>
+      <button class="btn" (click)="perfilHistorial()">Historial</button>
+      <button class="btn" (click)="perfilCompras()">Compras</button>
+    </div>
+
+
+    <div class="stats-cajas">
+      <div class="caja">
+        <ion-icon name="alarm-outline"></ion-icon>
+        <h3>Tiempo Total Cocinando</h3>
+        <p>0 MIN</p>
+      </div>
+
+      <div class="caja">
+        <ion-icon name="calendar-outline"></ion-icon>
+        <h3>Promedio Semanal</h3>
+        <p>0 MIN</p>
+      </div>
+    </div>
+
+    <h4 class="titulo-seccion">Tipos de cocina favoritas</h4>
+
+    <div class="lista-cocinas">
+      <div class="item">
+        <span>Italiana</span>
+        <div class="barra"><div class="relleno"></div></div>
+      </div>
+
+      <div class="item">
+        <span>Vegetariana</span>
+        <div class="barra"><div class="relleno"></div></div>
+      </div>
+
+      <div class="item">
+        <span>Comida Rápida</span>
+        <div class="barra"><div class="relleno"></div></div>
+      </div>
+
+      <div class="item">
+        <span>Comida Española</span>
+        <div class="barra"><div class="relleno"></div></div>
+      </div>
+    </div>
+
+  </div>
+
+
+  <app-barra-navegacion></app-barra-navegacion>
+
+</ion-content>

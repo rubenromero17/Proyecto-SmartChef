@@ -1,3 +1,24 @@
-<p>
-  perfil-historial works!
-</p>
+<ion-content class="fondo-principal">
+
+  <app-tarjeta-chef></app-tarjeta-chef>
+
+  <div class="contenedor">
+
+
+    <div class="botones-top">
+      <button class="btn" (click)="perfilEstadisticas()">Estadísticas</button>
+      <button class="btn activo" (click)="perfilHistorial()">Historial</button>
+      <button class="btn" (click)="perfilCompras()">Compras</button>
+    </div>
+
+
+    <div class="lista-favoritos">
+      <div class="mensaje-vacio">
+      <ion-icon name="book-outline" class="icono-grande"></ion-icon>
+      <p>Aún no has cocinado ninguna receta</p>
+      </div>
+    </div>
+  </div>
+
+  <app-barra-navegacion></app-barra-navegacion>
+</ion-content>

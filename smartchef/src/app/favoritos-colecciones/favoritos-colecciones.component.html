@@ -1,3 +1,29 @@
-<p>
-  favoritos-colecciones works!
-</p>
+<ion-content class="fondo-principal">
+  <div class="contenedor-principal">
+
+    <div class="boton-salida">
+      <ion-icon name="close-outline" (click)="irAinicioDesdeFavoritos()" class="icono-salida"></ion-icon>
+    </div>
+
+
+    <div class="cabecera">
+      <img src="assets/icon/logoSmartChef.png" alt="Logo" class="logo">
+    </div>
+
+
+    <div class="botones-top">
+      <button fill="outline" class="btn" (click)="coleccionesFavoritos()">Favoritos</button>
+      <button fill="solid" class="btn activo" (click)="favoritosColecciones()">Colecciones</button>
+    </div>
+
+    <div class="lista-favoritos">
+      <div class="mensaje-vacio">
+        <ion-icon name="folder-open-outline"></ion-icon>
+        <p>No tienes creada ninguna coleccion por el momento</p>
+      </div>
+    </div>
+
+  </div>
+</ion-content>
+
+<app-barra-navegacion></app-barra-navegacion>

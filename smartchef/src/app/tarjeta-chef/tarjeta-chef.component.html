@@ -1,0 +1,26 @@
+<div class="tarjeta-chef">
+  <button class="foto-perfil" (click)="editarPerfil()">
+    <img src="assets/icon/persona1.png" alt="Chef Avatar">
+  </button>
+
+  <div class="info">
+    <h2>{{ nombre }}</h2>
+
+    <div class="stats">
+      <div>
+        <p>{{ recetas }}</p>
+        <span>Recetas Cocinadas</span>
+      </div>
+
+      <div>
+        <p>{{ favoritos }}</p>
+        <span>Favoritos</span>
+      </div>
+
+      <div>
+        <p>{{ semana }}</p>
+        <span>Esta Semana</span>
+      </div>
+    </div>
+  </div>
+</div>

@@ -27,7 +27,6 @@
       <h3>Filtrar por:</h3>
 
       <div class="grupo-filtro">
-        <h4>Tipo de receta</h4>
         <ion-checkbox [(ngModel)]="filtros.vegetariano">Vegetariano</ion-checkbox>
         <ion-checkbox [(ngModel)]="filtros.sinGluten">Sin gluten</ion-checkbox>
         <ion-checkbox [(ngModel)]="filtros.rapidas">Rápidas</ion-checkbox>
@@ -63,7 +62,7 @@
             <div class="hashtags">
               <span *ngFor="let tag of receta.tags">#{{ tag }}</span>
             </div>
-            <ion-icon name="add-circle-outline" class="icono-mas"></ion-icon>
+            <ion-icon name="add-circle-outline" (click)="masInfoRecetas()" class="icono-mas"></ion-icon>
           </ion-col>
         </ion-row>
         <ion-icon name="heart-outline" class="icono-favorito"></ion-icon>
