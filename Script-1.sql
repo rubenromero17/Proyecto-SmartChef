@@ -107,14 +107,6 @@ create table comentarios_recetas (
     fecha timestamp default current_timestamp
 );
 
-create table valoraciones_recetas (
-    id_valoracion int primary key,
-    id_receta int references recetas(id_receta) on delete cascade,
-    id_usuario int references usuarios(id_usuario),
-    estrellas int check (estrellas between 1 and 5),
-    comentario text,
-    fecha timestamp default current_timestamp
-);
 
 create table etiquetas (
     id_etiqueta int primary key,
