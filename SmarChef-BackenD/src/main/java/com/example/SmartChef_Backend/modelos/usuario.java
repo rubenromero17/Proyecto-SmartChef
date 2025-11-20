@@ -38,4 +38,6 @@ public class usuario {
     @Column (name = "fecha_registro", nullable = false)
     private LocalDate fechaRegistro;
 
+    @OneToOne(cascade = CascadeType.ALL , mappedBy = "usuarios", fetch = FetchType.LAZY)
+    private fotoPerfilUsuario fotoPerfilUsuario;
 }

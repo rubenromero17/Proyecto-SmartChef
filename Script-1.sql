@@ -14,22 +14,18 @@ create table usuarios (
 create table recetas (
     id_receta int auto_increment primary key,
     nombre varchar(150) not null,
-    descripcion text,
+    descripcion varchar(150),
     tiempo_preparacion int,
     dificultad varchar(20),
     economica tinyint(1) default 0,
     vegetariana tinyint(1) default 0,
     sin_gluten tinyint(1) default 0,
-    rapido tinyint(1) default 0,
-    creador_id int,
-    foreign key (creador_id) references usuarios(id_usuario)
+    rapido tinyint(1) default 0
 );
 
 create table ingredientes (
     id_ingrediente int auto_increment primary key,
-    nombre varchar(100) unique not null,
-    categoria varchar(50),
-    unidad_medida varchar(20)
+    nombre varchar(100) unique not null
 );
 
 create table receta_ingredientes (
@@ -46,7 +42,6 @@ create table instrucciones_receta (
     id_receta int not null,
     paso_numero int not null,
     descripcion text not null,
-    imagen_url varchar(255),
     foreign key (id_receta) references recetas(id_receta) on delete cascade
 );
 
@@ -54,8 +49,6 @@ create table fotos_recetas (
     id_foto int auto_increment primary key,
     id_receta int not null,
     url_imagen varchar(255) not null,
-    descripcion varchar(255),
-    es_principal tinyint(1) default 0,
     foreign key (id_receta) references recetas(id_receta) on delete cascade
 );
 
@@ -63,8 +56,6 @@ create table fotos_perfil_usuario (
     id_foto int auto_increment primary key,
     id_usuario int not null,
     url_imagen varchar(255) not null,
-    activa tinyint(1) default 1,
-    fecha_subida timestamp default current_timestamp,
     foreign key (id_usuario) references usuarios(id_usuario) on delete cascade
 );
 
@@ -97,6 +88,7 @@ create table historial_cocina (
     id_historial int auto_increment primary key,
     id_usuario int not null,
     id_receta int not null,
+    fecha_visitado date not null,
     fecha_cocinado date not null,
     foreign key (id_usuario) references usuarios(id_usuario),
     foreign key (id_receta) references recetas(id_receta)
