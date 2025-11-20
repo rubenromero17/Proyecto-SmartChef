@@ -26,16 +26,16 @@ public class usuario {
     @Column (name = "fecha_nacimiento", nullable = false)
     private LocalDate fechaNacimiento;
 
-    @Column (name = "email",length = 150,nullable = false)
+    @Column (name = "email",length = 150, nullable = false)
     private String email;
 
-    @Column (name = "contrasena",nullable = false)
+    @Column (name = "contrasena", nullable = false)
     private String contrasena;
 
-    @Column (name = "direccion",nullable = false)
+    @Column (name = "direccion", nullable = false)
     private String direccion;
 
-    @Column (name = "fecha_registro",nullable = false)
+    @Column (name = "fecha_registro", nullable = false)
     private LocalDate fechaRegistro;
 
 }

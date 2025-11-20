@@ -2,119 +2,130 @@ create database smartchef;
 use smartchef;
 
 create table usuarios (
-    id_usuario int  primary key,
+    id_usuario int auto_increment primary key,
     nombre varchar(100) not null,
+    fecha_nacimiento date,
     email varchar(150) unique not null,
     contrasena varchar(255) not null,
+    direccion varchar(100) not null,
     fecha_registro date default current_date
 );
+
 create table recetas (
-    id_receta int  primary key,
+    id_receta int auto_increment primary key,
     nombre varchar(150) not null,
     descripcion text,
     tiempo_preparacion int,
     dificultad varchar(20),
-    economica boolean default false, 
-    vegetariana boolean default false,
-    sin_gluten boolean default false,
-    rapido boolean default false,
-    creador_id int references usuarios(id_usuario)
+    economica tinyint(1) default 0,
+    vegetariana tinyint(1) default 0,
+    sin_gluten tinyint(1) default 0,
+    rapido tinyint(1) default 0,
+    creador_id int,
+    foreign key (creador_id) references usuarios(id_usuario)
 );
 
 create table ingredientes (
-    id_ingrediente int primary key,
+    id_ingrediente int auto_increment primary key,
     nombre varchar(100) unique not null,
     categoria varchar(50),
     unidad_medida varchar(20)
 );
 
 create table receta_ingredientes (
-    id_receta int references recetas(id_receta) on delete cascade,
-    id_ingrediente int references ingredientes(id_ingrediente) on delete cascade,
+    id_receta int not null,
+    id_ingrediente int not null,
     cantidad decimal(10,2),
-    primary key (id_receta, id_ingrediente)
+    primary key (id_receta, id_ingrediente),
+    foreign key (id_receta) references recetas(id_receta) on delete cascade,
+    foreign key (id_ingrediente) references ingredientes(id_ingrediente) on delete cascade
 );
 
 create table instrucciones_receta (
-    id_instruccion int primary key,
-    id_receta int references recetas(id_receta) on delete cascade,
+    id_instruccion int auto_increment primary key,
+    id_receta int not null,
     paso_numero int not null,
     descripcion text not null,
-    imagen_url varchar(255)
+    imagen_url varchar(255),
+    foreign key (id_receta) references recetas(id_receta) on delete cascade
 );
 
 create table fotos_recetas (
-    id_foto int primary key,
-    id_receta int references recetas(id_receta) on delete cascade,
+    id_foto int auto_increment primary key,
+    id_receta int not null,
     url_imagen varchar(255) not null,
     descripcion varchar(255),
-    es_principal boolean default false
+    es_principal tinyint(1) default 0,
+    foreign key (id_receta) references recetas(id_receta) on delete cascade
 );
 
 create table fotos_perfil_usuario (
-    id_foto int primary key,
-    id_usuario int references usuarios(id_usuario) on delete cascade,
+    id_foto int auto_increment primary key,
+    id_usuario int not null,
     url_imagen varchar(255) not null,
-    activa boolean default true,
-    fecha_subida timestamp default current_timestamp
+    activa tinyint(1) default 1,
+    fecha_subida timestamp default current_timestamp,
+    foreign key (id_usuario) references usuarios(id_usuario) on delete cascade
 );
 
 create table listas_compras (
-    id_lista int primary key,
-    id_usuario int references usuarios(id_usuario),
+    id_lista int auto_increment primary key,
+    id_usuario int not null,
     fecha_creacion date default current_date,
-    nombre varchar(100) default 'mi lista'
+    foreign key (id_usuario) references usuarios(id_usuario)
 );
 
 create table lista_ingredientes (
-    id_lista int references listas_compras(id_lista) on delete cascade,
-    id_ingrediente int references ingredientes(id_ingrediente),
+    id_lista int not null,
+    id_ingrediente int not null,
     cantidad decimal(10,2),
-    comprado boolean default false,
-    primary key (id_lista, id_ingrediente)
+    comprado tinyint(1) default 0,
+    primary key (id_lista, id_ingrediente),
+    foreign key (id_lista) references listas_compras(id_lista) on delete cascade,
+    foreign key (id_ingrediente) references ingredientes(id_ingrediente)
 );
 
 create table recetas_favoritas (
-    id_usuario int references usuarios(id_usuario) on delete cascade,
-    id_receta int references recetas(id_receta) on delete cascade,
-    primary key (id_usuario, id_receta)
+    id_usuario int not null,
+    id_receta int not null,
+    primary key (id_usuario, id_receta),
+    foreign key (id_usuario) references usuarios(id_usuario) on delete cascade,
+    foreign key (id_receta) references recetas(id_receta) on delete cascade
 );
 
 create table historial_cocina (
-    id_historial int  primary key,
-    id_usuario int references usuarios(id_usuario),
-    id_receta int references recetas(id_receta),
-    fecha_cocinado date not null
+    id_historial int auto_increment primary key,
+    id_usuario int not null,
+    id_receta int not null,
+    fecha_cocinado date not null,
+    foreign key (id_usuario) references usuarios(id_usuario),
+    foreign key (id_receta) references recetas(id_receta)
 );
 
 create table colecciones (
-    id_coleccion int primary key,
-    id_usuario int references usuarios(id_usuario),
-    nombre varchar(100) not null
+    id_coleccion int auto_increment primary key,
+    id_usuario int not null,
+    nombre varchar(100) not null,
+    foreign key (id_usuario) references usuarios(id_usuario)
 );
 
 create table coleccion_recetas (
-    id_coleccion int references colecciones(id_coleccion) on delete cascade,
-    id_receta int references recetas(id_receta),
-    primary key (id_coleccion, id_receta)
+    id_coleccion int not null,
+    id_receta int not null,
+    primary key (id_coleccion, id_receta),
+    foreign key (id_coleccion) references colecciones(id_coleccion) on delete cascade,
+    foreign key (id_receta) references recetas(id_receta)
 );
-
-create table comentarios_recetas (
-    id_comentario int  primary key,
-    id_receta int references recetas(id_receta) on delete cascade,
-    id_usuario int references usuarios(id_usuario),
-    texto text not null,
-    fecha timestamp default current_timestamp
-);
-
 
 create table etiquetas (
-    id_etiqueta int primary key,
+    id_etiqueta int auto_increment primary key,
     nombre varchar(50) unique not null
 );
 
 create table receta_etiquetas (
-    id_receta int references recetas(id_receta) on delete cascade,
-    id_etiqueta int references etiquetas(id_etiqueta),
-    primary key (id_receta, id_etiqueta)
+    id_receta int not null,
+    id_etiqueta int not null,
+    primary key (id_receta, id_etiqueta),
+    foreign key (id_receta) references recetas(id_receta) on delete cascade,
+    foreign key (id_etiqueta) references etiquetas(id_etiqueta)
 );
