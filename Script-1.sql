@@ -16,7 +16,7 @@ create table recetas (
     nombre varchar(150) not null,
     descripcion varchar(150),
     tiempo_preparacion int,
-    dificultad varchar(20),
+    dificultad ENUM('FACIL', 'MEDIA', 'DIFICIL') NOT null,
     economica tinyint(1) default 0,
     vegetariana tinyint(1) default 0,
     sin_gluten tinyint(1) default 0,
