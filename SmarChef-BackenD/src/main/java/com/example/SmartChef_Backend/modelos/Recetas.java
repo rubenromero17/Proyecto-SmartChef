@@ -1,10 +1,7 @@
 package com.example.SmartChef_Backend.modelos;
-import com.fasterxml.jackson.annotation.JsonAnyGetter;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.*;
 
-import java.time.LocalDate;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -17,7 +14,7 @@ import java.util.Set;
 
 @Entity
 @Table(name="recetas")
-public class recetas {
+public class Recetas {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
@@ -47,23 +44,9 @@ public class recetas {
     private String rapido;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "recetas" , fetch = FetchType.LAZY)
-    private Set<instruccionesRecetas> instruccionesRecetas = new HashSet<>();
+    private Set<InstruccionesRecetas> instruccionesRecetas = new HashSet<>();
 
     @OneToOne(cascade = CascadeType.ALL, mappedBy = "recetas", fetch = FetchType.LAZY)
-    private fotosRecetas fotosRecetas;
-
-    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    @JoinTable(name = "recetas_favoritas",
-            joinColumns = {@JoinColumn(name = "id_receta", nullable = false)},
-            inverseJoinColumns = { @JoinColumn(name = "id_usuario", nullable = false)})
-    @JsonManagedReference
-    private Set<usuarios> usuarios = new HashSet<>();
-
-    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    @JoinTable(name = "coleccion_recetas",
-            joinColumns = {@JoinColumn(name = "id_receta", nullable = false)},
-            inverseJoinColumns = { @JoinColumn(name = "id_coleccion", nullable = false)})
-    @JsonManagedReference
-    private Set<colecciones> colecciones = new HashSet<>();
+    private FotosRecetas fotosRecetas;
 
 }

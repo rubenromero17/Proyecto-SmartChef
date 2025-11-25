@@ -1,9 +1,9 @@
 package com.example.SmartChef_Backend.modelos;
-import com.fasterxml.jackson.annotation.JsonAnyGetter;
 import jakarta.persistence.*;
 import lombok.*;
 
-import java.time.LocalDate;
+import java.util.HashSet;
+import java.util.Set;
 
 @Getter
 @Setter
@@ -13,12 +13,18 @@ import java.time.LocalDate;
 @NoArgsConstructor
 
 @Entity
-@Table(name="ingredientes")
-public class ingredientes {
+@Table(name="recetas_favoritas")
+public class RecetasFavoritas {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @Column (name = "nombre", length = 50,nullable = false)
-    private String nombre;
+    @ManyToOne
+    @JoinColumn(name = "id_receta")
+    private Recetas receta;
+
+    @ManyToOne
+    @JoinColumn(name = "id_usuario")
+    private Usuarios usuario;
+
 }

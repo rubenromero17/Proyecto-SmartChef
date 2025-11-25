@@ -29,10 +29,10 @@ create table ingredientes (
 );
 
 create table receta_ingredientes (
+	id_receta_ingredientes int auto_increment primary key,
     id_receta int not null,
     id_ingrediente int not null,
-    cantidad decimal(10,2),
-    primary key (id_receta, id_ingrediente),
+    cantidad int,
     foreign key (id_receta) references recetas(id_receta) on delete cascade,
     foreign key (id_ingrediente) references ingredientes(id_ingrediente) on delete cascade
 );
@@ -67,19 +67,19 @@ create table listas_compras (
 );
 
 create table lista_ingredientes (
+	id_lista_ingredientes int auto_increment primary key,
     id_lista int not null,
     id_ingrediente int not null,
-    cantidad decimal(10,2),
-    comprado tinyint(1) default 0,
-    primary key (id_lista, id_ingrediente),
+    cantidad int not null,
+    comprado  ENUM('Si', 'No') not null,
     foreign key (id_lista) references listas_compras(id_lista) on delete cascade,
-    foreign key (id_ingrediente) references ingredientes(id_ingrediente)
+    foreign key (id_ingrediente) references ingredientes(id_ingrediente) on delete cascade
 );
 
 create table recetas_favoritas (
+	id_recetas_favoritas int auto_increment primary key,
     id_usuario int not null,
     id_receta int not null,
-    primary key (id_usuario, id_receta),
     foreign key (id_usuario) references usuarios(id_usuario) on delete cascade,
     foreign key (id_receta) references recetas(id_receta) on delete cascade
 );
@@ -90,8 +90,8 @@ create table historial_cocina (
     id_receta int not null,
     fecha_visitado date not null,
     fecha_cocinado date not null,
-    foreign key (id_usuario) references usuarios(id_usuario),
-    foreign key (id_receta) references recetas(id_receta)
+    foreign key (id_usuario) references usuarios(id_usuario) on delete cascade,
+    foreign key (id_receta) references recetas(id_receta) on delete cascade
 );
 
 create table colecciones (
@@ -102,9 +102,9 @@ create table colecciones (
 );
 
 create table coleccion_recetas (
+	id_coleccion_recetas int auto_increment primary key,
     id_coleccion int not null,
     id_receta int not null,
-    primary key (id_coleccion, id_receta),
     foreign key (id_coleccion) references colecciones(id_coleccion) on delete cascade,
     foreign key (id_receta) references recetas(id_receta)
 );
@@ -115,9 +115,9 @@ create table etiquetas (
 );
 
 create table receta_etiquetas (
+	id_receta_etiquetas int auto_increment primary key,
     id_receta int not null,
     id_etiqueta int not null,
-    primary key (id_receta, id_etiqueta),
     foreign key (id_receta) references recetas(id_receta) on delete cascade,
-    foreign key (id_etiqueta) references etiquetas(id_etiqueta)
+    foreign key (id_etiqueta) references etiquetas(id_etiqueta) on delete cascade
 );

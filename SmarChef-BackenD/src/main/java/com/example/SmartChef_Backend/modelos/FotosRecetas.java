@@ -11,8 +11,8 @@ import lombok.*;
 @NoArgsConstructor
 
 @Entity
-@Table(name="fotosRecetas")
-public class fotosRecetas {
+@Table(name="fotos_recetas")
+public class FotosRecetas {
     @Id
     @GeneratedValue (strategy = GenerationType.IDENTITY)
     private Integer id;
@@ -22,7 +22,7 @@ public class fotosRecetas {
 
     @OneToOne
     @JoinColumn(name = "id_receta",nullable = false)
-    private recetas receta;
+    private Recetas receta;
 
 
 

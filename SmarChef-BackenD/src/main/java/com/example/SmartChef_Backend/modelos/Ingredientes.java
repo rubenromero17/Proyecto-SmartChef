@@ -1,0 +1,21 @@
+package com.example.SmartChef_Backend.modelos;
+import jakarta.persistence.*;
+import lombok.*;
+
+@Getter
+@Setter
+@AllArgsConstructor
+@EqualsAndHashCode
+@ToString
+@NoArgsConstructor
+
+@Entity
+@Table(name="ingredientes")
+public class Ingredientes {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Integer id;
+
+    @Column (name = "nombre", length = 50,nullable = false)
+    private String nombre;
+}

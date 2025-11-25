@@ -1,6 +1,5 @@
 package com.example.SmartChef_Backend.modelos;
 
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -17,7 +16,7 @@ import java.util.Set;
 
 @Entity
 @Table(name="usuarios")
-public class usuarios {
+public class Usuarios {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
@@ -41,19 +40,12 @@ public class usuarios {
     private LocalDate fechaRegistro;
 
     @OneToOne(cascade = CascadeType.ALL , mappedBy = "usuarios", fetch = FetchType.LAZY)
-    private fotoPerfilUsuario fotoPerfilUsuario;
+    private FotoPerfilUsuario fotoPerfilUsuario;
 
     @OneToMany(cascade = CascadeType.ALL,mappedBy = "usuarios", fetch = FetchType.LAZY)
-    private Set<colecciones> colecciones = new HashSet<>();
+    private Set<Colecciones> colecciones = new HashSet<>();
 
     @OneToMany(cascade = CascadeType.ALL,mappedBy = "usuarios", fetch = FetchType.LAZY)
-    private Set<listaCompras> listaCompras = new HashSet<>();
-
-    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    @JoinTable(name = "recetas_favoritas",
-            joinColumns = {@JoinColumn(name = "id_usuario", nullable = false)},
-            inverseJoinColumns = { @JoinColumn(name = "id_recetas", nullable = false)})
-    @JsonManagedReference
-    private Set<recetas> recetas = new HashSet<>();
+    private Set<ListaCompras> listaCompras = new HashSet<>();
 
 }
