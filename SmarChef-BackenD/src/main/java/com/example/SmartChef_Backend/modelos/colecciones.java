@@ -35,8 +35,4 @@ public class colecciones {
     @JsonManagedReference
     private Set<recetas> recetas = new HashSet<>();
 
-
-    //cambio
-
-
 }
