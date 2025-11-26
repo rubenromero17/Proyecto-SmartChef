@@ -17,6 +17,14 @@ import java.util.Set;
 @Entity
 @Table(name="usuarios")
 public class Usuarios {
+    public enum PreferenciaAlimentaria {
+        economica,
+        vegetariana,
+        sinGluten,
+        rapido
+    }
+
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
@@ -38,6 +46,10 @@ public class Usuarios {
 
     @Column (name = "fecha_registro", nullable = false)
     private LocalDate fechaRegistro;
+
+    @Enumerated(EnumType.STRING)
+    @Column (name = "preferencias", nullable = false )
+    private PreferenciaAlimentaria preferencia;
 
     @OneToOne(cascade = CascadeType.ALL , mappedBy = "usuarios", fetch = FetchType.LAZY)
     private FotoPerfilUsuario fotoPerfilUsuario;

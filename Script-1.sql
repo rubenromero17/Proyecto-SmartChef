@@ -8,6 +8,7 @@ create table usuarios (
     email varchar(150) unique not null,
     contrasena varchar(255) not null,
     direccion varchar(100) not null,
+    preferencias ENUM('economica','vegetariana','sin gluten', 'rapido'),
     fecha_registro date default current_date
 );
 

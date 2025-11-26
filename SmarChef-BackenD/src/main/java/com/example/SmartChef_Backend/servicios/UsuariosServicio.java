@@ -1,5 +1,6 @@
 package com.example.SmartChef_Backend.servicios;
 
+import com.example.SmartChef_Backend.modelos.Usuarios;
 import com.example.SmartChef_Backend.repositorios.UsuariosRepositorio;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -9,4 +10,12 @@ public class UsuariosServicio {
 
     @Autowired
     private UsuariosRepositorio usuariosRepositorio;
+
+    public Usuarios guardarUsuario(Usuarios usuario) {
+        usuariosRepositorio.save(usuario);
+        return usuario;
+    }
+    public void eliminarUsuario(Usuarios usuarios) {
+        usuariosRepositorio.delete(usuarios);
+    }
 }
