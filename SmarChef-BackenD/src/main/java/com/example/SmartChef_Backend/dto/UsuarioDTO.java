@@ -14,7 +14,7 @@ public class UsuarioDTO {
     private String nombre;
     private LocalDate fechaNacimiento;
     private String email;
-    private String password;
+    private String contrasena;
     private String direccion;
     private LocalDate fechaDeNacimiento;
     private String preferencia;

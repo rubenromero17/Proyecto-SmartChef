@@ -1,5 +1,6 @@
 package com.example.SmartChef_Backend.repositorios;
 
+import com.example.SmartChef_Backend.dto.UsuarioDTO;
 import com.example.SmartChef_Backend.modelos.Usuarios;
 import jakarta.persistence.criteria.CriteriaBuilder;
 import org.springframework.data.repository.Repository;
