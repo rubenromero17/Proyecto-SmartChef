@@ -31,6 +31,6 @@ public class HistorialCocina {
     private Usuarios usuario;
 
     @ManyToOne
-    @JoinColumn(name = "id_reeceta")
+    @JoinColumn(name = "id_receta")
     private Recetas receta;
 }

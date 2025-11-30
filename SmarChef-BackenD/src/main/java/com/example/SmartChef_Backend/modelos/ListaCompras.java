@@ -25,4 +25,5 @@ public class ListaCompras {
     @JoinColumn(name = "id_usuario")
     private Usuarios usuario;
 
+
 }

@@ -1,27 +1,16 @@
 package com.example.SmartChef_Backend.repositorios;
 
+
 import com.example.SmartChef_Backend.dto.UsuarioDTO;
 import com.example.SmartChef_Backend.modelos.Usuarios;
-import jakarta.persistence.criteria.CriteriaBuilder;
-import org.springframework.data.repository.Repository;
+import org.springframework.data.jpa.repository.JpaRepository;
 
-import java.util.List;
 
-public interface UsuariosRepositorio extends Repository<Usuarios, Integer> {
+public interface UsuariosRepositorio extends JpaRepository<Usuarios,Integer> {
 
-    List<Usuarios> getUsuariosRepositorio();
 
+    Usuarios findByNombre(String nombre);
     Usuarios findByEmail(String email);
-    Usuarios findByEmailAndPassword(String email, String password);
-
-    Usuarios getUsuariosById(Integer id);
-
-    Usuarios save(Usuarios usuario);
-    Usuarios update(Usuarios usuario);
-    void delete(Usuarios usuario);
-
-
-
-
-
+    Usuarios findByNombreAndEmail(String nombre, String email);
+    Usuarios save(UsuarioDTO usuario);
 }

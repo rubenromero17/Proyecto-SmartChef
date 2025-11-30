@@ -24,7 +24,6 @@ public class Usuarios {
         rapido
     }
 
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
@@ -44,20 +43,17 @@ public class Usuarios {
     @Column (name = "direccion", nullable = false)
     private String direccion;
 
-    @Column (name = "fecha_registro", nullable = false)
-    private LocalDate fechaRegistro;
-
     @Enumerated(EnumType.STRING)
     @Column (name = "preferencias", nullable = false )
     private PreferenciaAlimentaria preferencia;
 
-    @OneToOne(cascade = CascadeType.ALL , mappedBy = "usuarios", fetch = FetchType.LAZY)
-    private FotoPerfilUsuario fotoPerfilUsuario;
+    @Column (name= "url_imagen",nullable = true)
+    private String urlImagen;
 
-    @OneToMany(cascade = CascadeType.ALL,mappedBy = "usuarios", fetch = FetchType.LAZY)
-    private Set<Colecciones> colecciones = new HashSet<>();
 
-    @OneToMany(cascade = CascadeType.ALL,mappedBy = "usuarios", fetch = FetchType.LAZY)
-    private Set<ListaCompras> listaCompras = new HashSet<>();
+    @Column (name = "fecha_registro", nullable = false)
+    private LocalDate fechaRegistro;
+
+
 
 }

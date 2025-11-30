@@ -9,6 +9,7 @@ create table usuarios (
     contrasena varchar(255) not null,
     direccion varchar(100) not null,
     preferencias ENUM('economica','vegetariana','sin gluten', 'rapido'),
+    url_imagen varchar(255) not null,
     fecha_registro date default current_date
 );
 
@@ -17,6 +18,7 @@ create table recetas (
     nombre varchar(150) not null,
     descripcion varchar(150),
     tiempo_preparacion int,
+    url_imagen varchar(255) not null,
     dificultad ENUM('FACIL', 'MEDIA', 'DIFICIL') NOT null,
     economica tinyint(1) default 0,
     vegetariana tinyint(1) default 0,
@@ -46,19 +48,6 @@ create table instrucciones_receta (
     foreign key (id_receta) references recetas(id_receta) on delete cascade
 );
 
-create table fotos_recetas (
-    id_foto int auto_increment primary key,
-    id_receta int not null,
-    url_imagen varchar(255) not null,
-    foreign key (id_receta) references recetas(id_receta) on delete cascade
-);
-
-create table fotos_perfil_usuario (
-    id_foto int auto_increment primary key,
-    id_usuario int not null,
-    url_imagen varchar(255) not null,
-    foreign key (id_usuario) references usuarios(id_usuario) on delete cascade
-);
 
 create table listas_compras (
     id_lista int auto_increment primary key,
@@ -122,3 +111,12 @@ create table receta_etiquetas (
     foreign key (id_receta) references recetas(id_receta) on delete cascade,
     foreign key (id_etiqueta) references etiquetas(id_etiqueta) on delete cascade
 );
+
+alter table usuarios 
+	add column url_imagen varchar(255) not null;
+
+alter table recetas
+
+drop table fotos_perfil_usuario;
+
+drop table fotos_recetas;

@@ -28,6 +28,9 @@ public class Recetas {
     @Column (name = "tiempo_preparacion", nullable = false)
     private Integer tiempoPreparacion;
 
+    @Column (name= "url_imagen",nullable = false)
+    private String urlImagen;
+
     @Column (name = "dificultad", length = 50, nullable = false)
     private String dificultad;
 
@@ -43,10 +46,5 @@ public class Recetas {
     @Column (name = "rapido", length = 50,nullable = true)
     private String rapido;
 
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "recetas" , fetch = FetchType.LAZY)
-    private Set<InstruccionesRecetas> instruccionesRecetas = new HashSet<>();
-
-    @OneToOne(cascade = CascadeType.ALL, mappedBy = "recetas", fetch = FetchType.LAZY)
-    private FotosRecetas fotosRecetas;
 
 }

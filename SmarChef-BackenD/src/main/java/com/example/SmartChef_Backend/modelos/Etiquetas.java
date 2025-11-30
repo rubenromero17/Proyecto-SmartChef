@@ -18,4 +18,8 @@ public class Etiquetas {
 
     @Column (name = "nombre",length = 50,nullable = false)
     private String nombre;
+
+    @ManyToOne
+    @JoinColumn(name = "id_etiqueta")
+    private Etiquetas etiqueta;
 }
