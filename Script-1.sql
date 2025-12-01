@@ -28,14 +28,14 @@ create table recetas (
 
 create table ingredientes (
     id_ingrediente int auto_increment primary key,
-    nombre varchar(100) unique not null
+    nombre varchar(100) unique not null,
+    cantidad int
 );
 
 create table receta_ingredientes (
 	id_receta_ingredientes int auto_increment primary key,
     id_receta int not null,
     id_ingrediente int not null,
-    cantidad int,
     foreign key (id_receta) references recetas(id_receta) on delete cascade,
     foreign key (id_ingrediente) references ingredientes(id_ingrediente) on delete cascade
 );
@@ -120,3 +120,9 @@ alter table recetas
 drop table fotos_perfil_usuario;
 
 drop table fotos_recetas;
+
+alter table ingredientes
+	add column cantidad int;
+
+alter table receta_ingredientes
+drop column cantidad;

@@ -18,4 +18,8 @@ public class Ingredientes {
 
     @Column (name = "nombre", length = 50,nullable = false)
     private String nombre;
+
+    @Column(name = "cantidad",nullable = false)
+    private Integer cantidad;
+
 }

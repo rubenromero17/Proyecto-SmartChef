@@ -16,10 +16,6 @@ public class RecetaIngredientes {
     @Id
     @GeneratedValue (strategy = GenerationType.IDENTITY)
     private Integer id;
-
-    @Column(name = "cantidad",nullable = false)
-    private Integer cantidad;
-
     @ManyToOne
     @JoinColumn(name = "id_receta")
     private Recetas receta;
