@@ -17,12 +17,6 @@ import java.util.Set;
 @Entity
 @Table(name="usuarios")
 public class Usuarios {
-    public enum PreferenciaAlimentaria {
-        economica,
-        vegetariana,
-        sinGluten,
-        rapido
-    }
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -43,17 +37,14 @@ public class Usuarios {
     @Column (name = "direccion", nullable = false)
     private String direccion;
 
-    @Enumerated(EnumType.STRING)
     @Column (name = "preferencias", nullable = false )
-    private PreferenciaAlimentaria preferencia;
+    private String preferencia;
 
     @Column (name= "url_imagen",nullable = true)
     private String urlImagen;
 
-
     @Column (name = "fecha_registro", nullable = false)
-    private LocalDate fechaRegistro;
-
+    private LocalDate fechaRegistro = LocalDate.now();
 
 
 }

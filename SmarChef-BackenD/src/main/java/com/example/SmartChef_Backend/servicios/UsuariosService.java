@@ -7,6 +7,8 @@ import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.LocalDate;
+
 @Service
 @AllArgsConstructor
 public class UsuariosService {
@@ -15,18 +17,19 @@ public class UsuariosService {
 
 
     @Transactional
-    public void crearUsuario(UsuarioDTO usuario) {
+    public void crearUsuario(UsuarioDTO dto) {
         Usuarios usuarios = new Usuarios();
 
-        usuarios.setNombre(usuario.getNombre());
-        usuarios.setFechaNacimiento(usuario.getFechaNacimiento());
-        usuarios.setEmail(usuario.getEmail());
-        usuarios.setContrasena(usuario.getContrasena());
-        usuarios.setDireccion(usuario.getDireccion());
-        usuarios.setUrlImagen(usuario.getUrl_imagen());
-        usuarios.setPreferencia(Usuarios.PreferenciaAlimentaria.valueOf(usuario.getPreferencias()));
+        usuarios.setNombre(dto.getNombre());
+        usuarios.setFechaNacimiento(dto.getFechaNacimiento());
+        usuarios.setEmail(dto.getEmail());
+        usuarios.setContrasena(dto.getContrasena());
+        usuarios.setDireccion(dto.getDireccion());
+        usuarios.setUrlImagen(dto.getUrlImagen());
+        usuarios.setPreferencia(dto.getPreferencias());
+        usuarios.setFechaRegistro(LocalDate.now());
 
-        repositorio.save(usuario);
+        repositorio.save(usuarios);
 
     }
 

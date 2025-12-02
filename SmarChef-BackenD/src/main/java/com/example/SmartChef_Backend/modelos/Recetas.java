@@ -31,20 +31,20 @@ public class Recetas {
     @Column (name= "url_imagen",nullable = false)
     private String urlImagen;
 
-    @Column (name = "dificultad", length = 50, nullable = false)
+    @Column (name = "dificultad",nullable = false)
     private String dificultad;
 
-    @Column (name = "economica", length = 50,nullable = true)
-    private String economica;
+    @Column (name = "economica",nullable = false)
+    private Boolean economica;
 
-    @Column (name = "vegetariana", length = 50,nullable = true)
-    private String vegetariana;
+    @Column (name = "vegetariana",nullable = false)
+    private Boolean vegetariana;
 
-    @Column (name = "sin_gluten", length = 50,nullable = true)
-    private String sin_gluten;
+    @Column (name = "sin_gluten",nullable = false)
+    private Boolean sin_gluten;
 
-    @Column (name = "rapido", length = 50,nullable = true)
-    private String rapido;
+    @Column (name = "rapido",nullable = false)
+    private Boolean rapido;
 
 
 }

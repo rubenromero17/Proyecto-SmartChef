@@ -22,11 +22,12 @@ public class RecetaDTO {
     private Integer tiempoPreparacion;
     private String urlImagen;
     private String dificultad;
-    private String economica;
-    private String vegetariana;
-    private String sin_gluten;
-    private String rapido;
+    private Boolean economica;
+    private Boolean vegetariana;
+    private Boolean sin_gluten;
+    private Boolean rapido;
 
-
+    List<InstruccionesDTO> instrucciones;
+    List<IngredientesDTO> ingredientes;
 
 }

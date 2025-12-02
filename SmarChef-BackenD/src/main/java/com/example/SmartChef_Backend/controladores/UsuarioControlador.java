@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class UsuarioControlador {
     private UsuariosService service;
 
-    @PostMapping
+    @PostMapping("/crearUsuario")
     public void crearUsuario(@RequestBody UsuarioDTO usuario) {
         service.crearUsuario(usuario);
 

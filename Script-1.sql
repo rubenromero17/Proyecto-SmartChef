@@ -8,9 +8,9 @@ create table usuarios (
     email varchar(150) unique not null,
     contrasena varchar(255) not null,
     direccion varchar(100) not null,
-    preferencias ENUM('economica','vegetariana','sin gluten', 'rapido'),
+    preferencias ENUM('economica','vegetariana','sinGluten', 'rapido'),
     url_imagen varchar(255) not null,
-    fecha_registro date default current_date
+    fecha_registro date,
 );
 
 create table recetas (
@@ -20,15 +20,15 @@ create table recetas (
     tiempo_preparacion int,
     url_imagen varchar(255) not null,
     dificultad ENUM('FACIL', 'MEDIA', 'DIFICIL') NOT null,
-    economica tinyint(1) default 0,
-    vegetariana tinyint(1) default 0,
-    sin_gluten tinyint(1) default 0,
-    rapido tinyint(1) default 0
+    economica boolean,
+    vegetariana boolean,
+    sin_gluten boolean,
+    rapido boolean
 );
 
 create table ingredientes (
     id_ingrediente int auto_increment primary key,
-    nombre varchar(100) unique not null,
+    nombre varchar(100) unique not null, 
     cantidad int
 );
 
@@ -126,3 +126,32 @@ alter table ingredientes
 
 alter table receta_ingredientes
 drop column cantidad;
+
+alter table usuarios
+ drop column fecha_registro;
+
+alter table usuarios 
+add column fecha_registro date;
+
+alter table usuarios 
+add column preferencias ENUM('economica','vegetariana','sinGluten', 'rapido');
+
+alter table recetas 
+	drop column economica; 
+alter table recetas 
+	drop column vegetariana; 
+alter table recetas 
+	drop column sin_gluten; 
+alter table recetas 
+	drop column rapido; 
+
+
+
+alter table recetas 
+	add column economica boolean; 
+alter table recetas 
+	add column vegetariana boolean; 
+alter table recetas 
+	add column sin_gluten boolean; 
+alter table recetas 
+	add column rapido boolean; 
