@@ -27,8 +27,6 @@ public class RecetaDTO {
     private String sin_gluten;
     private String rapido;
 
-    private List<InstruccionesDTO> instrucciones;
-    private List<IngredientesDTO> ingredientes;
 
 
 }

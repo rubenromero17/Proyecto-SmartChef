@@ -23,7 +23,6 @@ public class UsuarioDTO {
 
 
 
-    private Set<Integer> coleccionesId; //oneToMany
-    private Set<Integer> listaComprasId; //oneToMany
+
 
 }

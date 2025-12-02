@@ -25,12 +25,7 @@ public class RecetaService {
         receta.setVegetariana(recetaDTO.getVegetariana());
         receta.setSin_gluten(recetaDTO.getSin_gluten());
         receta.setRapido(recetaDTO.getRapido());
-
-        if (recetaDTO.getInstrucciones() != null){
-            List<InstruccionesRecetas> instrucciones = recetaDTO.getInstrucciones();
-        }
-
-        return repositorio.save(recetaDTO);
+        return receta;
     }
 
 }
