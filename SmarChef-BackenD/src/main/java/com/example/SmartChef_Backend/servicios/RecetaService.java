@@ -35,11 +35,6 @@ public class RecetaService {
         receta.setRapido(recetaDTO.getRapido());
 
         repositorio.save(receta);
-        List<InstruccionesRecetas> instrucciones = recetaDTO.getInstrucciones().stream()
-                .map(i -> new InstruccionesRecetas(i.getId(),i.getPaso_numero(),i.getDescripcion())
-                .collect(Collectors.toList());
-
-        repositorioInstrucciones.saveAll(instrucciones);
 
 
     }
