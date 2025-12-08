@@ -6,6 +6,7 @@ import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -13,6 +14,7 @@ import java.util.Set;
 
 @Data
 @AllArgsConstructor
+@NoArgsConstructor
 @Builder
 public class RecetaDTO {
 
@@ -27,7 +29,7 @@ public class RecetaDTO {
     private Boolean sin_gluten;
     private Boolean rapido;
 
-    List<InstruccionesDTO> instrucciones;
-    List<IngredientesDTO> ingredientes;
+    private List<InstruccionesDTO> instrucciones;
+    private List<IngredientesDTO> ingredientes;
 
 }

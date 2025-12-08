@@ -14,12 +14,9 @@ import lombok.*;
 public class Ingredientes {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id_ingrediente")
     private Integer id;
 
     @Column (name = "nombre", length = 50,nullable = false)
     private String nombre;
-
-    @Column(name = "cantidad",nullable = false)
-    private Integer cantidad;
-
 }

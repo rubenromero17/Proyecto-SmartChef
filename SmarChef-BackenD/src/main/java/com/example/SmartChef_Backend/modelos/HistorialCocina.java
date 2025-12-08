@@ -18,6 +18,7 @@ import java.time.LocalDate;
 public class HistorialCocina {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id_historial")
     private Integer id;
 
     @Column(name = "fecha_visitado",nullable = false)

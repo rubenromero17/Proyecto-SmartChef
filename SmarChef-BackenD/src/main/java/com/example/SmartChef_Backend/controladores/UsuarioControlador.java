@@ -17,6 +17,5 @@ public class UsuarioControlador {
     @PostMapping("/crearUsuario")
     public void crearUsuario(@RequestBody UsuarioDTO usuario) {
         service.crearUsuario(usuario);
-
     }
 }

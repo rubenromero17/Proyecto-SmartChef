@@ -17,6 +17,7 @@ import java.util.Set;
 public class Recetas {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id_receta")
     private Integer id;
 
     @Column (name = "nombre", length = 150,nullable = false)
@@ -45,6 +46,14 @@ public class Recetas {
 
     @Column (name = "rapido",nullable = false)
     private Boolean rapido;
+
+    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JoinTable(
+            name = "receta_ingredientes",
+            joinColumns = @JoinColumn(name = "id_receta", nullable = false),
+            inverseJoinColumns = @JoinColumn(name = "id_ingrediente", nullable = false)
+    )
+    private Set<Ingredientes> ingredientes = new HashSet<>();
 
 
 }

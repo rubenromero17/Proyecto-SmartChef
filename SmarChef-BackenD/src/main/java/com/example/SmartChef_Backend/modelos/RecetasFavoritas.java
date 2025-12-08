@@ -15,16 +15,19 @@ import java.util.Set;
 @Entity
 @Table(name="recetas_favoritas")
 public class RecetasFavoritas {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id_recetas_favoritas")
     private Integer id;
 
     @ManyToOne
-    @JoinColumn(name = "id_receta")
+    @JoinColumn(name = "id_receta", nullable = false)
     private Recetas receta;
 
     @ManyToOne
-    @JoinColumn(name = "id_usuario")
+    @JoinColumn(name = "id_usuario", nullable = false)
     private Usuarios usuario;
 
 }
+

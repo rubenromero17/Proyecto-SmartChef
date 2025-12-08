@@ -1,7 +1,9 @@
 package com.example.SmartChef_Backend.repositorios;
 
 import com.example.SmartChef_Backend.modelos.ListaIngredientes;
-import org.springframework.data.repository.Repository;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
 
-public interface ListaIngredientesRepositorio extends Repository<ListaIngredientes,Integer> {
+@Repository
+public interface ListaIngredientesRepositorio extends JpaRepository<ListaIngredientes,Integer> {
 }

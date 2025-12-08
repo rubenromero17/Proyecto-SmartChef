@@ -20,6 +20,7 @@ public class Usuarios {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id_usuario")
     private Integer id;
 
     @Column(name = "nombre", length = 100, nullable = false)

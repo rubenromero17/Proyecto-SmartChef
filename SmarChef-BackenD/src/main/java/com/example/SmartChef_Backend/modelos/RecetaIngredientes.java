@@ -1,6 +1,6 @@
 package com.example.SmartChef_Backend.modelos;
+
 import jakarta.persistence.*;
-import jakarta.persistence.criteria.CriteriaBuilder;
 import lombok.*;
 
 @Getter
@@ -13,9 +13,12 @@ import lombok.*;
 @Entity
 @Table(name="receta_ingredientes")
 public class RecetaIngredientes {
+
     @Id
-    @GeneratedValue (strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id_receta_ingredientes")
     private Integer id;
+
     @ManyToOne
     @JoinColumn(name = "id_receta")
     private Recetas receta;
@@ -24,5 +27,7 @@ public class RecetaIngredientes {
     @JoinColumn(name = "id_ingrediente")
     private Ingredientes ingrediente;
 
-}
+    @Column(name = "cantidad",nullable = false)
+    private Integer cantidad;
 
+}

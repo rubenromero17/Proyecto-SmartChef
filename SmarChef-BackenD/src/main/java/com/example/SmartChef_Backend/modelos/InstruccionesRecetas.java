@@ -10,10 +10,11 @@ import lombok.*;
 @NoArgsConstructor
 
 @Entity
-@Table(name="instrucciones_recetas")
+@Table(name="instrucciones_receta")
 public class InstruccionesRecetas {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id_instruccion")
     private Integer id;
 
     @Column (name = "paso_numero",nullable = false)

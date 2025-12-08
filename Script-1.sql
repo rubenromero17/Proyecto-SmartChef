@@ -10,7 +10,7 @@ create table usuarios (
     direccion varchar(100) not null,
     preferencias ENUM('economica','vegetariana','sinGluten', 'rapido'),
     url_imagen varchar(255) not null,
-    fecha_registro date,
+    fecha_registro date
 );
 
 create table recetas (
@@ -28,14 +28,15 @@ create table recetas (
 
 create table ingredientes (
     id_ingrediente int auto_increment primary key,
-    nombre varchar(100) unique not null, 
-    cantidad int
+    nombre varchar(100) not null
+   
 );
 
 create table receta_ingredientes (
 	id_receta_ingredientes int auto_increment primary key,
     id_receta int not null,
     id_ingrediente int not null,
+    cantidad int,
     foreign key (id_receta) references recetas(id_receta) on delete cascade,
     foreign key (id_ingrediente) references ingredientes(id_ingrediente) on delete cascade
 );
@@ -155,3 +156,12 @@ alter table recetas
 	add column sin_gluten boolean; 
 alter table recetas 
 	add column rapido boolean; 
+
+alter table receta_ingredientes
+add column cantidad int;
+
+alter table ingredientes 
+drop column cantidad;
+
+alter table recetas_favoritas 
+add table id_recetas_favoritas int auto_increment primary key;

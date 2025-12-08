@@ -12,10 +12,11 @@ import java.time.LocalDate;
 @NoArgsConstructor
 
 @Entity
-@Table(name="lista_compras")
+@Table(name="listas_compras")
 public class ListaCompras {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id_lista")
     private Integer id;
 
     @Column (name = "fecha_creacion",nullable = false)
