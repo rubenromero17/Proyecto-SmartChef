@@ -3,6 +3,7 @@ package com.example.SmartChef_Backend.controladores;
 import com.example.SmartChef_Backend.dto.EstadisticasIngredientesDTO;
 import com.example.SmartChef_Backend.dto.EstadisticasRecetasDTO;
 import com.example.SmartChef_Backend.servicios.EstadisticasService;
+import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;

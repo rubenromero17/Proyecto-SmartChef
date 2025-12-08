@@ -20,7 +20,6 @@ public class ListaComprasService {
     private UsuariosRepositorio usuarioRepo;
 
     public ListaComprasDTO crearListaDesdeReceta(int idUsuario, int idReceta) {
-        try {
 
             Usuarios usuario = usuarioRepo.findById(idUsuario)
                     .orElseThrow(() -> new RuntimeException("Usuario no encontrado"));
@@ -30,18 +29,12 @@ public class ListaComprasService {
             lista.setFechaCreacion(LocalDate.now());
             lista = listaRepo.save(lista);
 
-
             List<RecetaIngredientes> recetaIngredientes = recetaIngRepo.findByRecetaId(idReceta);
-
-            if (recetaIngredientes.isEmpty()) {
-                throw new RuntimeException("No se encuentran ingredientes en esta receta " + idReceta);
-            }
 
             List<IngredienteListaDTO> itemsDTO = new ArrayList<>();
 
             for (RecetaIngredientes ri : recetaIngredientes) {
                 Ingredientes ing = ri.getIngrediente();
-
 
                 ListaIngredientes listaIng = new ListaIngredientes();
                 listaIng.setListaCompras(lista);
@@ -50,7 +43,6 @@ public class ListaComprasService {
                 listaIng.setComprado(ListaIngredientes.Comprado.No);
 
                 listaIngRepo.save(listaIng);
-
 
                 IngredienteListaDTO ingredienteListaDTO = new IngredienteListaDTO();
                 ingredienteListaDTO.setIdIngrediente(ing.getId());
@@ -61,7 +53,6 @@ public class ListaComprasService {
                 itemsDTO.add(ingredienteListaDTO);
             }
 
-
             ListaComprasDTO listaDTO = new ListaComprasDTO();
             listaDTO.setIdLista(lista.getId());
             listaDTO.setIdUsuario(usuario.getId());
@@ -69,11 +60,5 @@ public class ListaComprasService {
             listaDTO.setIngredientes(itemsDTO);
 
             return listaDTO;
-
-        } catch (Exception e) {
-            System.err.println("Error al crear lista de compras desde receta");
-            e.printStackTrace();
-            throw new RuntimeException("Error: " + e.getMessage(), e);
-        }
     }
 }

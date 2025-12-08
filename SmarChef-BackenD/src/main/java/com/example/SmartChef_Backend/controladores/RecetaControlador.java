@@ -5,6 +5,7 @@ import com.example.SmartChef_Backend.dto.FiltroRecetasDTO;
 import com.example.SmartChef_Backend.dto.RecetaDTO;
 import com.example.SmartChef_Backend.modelos.RecetasFavoritas;
 import com.example.SmartChef_Backend.servicios.RecetaService;
+import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
@@ -17,7 +18,7 @@ public class RecetaControlador {
     private RecetaService service;
 
     @PostMapping("/agregarReceta")
-    public void crearReceta(@RequestBody RecetaDTO recetaDTO) {
+    public void crearReceta(@Valid @RequestBody RecetaDTO recetaDTO) {
         service.agregarReceta(recetaDTO);
     }
 

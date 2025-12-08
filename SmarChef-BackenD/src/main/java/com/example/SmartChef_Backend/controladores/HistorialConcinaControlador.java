@@ -3,6 +3,7 @@ package com.example.SmartChef_Backend.controladores;
 import com.example.SmartChef_Backend.dto.AñadirHistorialDTO;
 import com.example.SmartChef_Backend.dto.HistorialCocinaDTO;
 import com.example.SmartChef_Backend.servicios.HistorialCocinaService;
+import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
@@ -16,7 +17,7 @@ public class HistorialConcinaControlador {
     private HistorialCocinaService servicio;
 
     @PostMapping("/registrar")
-    public void registrarHistorial(@RequestBody AñadirHistorialDTO añadirHistorialDTO) {
+    public void registrarHistorial(@Valid @RequestBody AñadirHistorialDTO añadirHistorialDTO) {
        servicio.registrarCocinado(añadirHistorialDTO);
     }
 

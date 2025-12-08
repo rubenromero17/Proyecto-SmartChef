@@ -2,6 +2,7 @@ package com.example.SmartChef_Backend.controladores;
 
 import com.example.SmartChef_Backend.dto.UsuarioDTO;
 import com.example.SmartChef_Backend.servicios.UsuariosService;
+import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -15,7 +16,7 @@ public class UsuarioControlador {
     private UsuariosService service;
 
     @PostMapping("/crearUsuario")
-    public void crearUsuario(@RequestBody UsuarioDTO usuario) {
+    public void crearUsuario(@Valid @RequestBody UsuarioDTO usuario) {
         service.crearUsuario(usuario);
     }
 }

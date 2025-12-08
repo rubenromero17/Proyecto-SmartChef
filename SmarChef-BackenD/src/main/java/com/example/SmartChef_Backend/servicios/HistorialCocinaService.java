@@ -43,8 +43,7 @@ public class HistorialCocinaService {
         List<HistorialCocina> historial = repositorio.findByUsuarioAndFechaVisitadoAfter(usuario, haceUnaSemana);
         List<HistorialCocinaDTO> listaDTO = new ArrayList<>();
 
-        try {
-            for (HistorialCocina h : historial) {
+        for (HistorialCocina h : historial) {
                 Recetas receta = h.getReceta();
                 HistorialCocinaDTO dto = new HistorialCocinaDTO();
                 dto.setIdReceta(receta.getId());
@@ -52,11 +51,6 @@ public class HistorialCocinaService {
                 dto.setFecha_visitado(h.getFechaVisitado());
                 listaDTO.add(dto);
             }
-        } catch (Exception e) {
-
-            System.out.println("Error al mapear historial de cocina:");
-            e.printStackTrace();
-        }
 
         return listaDTO;
     }

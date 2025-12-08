@@ -15,7 +15,6 @@ public class UsuariosService {
 
     private UsuariosRepositorio repositorio;
 
-
     @Transactional
     public void crearUsuario(UsuarioDTO dto) {
         Usuarios usuarios = new Usuarios();
@@ -28,9 +27,7 @@ public class UsuariosService {
         usuarios.setUrlImagen(dto.getUrlImagen());
         usuarios.setPreferencia(dto.getPreferencias());
         usuarios.setFechaRegistro(LocalDate.now());
-
         repositorio.save(usuarios);
-
     }
 
 }

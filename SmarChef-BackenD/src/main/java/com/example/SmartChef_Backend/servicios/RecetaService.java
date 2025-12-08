@@ -45,7 +45,6 @@ public class RecetaService {
 
         Recetas recetaGuardada = repositorio.save(receta);
 
-
         for (IngredientesDTO ingredienteDTO : recetaDTO.getIngredientes()) {
 
             Ingredientes ingrediente = new Ingredientes();
@@ -59,7 +58,6 @@ public class RecetaService {
 
             repositorioRecetaIngredientes.save(ri);
         }
-
 
         int paso = 1;
         for (InstruccionesDTO instrDTO : recetaDTO.getInstrucciones()) {
