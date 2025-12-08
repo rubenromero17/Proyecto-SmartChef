@@ -51,7 +51,6 @@ public class HistorialCocinaService {
                 dto.setFecha_visitado(h.getFechaVisitado());
                 listaDTO.add(dto);
             }
-
         return listaDTO;
     }
 

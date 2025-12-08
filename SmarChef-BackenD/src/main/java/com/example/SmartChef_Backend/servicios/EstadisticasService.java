@@ -19,12 +19,18 @@ public class EstadisticasService {
 
     public List<EstadisticasIngredientesDTO> top5Ingredientes() {
         List<EstadisticasIngredientesDTO> todos = recetaIngredientesRepositorio.findTopIngredientes();
-        return todos.stream().limit(5).toList();
+        if(todos.isEmpty()){
+            throw new RuntimeException();
+        }
+        else return todos.stream().limit(5).toList();
     }
 
 
     public List<EstadisticasRecetasDTO> top5Recetas() {
         List<EstadisticasRecetasDTO> favoritas = recetasFavoritasRepositorio.findRecetasFavoritas();
+        if(favoritas.isEmpty()){
+            throw new RuntimeException();
+        }
         return favoritas.stream().limit(5).toList();
     }
 
