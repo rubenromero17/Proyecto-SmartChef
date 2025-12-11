@@ -2,6 +2,7 @@ package com.example.SmartChef_Backend.dto;
 
 
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -12,8 +13,8 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Builder
 public class CrearListaDTO {
-    @NotBlank(message = "El id no puede estar vacio")
+    @NotNull
     private Integer idUsuario;
-    @NotBlank(message = "El id no puede estar vacio")
+    @NotNull
     private Integer idReceta;
 }

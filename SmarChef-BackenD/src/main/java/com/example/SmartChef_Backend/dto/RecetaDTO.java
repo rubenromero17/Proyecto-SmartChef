@@ -4,6 +4,7 @@ package com.example.SmartChef_Backend.dto;
 import com.example.SmartChef_Backend.modelos.Recetas;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Positive;
 import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
@@ -22,7 +23,6 @@ import java.util.Set;
 @Builder
 public class RecetaDTO {
 
-    @NotBlank(message = "El id no puede estar vacio")
     private Integer id;
 
     @NotBlank(message = "El nombre no puede estar vacio")
@@ -33,7 +33,8 @@ public class RecetaDTO {
     @Size(min = 1, max = 100)
     private String descripcion;
 
-    @NotBlank(message = "El tiempo de preparacion no puede estar vacio")
+
+    @NotNull
     @Positive
     private Integer tiempoPreparacion;
 
@@ -42,21 +43,20 @@ public class RecetaDTO {
     @URL(message = "La URL debe ser valida")
     private String urlImagen;
 
-    @NotBlank(message = "Indica si es true o false")
+
     private String dificultad;
-    @NotBlank(message = "Indica si es true o false")
+
     private Boolean economica;
-    @NotBlank(message = "Indica si es true o false")
+
     private Boolean vegetariana;
-    @NotBlank(message = "Indica si es true o false")
+
     private Boolean sin_gluten;
-    @NotBlank(message = "Indica si es true o false")
+
     private Boolean rapido;
 
-    @NotBlank(message = "La lista de instrucciones no puede estar vacia")
+
     private List<InstruccionesDTO> instrucciones;
 
-    @NotBlank(message = "La lista de ingredientes no puede estar vacia")
     private List<IngredientesDTO> ingredientes;
 
 }
