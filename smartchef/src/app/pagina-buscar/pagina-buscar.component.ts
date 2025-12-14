@@ -17,6 +17,8 @@ import { RecetaService } from '../servicios/receta-service';
 import { RecetaTarjeta } from '../modelos/RecetaTarjeta';
 import { CrearReceta } from '../modelos/CrearReceta';
 
+
+
 @Component({
   selector: 'app-pagina-buscar',
   templateUrl: './pagina-buscar.component.html',
@@ -151,8 +153,11 @@ export class PaginaBuscarComponent implements OnInit {
 
   cargartodaslasrecetas() {
     this.recetasService.obtenerRecetas().subscribe({
-      next: recetas => this.recetas = recetas,
-      error: err => console.error('Error al cargar recetas', err)
+      next: recetas => {
+        this.recetasOriginales = recetas;
+        this.recetas = recetas;
+      },
+      error: err => console.error(err)
     });
   }
 
@@ -170,10 +175,6 @@ export class PaginaBuscarComponent implements OnInit {
 
   busquedaActiva = false;
   filtroActivo = false;
-
-  toggleBusqueda() {
-    this.busquedaActiva = !this.busquedaActiva;
-  }
 
 
   filtro = {
@@ -204,4 +205,40 @@ export class PaginaBuscarComponent implements OnInit {
       error: err => console.error('Error al filtrar recetas', err)
     });
   }
+
+
+  textoBusqueda: string = '';
+  recetasOriginales: RecetaTarjeta[] = [];
+
+
+
+  buscarPorNombre() {
+    const texto = this.textoBusqueda.toLowerCase().trim();
+
+    if (!texto) {
+      this.recetas = this.recetasOriginales;
+      return;
+    }
+
+    this.recetas = this.recetasOriginales.filter(r =>
+      r.nombre.toLowerCase().includes(texto)
+    );
+  }
+
+  toggleBusqueda() {
+    this.busquedaActiva = !this.busquedaActiva;
+
+    if (!this.busquedaActiva) {
+      this.textoBusqueda = '';
+      this.recetas = this.recetasOriginales;
+    }
+  }
+
+
+
+
+
+
+
+
 }

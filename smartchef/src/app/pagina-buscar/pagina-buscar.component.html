@@ -12,7 +12,8 @@
         </ion-icon>
 
         <ion-input
-          type="text"
+          [(ngModel)]="textoBusqueda"
+          (ionInput)="buscarPorNombre()"
           placeholder="Buscar receta..."
           class="campo-busqueda">
         </ion-input>
