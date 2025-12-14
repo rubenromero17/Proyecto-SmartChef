@@ -1,7 +1,9 @@
 package com.example.SmartChef_Backend.servicios;
 
 
+import com.example.SmartChef_Backend.dto.FavoritayUsuarioDTO;
 import com.example.SmartChef_Backend.dto.FavoritosDTO;
+import com.example.SmartChef_Backend.exception.ElementoNoEncontradoException;
 import com.example.SmartChef_Backend.modelos.Recetas;
 import com.example.SmartChef_Backend.modelos.RecetasFavoritas;
 import com.example.SmartChef_Backend.modelos.Usuarios;
@@ -12,6 +14,8 @@ import jakarta.transaction.Transactional;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 @AllArgsConstructor
 public class RecetasFavoritasService {
@@ -20,13 +24,14 @@ public class RecetasFavoritasService {
     private RecetasFavoritasRepositorio repositorioFavoritas;
     private RecetasRepositorio repositorioRecetas;
     private UsuariosRepositorio repositorioUsuarios;
+
     @Transactional
     public void marcarComoFavorita(Integer usuarioId, Integer recetaId) {
         Usuarios usuario = repositorioUsuarios.findById(usuarioId)
-                .orElseThrow(() -> new RuntimeException("Usuario no encontrado"));
+                .orElseThrow(() -> new ElementoNoEncontradoException("Usuario no encontrado"));
 
         Recetas receta = repositorioRecetas.findById(recetaId)
-                .orElseThrow(() -> new RuntimeException("Receta no encontrada"));
+                .orElseThrow(() -> new ElementoNoEncontradoException("Receta no encontrada"));
 
         if (repositorioFavoritas.existsByUsuarioAndReceta(usuario, receta)) {
             throw new RuntimeException("Receta ya marcada como favorita");
@@ -38,4 +43,5 @@ public class RecetasFavoritasService {
 
         repositorioFavoritas.save(favorita);
     }
+
 }

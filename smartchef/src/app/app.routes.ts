@@ -1,5 +1,6 @@
 import { Routes } from '@angular/router';
 import {PaginaPerfilComponent} from "./pagina-perfil/pagina-perfil.component";
+import {PaginaBuscarComponent} from "./pagina-buscar/pagina-buscar.component";
 
 export const routes: Routes = [
   {
@@ -92,7 +93,7 @@ export const routes: Routes = [
       import('./pagina-edita-perfil/pagina-edita-perfil.component').then((m)=>m.PaginaEditaPerfilComponent)
   },
   {
-    path: 'masInfoRecetas',
+    path: 'masInfoRecetas/:id',
     loadComponent: () =>
       import('./receta-mas-info/receta-mas-info.component').then((m) => m.RecetaMasInfoComponent),
   },
@@ -107,18 +108,18 @@ export const routes: Routes = [
       import('./favoritos/favoritos.component').then((m) => m.FavoritosComponent),
   },
   {
-    path: 'cambiarAIngredientes',
+    path: 'volverABuscarDesdeRecetasMasInfo',
     loadComponent: () =>
-      import('./receta-mas-info/receta-mas-info.component').then((m) => m.RecetaMasInfoComponent),
+      import('./pagina-buscar/pagina-buscar.component').then((m) => m.PaginaBuscarComponent),
   },
   {
-    path: 'cambiarAInstrucciones',
+    path: 'volverABuscarDesdeRecetasMasInfo',
     loadComponent: () =>
-      import('./recetas-instrucciones/recetas-instrucciones.component').then((m) => m.RecetasInstruccionesComponent),
+      import('./pagina-buscar/pagina-buscar.component').then((m) => m.PaginaBuscarComponent),
   },
 
-
   {
+
     path: '',
     redirectTo: 'inicio',
     pathMatch: 'full',

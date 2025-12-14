@@ -6,4 +6,5 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface ListaIngredientesRepositorio extends JpaRepository<ListaIngredientes,Integer> {
+
 }

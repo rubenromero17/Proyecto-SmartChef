@@ -17,8 +17,8 @@ public class RecetasFavoritasControlador {
     public void marcarFavorito(
             @PathVariable("id") Integer recetaId,
             @RequestBody FavoritosDTO favoritoDTO) {
-
             service.marcarComoFavorita(favoritoDTO.getUsuarioId(), recetaId);
     }
+
 }
 

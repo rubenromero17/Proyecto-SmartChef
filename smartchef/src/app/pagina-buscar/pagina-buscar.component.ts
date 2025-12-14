@@ -1,18 +1,21 @@
-import { Component } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { BarraNavegacionComponent } from '../barra-navegacion/barra-navegacion.component';
-import {
-  IonButton,
-  IonCard,
-  IonCheckbox,
-  IonCol,
-  IonContent,
-  IonIcon,
-  IonInput,
-  IonRow,
-} from '@ionic/angular/standalone';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+
+import {
+  IonButton,
+  IonContent,
+  IonIcon,
+  IonInput
+} from '@ionic/angular/standalone';
+
+import { BarraNavegacionComponent } from '../barra-navegacion/barra-navegacion.component';
+import { TarjetaRecetasComponent } from '../tarjeta-recetas/tarjeta-recetas.component';
+
+import { RecetaService } from '../servicios/receta-service';
+import { RecetaTarjeta } from '../modelos/RecetaTarjeta';
+import { CrearReceta } from '../modelos/CrearReceta';
 
 @Component({
   selector: 'app-pagina-buscar',
@@ -23,144 +26,182 @@ import { FormsModule } from '@angular/forms';
     CommonModule,
     FormsModule,
     BarraNavegacionComponent,
+    TarjetaRecetasComponent,
     IonButton,
-    IonCard,
-    IonCheckbox,
-    IonCol,
     IonContent,
     IonIcon,
-    IonInput,
-    IonRow,
+    IonInput
   ],
 })
-export class PaginaBuscarComponent {
+export class PaginaBuscarComponent implements OnInit {
+
+  protected recetasService = inject(RecetaService);
+
+  // eslint-disable-next-line @angular-eslint/prefer-inject
   constructor(public router: Router) {}
 
-  busqueda: string = '';
-  busquedaActiva = false;
-  mostrarFiltro = false;
+  recetas: RecetaTarjeta[] = [];
+  mostrarFormulario = false;
 
-  toggleBusqueda() {
-    this.busquedaActiva = !this.busquedaActiva;
-    if (!this.busquedaActiva) {
-      this.busqueda = '';
-      this.recetasFiltradas = [...this.recetas];
-    }
-  }
-  filtros = {
-    vegetariano: false,
-    sinGluten: false,
-    rapidas: false,
-    economicas: false,
-    ingredientes: '',
-  };
 
-  recetas = [
-    {
-      nombre: 'Pasta Carbonara Clásica',
-      imagen: 'assets/icon/pastaCarbonara.png',
-      tiempo: '20 Min',
-      personas: '4 Pers',
-      ingredientes: 7,
-      tags: ['italiano', 'pasta'],
-      vegetariano: false,
-      sinGluten: false,
-      rapida: true,
-      economica: true,
-    },
-    {
-      nombre: 'Ensalada Buddha Bowl',
-      imagen: 'assets/icon/ensaladaBuddha.png',
-      tiempo: '15 Min',
-      personas: '1 Pers',
-      ingredientes: 9,
-      tags: ['saludable', 'vegetariano'],
-      vegetariano: true,
-      sinGluten: true,
-      rapida: true,
-      economica: true,
-    },
-    {
-      nombre: 'Pollo al Limón',
-      imagen: 'assets/icon/pollo-al-limon.png',
-      tiempo: '45 Min',
-      personas: '4 Pers',
-      ingredientes: 5,
-      tags: ['pollo', 'casero'],
-      vegetariano: false,
-      sinGluten: true,
-      rapida: false,
-      economica: true,
-    },
-    {
-      nombre: 'Smoothie Bowl Tropical',
-      imagen: 'assets/icon/smoothieBowl.png',
-      tiempo: '10 Min',
-      personas: '4 Pers',
-      ingredientes: 8,
-      tags: ['desayuno', 'tropical'],
-      vegetariano: true,
-      sinGluten: true,
-      rapida: true,
-      economica: true,
-    },
-    {
-      nombre: 'Risotto de Champiñones',
-      imagen: 'assets/icon/risottoChampiñones.png',
-      tiempo: '35 Min',
-      personas: '4 Pers',
-      ingredientes: 10,
-      tags: ['champiñones', 'aventura'],
-      vegetariano: true,
-      sinGluten: false,
-      rapida: false,
-      economica: false,
-    },
-  ];
+  nuevaReceta: CrearReceta = this.crearRecetaVacia();
 
-  recetasFiltradas = [...this.recetas];
-
-  toggleFiltro() {
-    this.mostrarFiltro = !this.mostrarFiltro;
+  ngOnInit() {
+    this.cargartodaslasrecetas();
   }
 
-  cerrarFiltro() {
-    this.mostrarFiltro = false;
-  }
 
-  aplicarFiltros() {
-    this.recetasFiltradas = this.recetas.filter((r) => {
-      const cumpleVegetariano = !this.filtros.vegetariano || r.vegetariano;
-      const cumpleSinGluten = !this.filtros.sinGluten || r.sinGluten;
-      const cumpleRapidas = !this.filtros.rapidas || parseInt(r.tiempo) <= 20;
-      const cumpleEconomicas = !this.filtros.economicas || r.economica;
+  abrirFormularioParaEditarPorId(id: number) {
+    this.recetasService.obtenerRecetaPorId(id).subscribe({
+      next: (receta) => {
+        this.nuevaReceta = {
+          ...receta,
+          ingredientes: receta.ingredientes ? [...receta.ingredientes] : [],
+          instrucciones: receta.instrucciones ? [...receta.instrucciones] : []
+        };
 
-      const ingredientesOk =
-        !this.filtros.ingredientes ||
-        r.tags.some((tag) =>
-          tag.toLowerCase().includes(this.filtros.ingredientes.toLowerCase())
-        );
-
-      return (
-        cumpleVegetariano &&
-        cumpleSinGluten &&
-        cumpleRapidas &&
-        cumpleEconomicas &&
-        ingredientesOk
-      );
+        this.mostrarFormulario = true;
+      },
+      error: (err) => {
+        console.error('Error al cargar la receta', err);
+        alert('No se pudo cargar la receta.');
+      }
     });
   }
 
-  filtrarRecetas() {
-    const texto = this.busqueda.toLowerCase().trim();
 
-    this.recetasFiltradas = this.recetas.filter(
-      (r) =>
-        r.nombre.toLowerCase().includes(texto) ||
-        r.tags.some((tag) => tag.toLowerCase().includes(texto))
-    );
+  guardarReceta() {
+    console.log('Receta que voy a enviar al backend:', this.nuevaReceta);
+
+    if (this.nuevaReceta.id && this.nuevaReceta.id !== 0) {
+      this.recetasService.editarReceta(this.nuevaReceta).subscribe({
+        next: () => {
+          alert('Receta actualizada correctamente');
+          this.resetFormulario();
+          this.cargartodaslasrecetas();
+        },
+        error: (err) => console.error('Error al editar receta', err)
+      });
+    } else {
+      this.recetasService.crearReceta(this.nuevaReceta).subscribe({
+        next: () => {
+          alert('Receta creada correctamente');
+          this.resetFormulario();
+          this.cargartodaslasrecetas();
+        },
+        error: (err) => console.error('Error al crear receta', err)
+      });
+    }
   }
-  masInfoRecetas(){
-    this.router.navigate(['/masInfoRecetas']);
+
+
+  resetFormulario() {
+    this.nuevaReceta = this.crearRecetaVacia();
+    this.mostrarFormulario = false;
+  }
+
+
+  crearRecetaVacia(): CrearReceta {
+    return {
+      id: 0,
+      nombre: '',
+      descripcion: '',
+      tiempoPreparacion: 0,
+      urlImagen: '',
+      dificultad: 'FACIL',
+      economica: false,
+      vegetariana: false,
+      sin_gluten: false,
+      rapido: false,
+      ingredientes: [],
+      instrucciones: []
+    };
+  }
+
+
+  agregarIngrediente() {
+    if (!this.nuevaReceta) {
+      this.nuevaReceta = this.crearRecetaVacia();
+    }
+    if (!this.nuevaReceta.ingredientes) {
+      this.nuevaReceta.ingredientes = [];
+    }
+    this.nuevaReceta.ingredientes.push({ nombre: '', cantidad: 1 });
+  }
+
+  eliminarIngrediente(index: number) {
+    this.nuevaReceta.ingredientes.splice(index, 1);
+  }
+
+
+  agregarInstruccion() {
+    if (!this.nuevaReceta) {
+      this.nuevaReceta = this.crearRecetaVacia();
+    }
+    if (!this.nuevaReceta.instrucciones) {
+      this.nuevaReceta.instrucciones = [];
+    }
+    this.nuevaReceta.instrucciones.push({ descripcion: '' });
+  }
+
+
+  eliminarInstruccion(index: number) {
+    this.nuevaReceta.instrucciones.splice(index, 1);
+  }
+
+  cargartodaslasrecetas() {
+    this.recetasService.obtenerRecetas().subscribe({
+      next: recetas => this.recetas = recetas,
+      error: err => console.error('Error al cargar recetas', err)
+    });
+  }
+
+  borrarReceta(id: number) {
+    if (!confirm('¿Eliminar esta receta?')) return;
+
+    this.recetasService.eliminarReceta(id).subscribe({
+      next: () => {
+        this.recetas = this.recetas.filter(r => r.id !== id);
+      },
+      error: err => console.error('Error al borrar receta', err)
+    });
+  }
+
+
+  busquedaActiva = false;
+  filtroActivo = false;
+
+  toggleBusqueda() {
+    this.busquedaActiva = !this.busquedaActiva;
+  }
+
+
+  filtro = {
+    economica: false,
+    vegetariana: false,
+    sin_gluten: false,
+    rapido: false,
+    ingredientes: [] as string[]
+  };
+
+  ingredienteFiltro: string = '';
+
+
+  agregarIngredienteFiltro() {
+    if (this.ingredienteFiltro && !this.filtro.ingredientes.includes(this.ingredienteFiltro)) {
+      this.filtro.ingredientes.push(this.ingredienteFiltro);
+      this.ingredienteFiltro = '';
+    }
+  }
+
+  quitarIngredienteFiltro(index: number) {
+    this.filtro.ingredientes.splice(index, 1);
+  }
+
+  aplicarFiltro() {
+    this.recetasService.buscarRecetasPorFiltro(this.filtro).subscribe({
+      next: recetasFiltradas => this.recetas = recetasFiltradas,
+      error: err => console.error('Error al filtrar recetas', err)
+    });
   }
 }

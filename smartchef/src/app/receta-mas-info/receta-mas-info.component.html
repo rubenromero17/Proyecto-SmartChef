@@ -1,26 +1,24 @@
-<ion-content class="fondo">
-
+<ion-content class="fondo" *ngIf="receta">
   <div class="contenedor">
 
     <div class="contenedor-imagen">
-      <img src="./assets/icon/pastaCarbonara.png" class="imagen-receta" />
+      <img [src]="receta.urlImagen" [alt]="receta.nombre" class="imagen-receta" />
     </div>
 
-
-    <h2 class="titulo">Pasta Carbonara Clásica</h2>
+    <h2 class="titulo">{{ receta.nombre }}</h2>
+    <p>{{ receta.descripcion }}</p>
 
     <div class="etiquetas">
-      <span>#italiano</span>
-      <span>#pasta</span>
+      <span *ngIf="receta.vegetariana">#vegetariana</span>
+      <span *ngIf="receta.rapido">#rápido</span>
+      <span *ngIf="receta.economica">#económica</span>
+      <span *ngIf="receta.sin_gluten">#sinGluten</span>
     </div>
 
-
     <div class="datos">
-      <div><ion-icon name="time-outline"></ion-icon> 20 Min</div>
-      <div>Rápido</div>
-      <div><ion-icon name="people-outline"></ion-icon> 4 Pers</div>
-      <div>Económico</div>
-      <div><ion-icon name="cube-outline"></ion-icon> 7 Ing</div>
+      <div><ion-icon name="time-outline"></ion-icon> {{ receta.tiempoPreparacion }} Min</div>
+      <div>{{ receta.dificultad }}</div>
+      <div><ion-icon name="cube-outline"></ion-icon> {{ receta.ingredientes.length }} Ing</div>
     </div>
 
     <div class="botones-acciones">
@@ -28,25 +26,28 @@
       <button class="btn-opcion">Marcar Cocinado</button>
     </div>
 
-
     <div class="toggle">
-      <button class="activo">Ingredientes</button>
-      <button (click)="cambiarAInstrucciones()">Instrucciones</button>
+      <button [class.activo]="mostrarIngredientes" (click)="cambiarAIngredientes()">Ingredientes</button>
+      <button [class.activo]="!mostrarIngredientes" (click)="cambiarAInstrucciones()">Instrucciones</button>
     </div>
 
+    <ng-container *ngIf="mostrarIngredientes">
+      <div class="item" *ngFor="let ing of receta.ingredientes">
+        {{ ing.cantidad }} {{ ing.nombre }}
+      </div>
+    </ng-container>
 
-    <div class="lista">
-      <div class="item">400g espaguetis</div>
-      <div class="item">200g panceta o tocino</div>
-      <div class="item">3 huevos grandes</div>
-      <div class="item">100g queso parmesano rallado</div>
-      <div class="item">2 dientes de ajo</div>
-      <div class="item">Pimienta negra recién molida</div>
-      <div class="item">Sal</div>
+    <ng-container *ngIf="!mostrarIngredientes">
+      <div class="item" *ngFor="let ins of receta.instrucciones">
+        {{ ins.paso_numero }}- {{ ins.descripcion }}
+      </div>
+    </ng-container>
+
+    <div class="boton-salir">
+      <ion-icon name="arrow-back-outline" (click)="volverABuscarDesdeRecetasMasInfo()"></ion-icon>
     </div>
 
   </div>
 
+  <app-barra-navegacion></app-barra-navegacion>
 </ion-content>
-
-<app-barra-navegacion></app-barra-navegacion>

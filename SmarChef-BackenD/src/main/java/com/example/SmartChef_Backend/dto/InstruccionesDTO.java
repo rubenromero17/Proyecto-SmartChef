@@ -3,6 +3,7 @@ package com.example.SmartChef_Backend.dto;
 import com.example.SmartChef_Backend.modelos.InstruccionesRecetas;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -17,10 +18,10 @@ import java.util.Set;
 @NoArgsConstructor
 @Builder
 public class InstruccionesDTO {
-    @NotBlank(message = "El id no puede estar vacio")
+    @NotNull(message = "El id no puede ser nulo")
     private Integer id;
 
-    @NotBlank(message = "El paso no puede estar vacio")
+    @NotNull(message = "El paso no puede ser nulo")
     private Integer paso_numero;
 
     @NotBlank(message = "La descripcion no puede estar vacia")

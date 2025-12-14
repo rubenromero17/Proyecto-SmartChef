@@ -1,0 +1,51 @@
+<div class="lista-recetas">
+  <ion-card class="tarjeta-receta" *ngFor="let receta of recetas">
+
+    <ion-icon
+      name="trash-outline"
+      class="icono-eliminar"
+      (click)="eliminaReceta(receta)">
+    </ion-icon>
+    <ion-icon
+      name="create-outline"
+      class="icono-editar"
+      (click)="editarReceta(receta)">
+    </ion-icon>
+
+
+    <ion-row>
+      <ion-col size="4">
+        <img [src]="receta.urlImagen" [alt]="receta.nombre" class="imagen-receta" />
+      </ion-col>
+
+      <ion-col size="8">
+
+        <h2 class="titulo-receta">{{ receta.nombre }}</h2>
+
+        <div class="info-receta">
+          <ion-icon name="time-outline"></ion-icon>
+          <span>{{ receta.tiempoPreparacion }} min</span>
+
+          <ion-icon name="fast-food-outline"></ion-icon>
+          <span>{{ receta.numeroIngredientes }} ING</span>
+        </div>
+
+        <div class="booleanos">
+          <span *ngFor="let etiqueta of receta.booleanosActivos; let i = index">
+            {{ etiqueta }}<span *ngIf="i < receta.booleanosActivos.length - 1"> - </span>
+          </span>
+        </div>
+
+
+        <ion-icon
+          name="add-circle-outline"
+          (click)="masInfoRecetas(receta.id)"
+          class="icono-mas">
+        </ion-icon>
+
+      </ion-col>
+    </ion-row>
+
+    <ion-icon name="heart-outline" class="icono-favorito"></ion-icon>
+  </ion-card>
+</div>

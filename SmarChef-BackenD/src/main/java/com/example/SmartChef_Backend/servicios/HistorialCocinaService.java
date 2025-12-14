@@ -1,5 +1,6 @@
 package com.example.SmartChef_Backend.servicios;
 
+import com.example.SmartChef_Backend.exception.ElementoNoEncontradoException;
 import com.example.SmartChef_Backend.modelos.*;
 import com.example.SmartChef_Backend.repositorios.*;
 import com.example.SmartChef_Backend.dto.*;
@@ -37,7 +38,7 @@ public class HistorialCocinaService {
     @Transactional
     public List<HistorialCocinaDTO> obtenerHistorialSemanal(int idUsuario) {
         Usuarios usuario = usuariosRepositorio.findById(idUsuario)
-                .orElseThrow(() -> new RuntimeException("Usuario no encontrado"));
+                .orElseThrow(() -> new ElementoNoEncontradoException("Usuario no encontrado"));
 
         LocalDate haceUnaSemana = LocalDate.now().minusDays(7);
         List<HistorialCocina> historial = repositorio.findByUsuarioAndFechaVisitadoAfter(usuario, haceUnaSemana);
@@ -53,6 +54,7 @@ public class HistorialCocinaService {
             }
         return listaDTO;
     }
+
 
 }
 

@@ -2,6 +2,7 @@ package com.example.SmartChef_Backend.controladores;
 
 import com.example.SmartChef_Backend.dto.EstadisticasIngredientesDTO;
 import com.example.SmartChef_Backend.dto.EstadisticasRecetasDTO;
+import com.example.SmartChef_Backend.dto.FavoritayUsuarioDTO;
 import com.example.SmartChef_Backend.servicios.EstadisticasService;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
@@ -23,8 +24,9 @@ public class EstadisticasControlador {
         return estadisticasService.top5Ingredientes();
     }
 
-    @GetMapping("/top5Recetas")
-    public List<EstadisticasRecetasDTO> top5Recetas() {
-        return estadisticasService.top5Recetas();
+    @GetMapping("/usuarioPopular")
+    public List<FavoritayUsuarioDTO> usuarioPopular() {
+        return estadisticasService.obtenerRecetasFavoritasPorUsuario();
     }
+
 }

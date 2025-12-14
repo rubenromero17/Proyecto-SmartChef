@@ -4,7 +4,7 @@ import {personOutline, checkmarkDoneCircleOutline,returnUpBackOutline,
   checkmarkOutline,personAddOutline,heartOutline,
   timeOutline,leafOutline,homeOutline,searchOutline,addCircleOutline,closeOutline,alarmOutline,createOutline,
   funnelOutline, peopleOutline,cubeOutline,calendarOutline,hourglassOutline,eyeOutline,heartCircleOutline,bookOutline,cartOutline,
-  folderOpenOutline,arrowBackOutline} from "ionicons/icons";
+  folderOpenOutline,arrowBackOutline,fastFoodOutline,trashOutline,addOutline,optionsOutline} from "ionicons/icons";
 import {addIcons} from "ionicons";
 
 
@@ -41,7 +41,11 @@ export class AppComponent {
       bookOutline,
       cartOutline,
       folderOpenOutline,
-      arrowBackOutline
+      arrowBackOutline,
+      fastFoodOutline,
+      trashOutline,
+      addOutline,
+      optionsOutline
     })
   }
 }

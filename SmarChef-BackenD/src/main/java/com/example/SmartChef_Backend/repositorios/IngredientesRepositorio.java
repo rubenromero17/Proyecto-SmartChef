@@ -7,4 +7,6 @@ import org.springframework.stereotype.Repository;
 public interface IngredientesRepositorio extends JpaRepository<Ingredientes, Integer> {
 
 
+
+
 }

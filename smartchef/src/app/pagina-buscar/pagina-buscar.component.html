@@ -4,69 +4,121 @@
     <div class="cabecera">
       <img src="assets/icon/logoSmartChef.png" alt="Logo" class="logo">
 
-
       <div class="buscador-animado" [class.activo]="busquedaActiva">
-        <ion-icon name="search-outline" class="icono-buscar" (click)="toggleBusqueda()"></ion-icon>
+        <ion-icon
+          name="search-outline"
+          class="icono-buscar"
+          (click)="toggleBusqueda()">
+        </ion-icon>
+
         <ion-input
           type="text"
           placeholder="Buscar receta..."
-          [(ngModel)]="busqueda"
-          (ionInput)="filtrarRecetas()"
-          class="campo-busqueda"
-        ></ion-input>
+          class="campo-busqueda">
+        </ion-input>
       </div>
 
-      <ion-button fill="outline" class="boton-filtrar" (click)="toggleFiltro()">
-        <ion-icon name="funnel-outline"></ion-icon>
-        Filtrar
-      </ion-button>
+      <button class="boton-filtro" (click)="filtroActivo = !filtroActivo">
+        <ion-icon name="options-outline"></ion-icon> Filtro
+      </button>
+
+
+      <div class="panel-filtro" *ngIf="filtroActivo">
+        <div class="categorias">
+          <label><input type="checkbox" [(ngModel)]="filtro.economica"> Económica</label>
+          <label><input type="checkbox" [(ngModel)]="filtro.vegetariana"> Vegetariana</label>
+          <label><input type="checkbox" [(ngModel)]="filtro.sin_gluten"> Sin gluten</label>
+          <label><input type="checkbox" [(ngModel)]="filtro.rapido"> Rápido</label>
+        </div>
+
+        <div class="ingredientes-filtro">
+          <ion-input placeholder="Añadir ingrediente" [(ngModel)]="ingredienteFiltro"></ion-input>
+          <ion-button (click)="agregarIngredienteFiltro()">Añadir</ion-button>
+        </div>
+
+        <div class="ingredientes-agregados">
+      <span class="ingrediente-chip" *ngFor="let ing of filtro.ingredientes; let i = index">
+        {{ ing }} <button (click)="quitarIngredienteFiltro(i)">×</button>
+      </span>
+        </div>
+
+        <button class="boton-aplicar" (click)="aplicarFiltro()">Aplicar filtro</button>
+      </div>
+    </div>
+
+    <app-tarjeta-recetas [recetas]="recetas"
+    (eliminar)="borrarReceta($event)" (editar)="abrirFormularioParaEditarPorId($event)">
+    </app-tarjeta-recetas>
+
+
+
+    <div class="panel-filtro" *ngIf="filtroActivo">
+
+    </div>
+
+    <div class="boton-anadir-receta" (click)="mostrarFormulario = !mostrarFormulario">
+      <ion-icon name="add-outline"></ion-icon>
+      <button type="submit">
+      {{ nuevaReceta.id !== 0 ? 'Actualizar Receta' : 'Crear Receta' }}
+    </button>
     </div>
 
 
-    <div *ngIf="mostrarFiltro" class="filtro-panel">
-      <h3>Filtrar por:</h3>
+    <div *ngIf="mostrarFormulario" class="formulario-receta">
+      <form (ngSubmit)="guardarReceta()">
 
-      <div class="grupo-filtro">
-        <ion-checkbox [(ngModel)]="filtros.vegetariano">Vegetariano</ion-checkbox>
-        <ion-checkbox [(ngModel)]="filtros.sinGluten">Sin gluten</ion-checkbox>
-        <ion-checkbox [(ngModel)]="filtros.rapidas">Rápidas</ion-checkbox>
-        <ion-checkbox [(ngModel)]="filtros.economicas">Económicas</ion-checkbox>
-      </div>
+        <label for="nombre">Nombre:</label>
+        <input id="nombre" [(ngModel)]="nuevaReceta.nombre" name="nombre" required />
 
-      <div class="grupo-filtro">
-        <h4>Ingredientes</h4>
-        <ion-input
-          placeholder="Ej: pasta, pollo..."
-          [(ngModel)]="filtros.ingredientes"
-        ></ion-input>
-      </div>
+        <label for="descripcion">Descripción:</label>
+        <textarea id="descripcion" [(ngModel)]="nuevaReceta.descripcion" name="descripcion" required></textarea>
 
-      <ion-button expand="block" (click)="aplicarFiltros()">Aplicar filtros</ion-button>
-      <ion-button expand="block" fill="clear" color="medium" (click)="cerrarFiltro()">Cerrar</ion-button>
-    </div>
+        <label for="tiempoPreparacion">Tiempo de preparación (min):</label>
+        <input type="number" id="tiempoPreparacion" [(ngModel)]="nuevaReceta.tiempoPreparacion" name="tiempoPreparacion" min="1" required />
+
+        <label for="urlImagen">URL Imagen:</label>
+        <input id="urlImagen" [(ngModel)]="nuevaReceta.urlImagen" name="urlImagen" />
+
+        <label for="dificultad">Dificultad:</label>
+        <select id="dificultad" [(ngModel)]="nuevaReceta.dificultad" name="dificultad" required>
+          <option value="FACIL">Fácil</option>
+          <option value="MEDIA">Media</option>
+          <option value="DIFICIL">Difícil</option>
+        </select>
+
+        <label>
+          <input type="checkbox" [(ngModel)]="nuevaReceta.economica" name="economica" /> Económica
+        </label>
+        <label>
+          <input type="checkbox" [(ngModel)]="nuevaReceta.vegetariana" name="vegetariana" /> Vegetariana
+        </label>
+        <label>
+          <input type="checkbox" [(ngModel)]="nuevaReceta.sin_gluten" name="sin_gluten" /> Sin gluten
+        </label>
+        <label>
+          <input type="checkbox" [(ngModel)]="nuevaReceta.rapido" name="rapido" /> Rápido
+        </label>
 
 
-    <div class="lista-recetas">
-      <ion-card class="tarjeta-receta" *ngFor="let receta of recetasFiltradas">
-        <ion-row>
-          <ion-col size="4">
-            <img [src]="receta.imagen" [alt]="receta.nombre" class="imagen-receta" />
-          </ion-col>
-          <ion-col size="8">
-            <h2 class="titulo-receta">{{ receta.nombre }}</h2>
-            <div class="info-receta">
-              <ion-icon name="time-outline"></ion-icon><span>{{ receta.tiempo }}</span>
-              <ion-icon name="people-outline"></ion-icon><span>{{ receta.personas }}</span>
-              <ion-icon name="leaf-outline"></ion-icon><span>{{ receta.ingredientes }} Ing</span>
-            </div>
-            <div class="hashtags">
-              <span *ngFor="let tag of receta.tags">#{{ tag }}</span>
-            </div>
-            <ion-icon name="add-circle-outline" (click)="masInfoRecetas()" class="icono-mas"></ion-icon>
-          </ion-col>
-        </ion-row>
-        <ion-icon name="heart-outline" class="icono-favorito"></ion-icon>
-      </ion-card>
+        <h3>Ingredientes</h3>
+        <div *ngFor="let ing of nuevaReceta.ingredientes; let i = index">
+          <input placeholder="Nombre" [(ngModel)]="nuevaReceta.ingredientes[i].nombre" name="ingredienteNombre{{i}}" required />
+          <input type="number" placeholder="Cantidad" [(ngModel)]="nuevaReceta.ingredientes[i].cantidad" name="ingredienteCantidad{{i}}" min="1" required />
+          <button type="button" (click)="eliminarIngrediente(i)">Eliminar</button>
+        </div>
+        <button type="button" (click)="agregarIngrediente()">Añadir Ingrediente</button>
+
+
+        <h3>Instrucciones</h3>
+        <div *ngFor="let instr of nuevaReceta.instrucciones; let j = index">
+          <textarea placeholder="Descripción" [(ngModel)]="nuevaReceta.instrucciones[j].descripcion" name="instrDescripcion{{j}}" required></textarea>
+          <button type="button" (click)="eliminarInstruccion(j)">Eliminar</button>
+        </div>
+        <button type="button" (click)="agregarInstruccion()">Añadir Instrucción</button>
+
+        <br /><br />
+        <button type="submit">Confirmar</button>
+      </form>
     </div>
   </div>
 

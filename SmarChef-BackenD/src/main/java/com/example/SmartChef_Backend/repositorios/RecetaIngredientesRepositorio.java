@@ -14,8 +14,10 @@ import java.util.List;
 @Repository
 public interface RecetaIngredientesRepositorio extends JpaRepository<RecetaIngredientes, Integer> {
     List<RecetaIngredientes> findByRecetaId(Integer idReceta);
+    void deleteByReceta_Id(Integer recetaId);
 
-//hago el select new para pasar directamente el dto no la entidad
+
+    //hago el select new para pasar directamente el dto no la entidad
     @Query("select new com.example.SmartChef_Backend.dto.EstadisticasIngredientesDTO(ri.ingrediente.nombre, count (distinct ri.receta.id)) " +
             "from RecetaIngredientes ri " +
             "group by  ri.ingrediente.nombre " +

@@ -28,6 +28,8 @@ public class UsuariosService {
         usuarios.setPreferencia(dto.getPreferencias());
         usuarios.setFechaRegistro(LocalDate.now());
         repositorio.save(usuarios);
+
     }
+
 
 }

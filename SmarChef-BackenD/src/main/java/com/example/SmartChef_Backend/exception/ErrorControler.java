@@ -24,5 +24,22 @@ public class ErrorControler {
 
     }
 
+    @ExceptionHandler(ElementoNoEncontradoException.class)
+    public ResponseEntity<Map<String, String>> manejarRecursoNoEncontrado(ElementoNoEncontradoException ex) {
+        Map<String, String> error = new HashMap<>();
+        error.put("error", ex.getMessage());
+        return new ResponseEntity<>(error, HttpStatus.NOT_FOUND);
+    }
+
+
+
+    @ExceptionHandler(EliminarNoExistenteException.class)
+    public ResponseEntity<Map<String, String>> manejarExcepcionEliminarnoExistente(EliminarNoExistenteException ex){
+        Map<String, String> error = new HashMap<>();
+        error.put("error", ex.getMessage());
+        return new ResponseEntity<>(error, HttpStatus.NOT_FOUND);
+    }
+
+
 
 }

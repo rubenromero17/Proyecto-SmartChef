@@ -13,8 +13,8 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Builder
 public class CrearListaDTO {
-    @NotNull
+    @NotNull(message = "El idUsuario no puede ser nulo")
     private Integer idUsuario;
-    @NotNull
+    @NotNull(message = "El idReceta no puede ser nulo")
     private Integer idReceta;
 }

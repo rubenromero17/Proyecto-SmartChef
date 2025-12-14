@@ -43,20 +43,21 @@ public class RecetaDTO {
     @URL(message = "La URL debe ser valida")
     private String urlImagen;
 
-
+    @NotBlank(message = "La dificultad no puede estar vacia")
     private String dificultad;
 
+    @NotNull(message = "Debes indica mediante un booleano (true | false) si la receta es economica")
     private Boolean economica;
-
+    @NotNull(message = "Debes indica mediante un booleano (true | false) si la receta es vegetariana")
     private Boolean vegetariana;
-
+    @NotNull(message = "Debes indica mediante un booleano (true | false) si la receta es sin gluten")
     private Boolean sin_gluten;
-
+    @NotNull(message = "Debes indica mediante un booleano (true | false) si la receta es rapida")
     private Boolean rapido;
 
-
+    @NotNull(message = "Debes indicar las intrucciones de la receta")
     private List<InstruccionesDTO> instrucciones;
-
+    @NotNull(message = "Debes indicar los ingredientes de la receta")
     private List<IngredientesDTO> ingredientes;
 
 }

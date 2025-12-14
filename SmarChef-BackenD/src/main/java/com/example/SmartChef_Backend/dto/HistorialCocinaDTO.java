@@ -15,13 +15,12 @@ import java.time.LocalDate;
 @Builder
 public class HistorialCocinaDTO {
 
-    @NotNull
+    @NotNull(message = "El idUsuario no puede ser nulo")
     private Integer idUsuario;
-    @NotNull
+    @NotNull(message = "El idReceta no puede ser nulo")
     private Integer idReceta;
 
-    @NotBlank(message = "La fecha cocinado no puede estar vacia")
-    @Pattern(regexp = "^\\d{4}-(0[1-9]|1[0-2])-(0[1-9]|[12]\\d|3[01])$",message = "Indica un formato valido para la fecha")
+    @NotNull(message = "La fecha de cocinado no puede ser nula")
     private LocalDate fecha_cocinado;
 
     private LocalDate fecha_visitado;

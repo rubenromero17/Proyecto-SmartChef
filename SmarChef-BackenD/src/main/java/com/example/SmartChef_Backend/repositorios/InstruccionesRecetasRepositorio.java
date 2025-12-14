@@ -11,4 +11,7 @@ import java.util.List;
 public interface InstruccionesRecetasRepositorio extends JpaRepository<InstruccionesRecetas, Integer> {
 
     List<InstruccionesRecetas> findByReceta_Id(Integer recetaId);
+    void deleteByReceta_Id(Integer recetaId);
+
+
 }

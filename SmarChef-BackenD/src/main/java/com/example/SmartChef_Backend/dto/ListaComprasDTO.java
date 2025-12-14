@@ -24,7 +24,7 @@ public class ListaComprasDTO {
     @Pattern(regexp = "^\\d{4}-(0[1-9]|1[0-2])-(0[1-9]|[12]\\d|3[01])$",message = "Indica un formato valido para la fecha")
     private LocalDate fechaCreacion;
 
-    @NotBlank(message = "No se puede pasar una lisa vacia")
+    @NotBlank(message = "No se puede pasar una lista vacia")
     private List<IngredienteListaDTO> ingredientes;
 
 
