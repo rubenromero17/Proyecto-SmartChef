@@ -17,19 +17,20 @@ import java.time.LocalDate;
 @Builder
 public class UsuarioDTO {
 
-    @NotBlank(message = "Debes indicar el nombre no puede estar vacia")
+    @NotBlank(message = "Debes indicar el nombre no puede estar vacio")
     private String nombre;
 
-    @NotNull(message = "La fecha no puede estar vacia")
+    @NotNull(message = "La fecha no puede ser nula")
     @Past(message = "La fecha de nacimiento deber ser en el pasado")
     private LocalDate fechaNacimiento;
 
-    @NotBlank(message = "El mensaje no puede ser nulo")
-    @Email
+    @NotBlank(message = "El email no puede estar vacío")
+    @Pattern(regexp = "^(?!\\.)(?!.*\\.\\.)[a-zA-Z0-9._%+-]+(?<!\\.)@gmail\\.com$", message = "El email debe ser una dirección Gmail válida"
+    )
     private String email;
 
     @NotBlank(message = "La contraseña es obligatoria")
-    @Size(min = 8, max = 20, message = "La contraseña debe tener entre 8 y 255 caracteres")
+    @Size(min = 8, max = 20, message = "La contraseña debe tener entre 8 y 20 caracteres")
     private String contrasena;
 
     @NotBlank(message = "Debes indicar una direccion valida")

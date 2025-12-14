@@ -17,6 +17,10 @@ public class UsuariosService {
 
     @Transactional
     public void crearUsuario(UsuarioDTO dto) {
+
+        if (repositorio.existsByEmail(dto.getEmail())) {
+            throw new IllegalArgumentException("El email ya está en uso");
+        }
         Usuarios usuarios = new Usuarios();
 
         usuarios.setNombre(dto.getNombre());
