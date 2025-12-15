@@ -18,7 +18,7 @@ public class ListaIngredientes {
     private Integer id;
 
     @Column(name = "cantidad",nullable = false)
-    private Integer cantidad;
+    private Double cantidad;
 
     @Column(name = "comprado",nullable = false)
     @Enumerated(EnumType.STRING)

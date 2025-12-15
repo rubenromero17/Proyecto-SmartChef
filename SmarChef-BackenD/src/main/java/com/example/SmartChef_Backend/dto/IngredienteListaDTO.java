@@ -21,7 +21,7 @@ public class IngredienteListaDTO {
     private String nombre;
 
     @NotBlank(message = "La cantidad no puede estar vacia")
-    private Integer cantidad;
+    private Double cantidad;
     @NotBlank
     private String comprado;
 }

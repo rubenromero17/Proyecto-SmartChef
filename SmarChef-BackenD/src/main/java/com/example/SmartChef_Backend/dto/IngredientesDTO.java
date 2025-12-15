@@ -18,5 +18,5 @@ public class IngredientesDTO {
     @NotBlank(message = "El nombre no puede estar en blanco")
     private String nombre;
     @NotNull(message = "La cantidad no puede ser nula")
-    private Integer cantidad;
+    private Double cantidad;
 }

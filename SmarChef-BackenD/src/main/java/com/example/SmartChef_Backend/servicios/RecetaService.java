@@ -113,6 +113,19 @@ public class RecetaService {
                     .collect(Collectors.toList());
             dto.setIngredientes(ingredientesDTO);
 
+            List<InstruccionesDTO> instruccionesDTO =
+                    repositorioInstrucciones.findByReceta_Id(receta.getId())
+                            .stream()
+                            .map(i -> new InstruccionesDTO(
+                                    i.getId(),
+                                    i.getPaso_numero(),
+                                    i.getDescripcion()
+                            ))
+                            .collect(Collectors.toList());
+
+            dto.setInstrucciones(instruccionesDTO);
+
+
             listaDTO.add(dto);
         }
 

@@ -3,10 +3,7 @@ package com.example.SmartChef_Backend.dto;
 
 import com.example.SmartChef_Backend.modelos.Recetas;
 import jakarta.persistence.*;
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotNull;
-import jakarta.validation.constraints.Positive;
-import jakarta.validation.constraints.Size;
+import jakarta.validation.constraints.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -43,7 +40,8 @@ public class RecetaDTO {
     @URL(message = "La URL debe ser valida")
     private String urlImagen;
 
-    @NotBlank(message = "La dificultad no puede estar vacia")
+    @NotBlank(message = "La dificultad no puede estar vacía")
+    @Pattern(regexp = "^(FACIL|MEDIA|DIFICIL)$", message = "Dificultad inválida. Debe ser: FACIL, MEDIA o DIFICIL")
     private String dificultad;
 
     @NotNull(message = "Debes indica mediante un booleano (true | false) si la receta es economica")

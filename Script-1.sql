@@ -1,6 +1,7 @@
 create database smartchef;
 use smartchef;
 
+
 create table usuarios (
     id_usuario int auto_increment primary key,
     nombre varchar(100) not null,
@@ -36,7 +37,7 @@ create table receta_ingredientes (
 	id_receta_ingredientes int auto_increment primary key,
     id_receta int not null,
     id_ingrediente int not null,
-    cantidad int,
+    cantidad float,
     foreign key (id_receta) references recetas(id_receta) on delete cascade,
     foreign key (id_ingrediente) references ingredientes(id_ingrediente) on delete cascade
 );
@@ -61,7 +62,7 @@ create table lista_ingredientes (
 	id_lista_ingredientes int auto_increment primary key,
     id_lista int not null,
     id_ingrediente int not null,
-    cantidad int not null,
+    cantidad float not null,
     comprado  ENUM('Si', 'No') not null,
     foreign key (id_lista) references listas_compras(id_lista) on delete cascade,
     foreign key (id_ingrediente) references ingredientes(id_ingrediente) on delete cascade
@@ -165,3 +166,7 @@ drop column cantidad;
 
 alter table recetas_favoritas 
 add table id_recetas_favoritas int auto_increment primary key;
+
+ALTER TABLE receta_ingredientes 
+MODIFY cantidad FLOAT;
+
