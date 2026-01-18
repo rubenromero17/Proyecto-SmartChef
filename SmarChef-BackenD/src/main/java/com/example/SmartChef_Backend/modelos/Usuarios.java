@@ -15,7 +15,7 @@ import java.util.Set;
 @NoArgsConstructor
 
 @Entity
-@Table(name="usuarios")
+@Table(name="usuarios", schema = "smartchef")
 public class Usuarios {
 
     @Id
@@ -23,7 +23,7 @@ public class Usuarios {
     @Column(name = "id_usuario")
     private Integer id;
 
-    @Column(name = "nombre", length = 100, nullable = false)
+    @Column(name = "nombre", length = 100, nullable = false, unique = true)
     private String nombre;
 
     @Column (name = "fecha_nacimiento", nullable = false)

@@ -10,7 +10,7 @@ import lombok.*;
 @NoArgsConstructor
 
 @Entity
-@Table(name="etiquetas")
+@Table(name="etiquetas", schema = "smartchef")
 public class Etiquetas {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

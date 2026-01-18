@@ -11,7 +11,7 @@ import lombok.*;
 @NoArgsConstructor
 
 @Entity
-@Table(name="coleccion_recetas")
+@Table(name="coleccion_recetas", schema = "smartchef")
 public class ColeccionRecetas {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

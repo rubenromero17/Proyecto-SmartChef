@@ -16,7 +16,7 @@ import java.util.Set;
 @NoArgsConstructor
 
 @Entity
-@Table(name="recetas_etiquetas")
+@Table(name="recetas_etiquetas", schema = "smartchef")
 public class RecetasEtiquetas {
 
     @Id

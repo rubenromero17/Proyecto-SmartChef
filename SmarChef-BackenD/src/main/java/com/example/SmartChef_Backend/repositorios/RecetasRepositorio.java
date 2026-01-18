@@ -14,7 +14,7 @@ public interface RecetasRepositorio extends JpaRepository<Recetas, Integer> {
 
     Recetas findByNombre(String nombre);
     Recetas findAllByDescripcion(String descripcion);
-
+    boolean existsByNombre(String nombre);
     Optional<Recetas> findById(Integer id);
 
     @Query("select distinct r from Recetas r join fetch r.ingredientes i "

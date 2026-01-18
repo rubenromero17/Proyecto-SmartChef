@@ -13,7 +13,7 @@ import java.util.Set;
 @NoArgsConstructor
 
 @Entity
-@Table(name="recetas")
+@Table(name="recetas", schema = "smartchef")
 public class Recetas {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

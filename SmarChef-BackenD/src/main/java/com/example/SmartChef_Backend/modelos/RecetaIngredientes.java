@@ -11,7 +11,7 @@ import lombok.*;
 @NoArgsConstructor
 
 @Entity
-@Table(name="receta_ingredientes")
+@Table(name="receta_ingredientes", schema = "smartchef")
 public class RecetaIngredientes {
 
     @Id

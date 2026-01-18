@@ -27,6 +27,9 @@ public class RecetaService {
 
     @Transactional
     public void agregarReceta(RecetaDTO recetaDTO) {
+        if (repositorio.existsByNombre(recetaDTO.getNombre())) {
+            throw new IllegalArgumentException("El nombre de la receta ya existe");
+        }
 
         Recetas receta = new Recetas();
         receta.setNombre(recetaDTO.getNombre());

@@ -17,7 +17,9 @@ public class UsuariosService {
 
     @Transactional
     public void crearUsuario(UsuarioDTO dto) {
-
+        if (repositorio.existsByNombre(dto.getNombre())) {
+            throw new IllegalArgumentException("El nombre de usuario ya existe");
+        }
         if (repositorio.existsByEmail(dto.getEmail())) {
             throw new IllegalArgumentException("El email ya está en uso");
         }
@@ -33,6 +35,10 @@ public class UsuariosService {
         usuarios.setFechaRegistro(LocalDate.now());
         repositorio.save(usuarios);
 
+    }
+    @Transactional
+    public void verTodosUsuarios() {
+        repositorio.findAll();
     }
 
 

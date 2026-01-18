@@ -12,7 +12,7 @@ import java.time.LocalDate;
 @NoArgsConstructor
 
 @Entity
-@Table(name="listas_compras")
+@Table(name="listas_compras", schema = "smartchef")
 public class ListaCompras {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
