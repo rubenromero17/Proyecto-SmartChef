@@ -1,13 +1,9 @@
 package com.example.SmartChef_Backend.servicios;
 
-import com.example.SmartChef_Backend.dto.IngredientesDTO;
-import com.example.SmartChef_Backend.dto.InstruccionesDTO;
-import com.example.SmartChef_Backend.dto.RecetaDTO;
-import com.example.SmartChef_Backend.dto.UsuarioDTO;
-import com.example.SmartChef_Backend.modelos.Recetas;
-import com.example.SmartChef_Backend.modelos.Usuarios;
-import com.example.SmartChef_Backend.repositorios.RecetasFavoritasRepositorio;
-import com.example.SmartChef_Backend.repositorios.RecetasRepositorio;
+import com.example.SmartChef_Backend.dto.*;
+import com.example.SmartChef_Backend.modelos.HistorialCocina;
+import com.example.SmartChef_Backend.modelos.ListaCompras;
+import com.example.SmartChef_Backend.repositorios.HistorialCocinaRepositorio;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestInstance;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,27 +11,26 @@ import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabas
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest
 @AutoConfigureTestDatabase
 @Transactional
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
-public class RecetaFavoritaServiceTest {
+public class HistorialCocinaServiceTest {
 
     @Autowired
-    private RecetasFavoritasService servicio;
-
+    private HistorialCocinaService servicio;
     @Autowired
-    private RecetaService recetaService;
-
+    HistorialCocinaRepositorio repositorio;
     @Autowired
     private UsuariosService usuariosService;
     @Autowired
-    private RecetasFavoritasRepositorio repositorio;
+    private RecetaService recetaService;
 
     public void cargardatos(){
         RecetaDTO recetaDTO = new RecetaDTO();
@@ -63,7 +58,6 @@ public class RecetaFavoritaServiceTest {
         recetaDTO.setInstrucciones(instrucciones);
 
         recetaService.agregarReceta(recetaDTO);
-
         UsuarioDTO usuarioDTO = new UsuarioDTO();
         usuarioDTO.setNombre("Juan Perez");
         usuarioDTO.setFechaNacimiento(java.time.LocalDate.of(1990, 5, 20));
@@ -75,11 +69,50 @@ public class RecetaFavoritaServiceTest {
         usuarioDTO.setFechaRegistro(java.time.LocalDate.now());
 
         usuariosService.crearUsuario(usuarioDTO);
+
+        UsuarioDTO usuarioDTO1 = new UsuarioDTO();
+        usuarioDTO1.setNombre("Juan Perez");
+        usuarioDTO1.setFechaNacimiento(java.time.LocalDate.of(1990, 5, 20));
+        usuarioDTO1.setEmail("run2@gmail.com");
+        usuarioDTO1.setContrasena("password123");
+        usuarioDTO1.setDireccion("Calle Falsa 123");
+        usuarioDTO1.setPreferencias("Vegetariano");
+        usuarioDTO1.setUrlImagen("http://example.com/imagen.jpg");
+        usuarioDTO1.setFechaRegistro(java.time.LocalDate.now());
+
     }
 
     @Test
-    public void agregarRecetaFavoritaTest() {
+    public void registrarCocinadoTest(){
+        cargardatos();
+        servicio.registrarCocinado(AñadirHistorialDTO.builder().idUsuario(1).idReceta(1).fecha_cocinado(LocalDate.now()).build());
+        List<HistorialCocina> listas = repositorio.findAll();
+        assertFalse(listas.isEmpty());
+    }
 
+    @Test
+    public void registrarCocinadoNegativoTest(){
+        cargardatos();
+        assertThrows(RuntimeException.class, () ->   servicio.registrarCocinado(AñadirHistorialDTO.builder().idUsuario(1).idReceta(2).fecha_cocinado(LocalDate.now()).build()));
+    }
+
+    @Test
+    public void obtenerHistorialSemanalTest(){
+        cargardatos();
+        servicio.registrarCocinado(AñadirHistorialDTO.builder().idUsuario(1).idReceta(1).fecha_cocinado(LocalDate.now()).build());
+        servicio.obtenerHistorialSemanal(1);
+
+        List<HistorialCocinaDTO> historial = servicio.obtenerHistorialSemanal(1);
+
+        assertNotNull(historial);
+        assertFalse(historial.isEmpty());
+    }
+
+    @Test
+    public void obtenerHistorialSemanalNegativoTest(){
+        cargardatos();
+        servicio.registrarCocinado(AñadirHistorialDTO.builder().idUsuario(1).idReceta(1).fecha_cocinado(LocalDate.now()).build());
+        assertThrows(RuntimeException.class, () -> servicio.obtenerHistorialSemanal(2));
     }
 
 

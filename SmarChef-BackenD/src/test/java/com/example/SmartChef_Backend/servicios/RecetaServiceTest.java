@@ -4,6 +4,7 @@ import com.example.SmartChef_Backend.dto.FiltroRecetasDTO;
 import com.example.SmartChef_Backend.dto.IngredientesDTO;
 import com.example.SmartChef_Backend.dto.InstruccionesDTO;
 import com.example.SmartChef_Backend.dto.RecetaDTO;
+import com.example.SmartChef_Backend.exception.ElementoNoEncontradoException;
 import com.example.SmartChef_Backend.modelos.RecetaIngredientes;
 import com.example.SmartChef_Backend.modelos.Recetas;
 import com.example.SmartChef_Backend.repositorios.RecetasRepositorio;
@@ -129,6 +130,23 @@ public class RecetaServiceTest {
 
         List<RecetaDTO> resultados = servicio.buscarRecetasPorFiltro(filtroRecetasDTO);
         assertTrue(resultados.isEmpty());
+    }
+
+    @Test
+    public void verDetallesRecetaTest(){
+        cargardatos();
+
+        RecetaDTO receta = servicio.verDetallesRecetas(1);
+        assertNotNull(receta);
+    }
+
+    @Test
+    public void verDetalleRecetaNoHayRecetaTest(){
+        cargardatos();
+
+        assertThrows(ElementoNoEncontradoException.class, () -> {
+            servicio.verDetallesRecetas(2);
+        });
     }
 
 }

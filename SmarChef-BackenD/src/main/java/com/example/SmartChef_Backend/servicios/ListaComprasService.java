@@ -17,12 +17,15 @@ public class ListaComprasService {
     private ListaComprasRepositorio listaRepo;
     private ListaIngredientesRepositorio listaIngRepo;
     private RecetaIngredientesRepositorio recetaIngRepo;
+    private RecetasRepositorio recetaRepo;
     private UsuariosRepositorio usuarioRepo;
 
     public ListaComprasDTO crearListaDesdeReceta(int idUsuario, int idReceta) {
 
             Usuarios usuario = usuarioRepo.findById(idUsuario)
                     .orElseThrow(() -> new RuntimeException("Usuario no encontrado"));
+            Recetas recetas = recetaRepo.findById(idReceta)
+                    .orElseThrow(() -> new RuntimeException("Receta no encontrada"));
 
             ListaCompras lista = new ListaCompras();
             lista.setUsuario(usuario);
