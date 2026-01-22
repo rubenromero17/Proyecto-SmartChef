@@ -4,6 +4,7 @@ import com.example.SmartChef_Backend.dto.*;
 import com.example.SmartChef_Backend.modelos.HistorialCocina;
 import com.example.SmartChef_Backend.modelos.ListaCompras;
 import com.example.SmartChef_Backend.repositorios.HistorialCocinaRepositorio;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestInstance;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,6 +33,7 @@ public class HistorialCocinaServiceTest {
     @Autowired
     private RecetaService recetaService;
 
+    @BeforeEach
     public void cargardatos(){
         RecetaDTO recetaDTO = new RecetaDTO();
         recetaDTO.setNombre("Tarta de Manzana");
@@ -84,35 +86,35 @@ public class HistorialCocinaServiceTest {
 
     @Test
     public void registrarCocinadoTest(){
-        cargardatos();
+
         servicio.registrarCocinado(AñadirHistorialDTO.builder().idUsuario(1).idReceta(1).fecha_cocinado(LocalDate.now()).build());
         List<HistorialCocina> listas = repositorio.findAll();
-        assertFalse(listas.isEmpty());
+        assertFalse(listas.isEmpty(), "No se han registrado los historiales");
     }
 
     @Test
     public void registrarCocinadoNegativoTest(){
-        cargardatos();
+
         assertThrows(RuntimeException.class, () ->   servicio.registrarCocinado(AñadirHistorialDTO.builder().idUsuario(1).idReceta(2).fecha_cocinado(LocalDate.now()).build()));
     }
 
     @Test
     public void obtenerHistorialSemanalTest(){
-        cargardatos();
+
         servicio.registrarCocinado(AñadirHistorialDTO.builder().idUsuario(1).idReceta(1).fecha_cocinado(LocalDate.now()).build());
         servicio.obtenerHistorialSemanal(1);
 
         List<HistorialCocinaDTO> historial = servicio.obtenerHistorialSemanal(1);
 
-        assertNotNull(historial);
-        assertFalse(historial.isEmpty());
+        assertNotNull(historial, "No se han podido obtener los historiales");
+        assertFalse(historial.isEmpty(), "No se han encontrado historiales para el usuario");
     }
 
     @Test
     public void obtenerHistorialSemanalNegativoTest(){
-        cargardatos();
+
         servicio.registrarCocinado(AñadirHistorialDTO.builder().idUsuario(1).idReceta(1).fecha_cocinado(LocalDate.now()).build());
-        assertThrows(RuntimeException.class, () -> servicio.obtenerHistorialSemanal(2));
+        assertThrows(RuntimeException.class, () -> servicio.obtenerHistorialSemanal(2), "El usuario no existe");
     }
 
 

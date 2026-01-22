@@ -5,6 +5,7 @@ import com.example.SmartChef_Backend.dto.UsuarioDTO;
 import com.example.SmartChef_Backend.modelos.Usuarios;
 import com.example.SmartChef_Backend.repositorios.UsuariosRepositorio;
 import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestInstance;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,6 +20,7 @@ import static org.junit.jupiter.api.Assertions.*;
 @AutoConfigureTestDatabase
 @Transactional
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
+@DisplayName("Test unitarios de usuarios")
 public class UsuariosServiceTest {
 
     @Autowired
@@ -27,9 +29,8 @@ public class UsuariosServiceTest {
     @Autowired
     private UsuariosRepositorio repositorio;
 
-
-
     @Test
+    @DisplayName("Test unitario: crear un usuario correctamente")
     public void crearUsuarioTest() {
         UsuarioDTO usuarioDTO = new UsuarioDTO();
         usuarioDTO.setNombre("Juan Perez");
@@ -41,17 +42,19 @@ public class UsuariosServiceTest {
         usuarioDTO.setUrlImagen("http://example.com/imagen.jpg");
         usuarioDTO.setFechaRegistro(java.time.LocalDate.now());
 
-        //Given (se te da para hacer el test)
+        // Given
         servicio.crearUsuario(usuarioDTO);
-        //Then (se prueba el test)
 
-        //When(comprobación)
+        // When
         Usuarios usuarioBD = repositorio.findByNombre("Juan Perez");
-        assertNotNull(usuarioBD);
-        assertEquals("ruben@gmail.com", usuarioBD.getEmail());
 
+        // Then
+        assertNotNull(usuarioBD, "El usuario no se ha creado correctamente");
+        assertEquals("ruben@gmail.com", usuarioBD.getEmail(), "El email no coincide");
     }
+
     @Test
+    @DisplayName("Test unitario: no se permite crear un usuario con nombre repetido")
     public void crearUsuarioConNombreRepetidoTest() {
         UsuarioDTO usuarioDTO = new UsuarioDTO();
         usuarioDTO.setNombre("Juan Perez");
@@ -75,9 +78,8 @@ public class UsuariosServiceTest {
         usuarioDTO1.setUrlImagen("http://example.com/imagen.jpg");
         usuarioDTO1.setFechaRegistro(java.time.LocalDate.now());
 
-
-        assertThrows(IllegalArgumentException.class, () -> servicio.crearUsuario(usuarioDTO1));
-
+        assertThrows(IllegalArgumentException.class, () -> servicio.crearUsuario(usuarioDTO1), "El usuario ya existe");
     }
 
 }
+

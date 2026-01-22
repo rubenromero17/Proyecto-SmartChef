@@ -8,6 +8,7 @@ import com.example.SmartChef_Backend.exception.ElementoNoEncontradoException;
 import com.example.SmartChef_Backend.modelos.RecetaIngredientes;
 import com.example.SmartChef_Backend.modelos.Recetas;
 import com.example.SmartChef_Backend.repositorios.RecetasRepositorio;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestInstance;
@@ -26,6 +27,7 @@ import static org.junit.jupiter.api.Assertions.*;
 @AutoConfigureTestDatabase
 @Transactional
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
+@DisplayName("Test unitarios de recetas")
 public class RecetaServiceTest {
 
     @Autowired
@@ -34,6 +36,7 @@ public class RecetaServiceTest {
     @Autowired
     private RecetasRepositorio repositorio;
 
+    @BeforeEach
     public void cargardatos(){
         RecetaDTO recetaDTO = new RecetaDTO();
         recetaDTO.setNombre("Tarta de Manzana");
@@ -63,19 +66,17 @@ public class RecetaServiceTest {
     }
 
     @Test
+    @DisplayName("Test unitario: Se crea una receta correctamente y se encuentra en la base de datos")
     public void crearRecetaTest() {
 
-        cargardatos();
-
         Recetas recetaBD = repositorio.findByNombre("Tarta de Manzana");
-        assertNotNull(recetaBD);
+        assertNotNull(recetaBD, "La receta no se ha creado correctamente");
         assertEquals("Tarta de Manzana", recetaBD.getNombre());
     }
 
     @Test
-    @DisplayName("Crear receta con nombre repetido")
+    @DisplayName("Test unitario: no se permite crear una receta con nombre repetido")
     public void crearRecetaConNombreRepetidoTest() {
-      cargardatos();
 
         RecetaDTO recetaDTO1 = new RecetaDTO();
         recetaDTO1.setNombre("Tarta de Manzana");
@@ -104,10 +105,10 @@ public class RecetaServiceTest {
         assertThrows(IllegalArgumentException.class, () -> servicio.agregarReceta(recetaDTO1));
     }
 
-
     @Test
+    @DisplayName("Test unitario: buscar recetas por filtro válido devuelve resultados")
     public void buscarRecetasPorFiltroTest(){
-       cargardatos();
+
 
         FiltroRecetasDTO filtroRecetasDTO = new FiltroRecetasDTO();
         filtroRecetasDTO.setIngredientes(Arrays.asList("Harina", "Azúcar"));
@@ -115,13 +116,14 @@ public class RecetaServiceTest {
         filtroRecetasDTO.setEconomica(true);
 
         List<RecetaDTO> resultados = servicio.buscarRecetasPorFiltro(filtroRecetasDTO);
-        assertFalse(resultados.isEmpty());
-        assertNotNull(resultados.get(0));
+        assertFalse(resultados.isEmpty(),"No se han encontrado recetas que cumplan con los filtros");
+        assertNotNull(resultados.get(0),"No se ha podido obtener la receta buscada");
     }
 
     @Test
+    @DisplayName("Test unitario: buscar recetas por filtro incompatible devuelve lista vacía")
     public void buscarRecetasPorFiltroNegativoTest(){
-       cargardatos();
+        cargardatos();
 
         FiltroRecetasDTO filtroRecetasDTO = new FiltroRecetasDTO();
         filtroRecetasDTO.setIngredientes(Arrays.asList("Harina", "Azúcar"));
@@ -129,20 +131,20 @@ public class RecetaServiceTest {
         filtroRecetasDTO.setEconomica(true);
 
         List<RecetaDTO> resultados = servicio.buscarRecetasPorFiltro(filtroRecetasDTO);
-        assertTrue(resultados.isEmpty());
+        assertTrue(resultados.isEmpty(),"Se han encontrado recetas que no cumplen con los filtros");
     }
 
     @Test
+    @DisplayName("Test unitario: obtener detalles de una receta existente")
     public void verDetallesRecetaTest(){
-        cargardatos();
 
         RecetaDTO receta = servicio.verDetallesRecetas(1);
-        assertNotNull(receta);
+        assertNotNull(receta, "No se ha podido obtener los detalles de la receta");
     }
 
     @Test
+    @DisplayName("Test unitario: lanzar excepción al consultar una receta inexistente")
     public void verDetalleRecetaNoHayRecetaTest(){
-        cargardatos();
 
         assertThrows(ElementoNoEncontradoException.class, () -> {
             servicio.verDetallesRecetas(2);
@@ -150,3 +152,4 @@ public class RecetaServiceTest {
     }
 
 }
+

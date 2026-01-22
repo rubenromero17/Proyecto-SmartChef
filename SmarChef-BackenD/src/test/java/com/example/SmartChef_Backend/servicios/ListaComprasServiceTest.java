@@ -6,6 +6,7 @@ import com.example.SmartChef_Backend.dto.RecetaDTO;
 import com.example.SmartChef_Backend.dto.UsuarioDTO;
 import com.example.SmartChef_Backend.modelos.ListaCompras;
 import com.example.SmartChef_Backend.repositorios.ListaComprasRepositorio;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestInstance;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,7 +36,7 @@ public class ListaComprasServiceTest {
     @Autowired
     private RecetaService recetaService;
 
-
+    @BeforeEach
     public void cargardatos(){
         RecetaDTO recetaDTO = new RecetaDTO();
         recetaDTO.setNombre("Tarta de Manzana");
@@ -87,17 +88,15 @@ public class ListaComprasServiceTest {
     }
     @Test
     public void crearListaDesdeRecetaTest(){
-        cargardatos();
         service.crearListaDesdeReceta(1, 1);
 
         List<ListaCompras> listas = listaRepo.findAll();
-        assertNotNull(listas);
-        assertFalse(listas.isEmpty());
+        assertNotNull(listas,"Lista de compras no creada");
+        assertFalse(listas.isEmpty(),"No se han creado listas de compras");
     }
     @Test
     public void crearListaDesdeRecetaNegativoTest(){
-        cargardatos();
-        assertThrows(RuntimeException.class, () -> service.crearListaDesdeReceta(1,2));
+        assertThrows(RuntimeException.class, () -> service.crearListaDesdeReceta(1,2),"La receta no existe");
 
     }
 }
