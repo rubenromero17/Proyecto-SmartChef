@@ -16,6 +16,7 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
+import org.mockito.Mockito;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
@@ -64,37 +65,37 @@ public class RecetaServiceIntegrationTest {
         recetaDTO.setInstrucciones(instrucciones);
 
 
-        when(repositorio.existsByNombre("Tarta de Manzana")).thenReturn(false);
+        Mockito.when(repositorio.existsByNombre("Tarta de Manzana")).thenReturn(false);
 
 
         Recetas recetaGuardada = new Recetas();
         recetaGuardada.setNombre("Tarta de Manzana");
-        when(repositorio.save(any(Recetas.class))).thenReturn(recetaGuardada);
+        Mockito.when(repositorio.save(any(Recetas.class))).thenReturn(recetaGuardada);
 
 
         for (IngredientesDTO i : ingredientes) {
             Ingredientes ingrediente = new Ingredientes();
             ingrediente.setNombre(i.getNombre());
-            when(repositorioIngredientes.save(any(Ingredientes.class))).thenReturn(ingrediente);
+            Mockito.when(repositorioIngredientes.save(any(Ingredientes.class))).thenReturn(ingrediente);
         }
 
 
-        when(repositorioRecetaIngredientes.save(any(RecetaIngredientes.class))).thenAnswer(invocation -> invocation.getArgument(0));
-        when(repositorioInstrucciones.save(any(InstruccionesRecetas.class))).thenAnswer(invocation -> invocation.getArgument(0));
+        Mockito. when(repositorioRecetaIngredientes.save(any(RecetaIngredientes.class))).thenAnswer(invocation -> invocation.getArgument(0));
+        Mockito.when(repositorioInstrucciones.save(any(InstruccionesRecetas.class))).thenAnswer(invocation -> invocation.getArgument(0));
 
 
         assertDoesNotThrow(() -> service.agregarReceta(recetaDTO));
 
-        verify(repositorio, times(1)).save(any(Recetas.class));
-        verify(repositorioIngredientes, times(4)).save(any(Ingredientes.class));
-        verify(repositorioRecetaIngredientes, times(4)).save(any(RecetaIngredientes.class));
-        verify(repositorioInstrucciones, times(3)).save(any(InstruccionesRecetas.class));
+        Mockito.verify(repositorio, times(1)).save(any(Recetas.class));
+        Mockito.verify(repositorioIngredientes, times(4)).save(any(Ingredientes.class));
+        Mockito.verify(repositorioRecetaIngredientes, times(4)).save(any(RecetaIngredientes.class));
+        Mockito.verify(repositorioInstrucciones, times(3)).save(any(InstruccionesRecetas.class));
     }
 
     @Test
     @DisplayName("Test Integración: buscar recetas por filtro que no devuelva resultados")
     public void buscarRecetasPorFiltroNegativoTest() {
-        when(repositorio.buscarRecetasConFiltros(anyList(), anyBoolean(), anyBoolean(), nullable(Boolean.class), nullable(Boolean.class))).thenReturn(Collections.emptyList());
+        Mockito.when(repositorio.buscarRecetasConFiltros(anyList(), anyBoolean(), anyBoolean(), nullable(Boolean.class), nullable(Boolean.class))).thenReturn(Collections.emptyList());
 
         FiltroRecetasDTO filtro = new FiltroRecetasDTO();
         filtro.setIngredientes(Arrays.asList("Harina", "Azúcar"));
@@ -106,8 +107,8 @@ public class RecetaServiceIntegrationTest {
 
         assertTrue(resultados.isEmpty(), "No hay recetas que cumplan con los filtros");
 
-        verify(repositorio, times(1)).buscarRecetasConFiltros(anyList(), anyBoolean(), anyBoolean(), nullable(Boolean.class), nullable(Boolean.class));
-        verifyNoInteractions(repositorioRecetaIngredientes, repositorioInstrucciones);
+        Mockito.verify(repositorio, times(1)).buscarRecetasConFiltros(anyList(), anyBoolean(), anyBoolean(), nullable(Boolean.class), nullable(Boolean.class));
+        Mockito.verifyNoInteractions(repositorioRecetaIngredientes, repositorioInstrucciones);
     }
 
     @Test
@@ -126,7 +127,7 @@ public class RecetaServiceIntegrationTest {
         recetas.setSin_gluten(false);
         recetas.setRapido(false);
 
-        when(repositorio.findById(1)).thenReturn(java.util.Optional.of(recetas));
+        Mockito.when(repositorio.findById(1)).thenReturn(java.util.Optional.of(recetas));
 
 
         Ingredientes ingredientes = new Ingredientes();
@@ -137,7 +138,7 @@ public class RecetaServiceIntegrationTest {
         recetaIngredientes.setIngrediente(ingredientes);
         recetaIngredientes.setCantidad(3.0);
 
-        when(repositorioRecetaIngredientes.findByRecetaId(1)).thenReturn(Collections.singletonList(recetaIngredientes));
+        Mockito.when(repositorioRecetaIngredientes.findByRecetaId(1)).thenReturn(Collections.singletonList(recetaIngredientes));
 
 
         InstruccionesRecetas instrucciones = new InstruccionesRecetas();
@@ -145,7 +146,7 @@ public class RecetaServiceIntegrationTest {
         instrucciones.setPaso_numero(1);
         instrucciones.setDescripcion("Precalentar el horno a 180ºC");
 
-        when(repositorioInstrucciones.findByReceta_Id(1)).thenReturn(Collections.singletonList(instrucciones));
+        Mockito.when(repositorioInstrucciones.findByReceta_Id(1)).thenReturn(Collections.singletonList(instrucciones));
 
 
         RecetaDTO resultado = service.verDetallesRecetas(1);
@@ -158,9 +159,9 @@ public class RecetaServiceIntegrationTest {
         assertEquals("Precalentar el horno a 180ºC", resultado.getInstrucciones().get(0).getDescripcion());
 
 
-        verify(repositorio, times(1)).findById(1);
-        verify(repositorioRecetaIngredientes, times(1)).findByRecetaId(1);
-        verify(repositorioInstrucciones, times(1)).findByReceta_Id(1);
+        Mockito.verify(repositorio, times(1)).findById(1);
+        Mockito.verify(repositorioRecetaIngredientes, times(1)).findByRecetaId(1);
+        Mockito.verify(repositorioInstrucciones, times(1)).findByReceta_Id(1);
     }
 
 

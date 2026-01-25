@@ -7,6 +7,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
+import org.mockito.Mockito;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import java.util.List;
@@ -63,10 +64,10 @@ public class ListaComprasServiceIntegrationTest {
         listaGuardada.setId(1);
         listaGuardada.setUsuario(usuario);
 
-        when(usuariosRepositorio.findById(1)).thenReturn(Optional.of(usuario));
-        when(recetasRepositorio.findById(1)).thenReturn(Optional.of(receta));
-        when(listaComprasRepositorio.save(any(ListaCompras.class))).thenReturn(listaGuardada);
-        when(recetaIngredientesRepositorio.findByRecetaId(1)).thenReturn(List.of(recetaIng));
+        Mockito.when(usuariosRepositorio.findById(1)).thenReturn(Optional.of(usuario));
+        Mockito.when(recetasRepositorio.findById(1)).thenReturn(Optional.of(receta));
+        Mockito.when(listaComprasRepositorio.save(any(ListaCompras.class))).thenReturn(listaGuardada);
+        Mockito.when(recetaIngredientesRepositorio.findByRecetaId(1)).thenReturn(List.of(recetaIng));
 
         ListaComprasDTO resultado = service.crearListaDesdeReceta(1, 1);
 
@@ -74,8 +75,8 @@ public class ListaComprasServiceIntegrationTest {
         assertEquals(1, resultado.getIdUsuario());
         assertFalse(resultado.getIngredientes().isEmpty());
 
-        verify(listaComprasRepositorio, times(1)).save(any(ListaCompras.class));
-        verify(listaIngredientesRepositorio, times(1)).save(any(ListaIngredientes.class));
+        Mockito.verify(listaComprasRepositorio, times(1)).save(any(ListaCompras.class));
+        Mockito.verify(listaIngredientesRepositorio, times(1)).save(any(ListaIngredientes.class));
     }
 
 

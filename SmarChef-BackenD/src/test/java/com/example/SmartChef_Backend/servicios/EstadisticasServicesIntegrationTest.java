@@ -55,13 +55,13 @@ public class EstadisticasServicesIntegrationTest {
         assertTrue(resultado.size() <= 5, "La lista no debe tener más de 5 elementos");
         assertEquals("Harina", resultado.get(0).getNombreIngrediente(), "El primer ingrediente debe ser Harina");
 
-        verify(recetaIngredientesRepositorio, times(1)).findTopIngredientes();
+        Mockito.verify(recetaIngredientesRepositorio, times(1)).findTopIngredientes();
     }
     @Test
     @DisplayName("Test Integración: obtener recetas favoritas por usuario")
     public void obtenerRecetasFavoritasPorUsuarioMockNegativo() {
 
-        when(recetasFavoritasRepositorio.recetasFavoritas())
+        Mockito.when(recetasFavoritasRepositorio.recetasFavoritas())
                 .thenThrow(new ElementoNoEncontradoException("Usuario no encontrado"));
 
         assertThrows(ElementoNoEncontradoException.class,

@@ -10,6 +10,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
+import org.mockito.Mockito;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import java.util.Optional;
@@ -47,18 +48,18 @@ public class RecetaFavoritaServiceIntegrationTest {
         receta.setId(1);
         receta.setNombre("Tarta de Manzana");
 
-        when(repositorioUsuarios.findById(1)).thenReturn(Optional.of(usuarios));
-        when(repositorioRecetas.findById(1)).thenReturn(Optional.of(receta));
-        when(repositorioFavoritas.existsByUsuarioAndReceta(usuarios, receta)).thenReturn(false);
+        Mockito.when(repositorioUsuarios.findById(1)).thenReturn(Optional.of(usuarios));
+        Mockito.when(repositorioRecetas.findById(1)).thenReturn(Optional.of(receta));
+        Mockito.when(repositorioFavoritas.existsByUsuarioAndReceta(usuarios, receta)).thenReturn(false);
 
 
         assertDoesNotThrow(() -> servicio.marcarComoFavorita(1, 1));
 
-        verify(repositorioFavoritas, times(1)).save(any(RecetasFavoritas.class));
+        Mockito.verify(repositorioFavoritas, times(1)).save(any(RecetasFavoritas.class));
 
 
-        verify(repositorioUsuarios, times(1)).findById(1);
-        verify(repositorioRecetas, times(1)).findById(1);
-        verify(repositorioFavoritas, times(1)).existsByUsuarioAndReceta(usuarios, receta);
+        Mockito.verify(repositorioUsuarios, times(1)).findById(1);
+        Mockito.verify(repositorioRecetas, times(1)).findById(1);
+        Mockito.verify(repositorioFavoritas, times(1)).existsByUsuarioAndReceta(usuarios, receta);
     }
 }
