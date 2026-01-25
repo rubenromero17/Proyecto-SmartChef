@@ -4,10 +4,13 @@ import com.example.SmartChef_Backend.dto.IngredientesDTO;
 import com.example.SmartChef_Backend.dto.InstruccionesDTO;
 import com.example.SmartChef_Backend.dto.RecetaDTO;
 import com.example.SmartChef_Backend.dto.UsuarioDTO;
+import com.example.SmartChef_Backend.exception.ElementoNoEncontradoException;
 import com.example.SmartChef_Backend.modelos.Recetas;
 import com.example.SmartChef_Backend.modelos.Usuarios;
 import com.example.SmartChef_Backend.repositorios.RecetasFavoritasRepositorio;
 import com.example.SmartChef_Backend.repositorios.RecetasRepositorio;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestInstance;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,7 +21,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest
 @AutoConfigureTestDatabase
@@ -36,7 +39,10 @@ public class RecetaFavoritaServiceTest {
     private UsuariosService usuariosService;
     @Autowired
     private RecetasFavoritasRepositorio repositorio;
+    @Autowired
+    private RecetasRepositorio recetasRepositorio;
 
+@BeforeEach
     public void cargardatos(){
         RecetaDTO recetaDTO = new RecetaDTO();
         recetaDTO.setNombre("Tarta de Manzana");
@@ -78,9 +84,35 @@ public class RecetaFavoritaServiceTest {
     }
 
     @Test
+    @DisplayName("Test unitario: agregar receta a favoritos correctamente")
     public void agregarRecetaFavoritaTest() {
+        Usuarios usuarios = usuariosService.verTodosUsuarios().get(0);
+        Recetas receta = recetasRepositorio.findAll().get(0);
+        servicio.marcarComoFavorita(usuarios.getId(), receta.getId());
+        boolean existeFavorita = repositorio.existsByUsuarioAndReceta(usuarios, receta);
+
+        assertTrue(existeFavorita);
 
     }
+    @Test
+    @DisplayName("Test unitario: aggregar receta a favoritos correctamente caso negativo")
+    public void agregarRecetaFavoritaTestNegativo() {
+        Usuarios usuarioValido = usuariosService.verTodosUsuarios().get(0);
+        Recetas recetaValida = recetasRepositorio.findAll().get(0);
 
 
+        servicio.marcarComoFavorita(usuarioValido.getId(), recetaValida.getId());
+
+        assertAll("Casos negativos",
+                // Usuario no encontrado
+                () -> assertThrows(ElementoNoEncontradoException.class,
+                        () -> servicio.marcarComoFavorita(2, recetaValida.getId()),"Usuario no encontrado"),
+                // Receta no encontrada
+                () -> assertThrows(ElementoNoEncontradoException.class,
+                        () -> servicio.marcarComoFavorita(usuarioValido.getId(), 5),"Receta no encontrada"),
+                // Receta ya puesta como favorita
+                () -> assertThrows(RuntimeException.class,
+                        () -> servicio.marcarComoFavorita(usuarioValido.getId(), recetaValida.getId()),"Receta ya marcada como favorita")
+        );
+    }
 }

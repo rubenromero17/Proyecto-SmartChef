@@ -16,6 +16,7 @@ import java.time.LocalDate;
 @NoArgsConstructor
 @Builder
 public class UsuarioDTO {
+    private Integer id;
 
     @NotBlank(message = "Debes indicar el nombre no puede estar vacio")
     private String nombre;

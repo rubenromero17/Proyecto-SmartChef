@@ -5,6 +5,7 @@ import com.example.SmartChef_Backend.modelos.HistorialCocina;
 import com.example.SmartChef_Backend.modelos.ListaCompras;
 import com.example.SmartChef_Backend.repositorios.HistorialCocinaRepositorio;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestInstance;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -85,6 +86,7 @@ public class HistorialCocinaServiceTest {
     }
 
     @Test
+    @DisplayName("Test Unitario = Registrar Cocinado - Caso Positivo")
     public void registrarCocinadoTest(){
 
         servicio.registrarCocinado(AñadirHistorialDTO.builder().idUsuario(1).idReceta(1).fecha_cocinado(LocalDate.now()).build());
@@ -93,12 +95,13 @@ public class HistorialCocinaServiceTest {
     }
 
     @Test
+    @DisplayName("Test Unitario = Registrar Cocinado - Caso Negativo")
     public void registrarCocinadoNegativoTest(){
-
-        assertThrows(RuntimeException.class, () ->   servicio.registrarCocinado(AñadirHistorialDTO.builder().idUsuario(1).idReceta(2).fecha_cocinado(LocalDate.now()).build()));
+        assertThrows(RuntimeException.class, () ->  servicio.registrarCocinado(AñadirHistorialDTO.builder().idUsuario(1).idReceta(2).fecha_cocinado(LocalDate.now()).build()));
     }
 
     @Test
+    @DisplayName("Test Unitario = Obtener Historial Semanal - Caso Positivo")
     public void obtenerHistorialSemanalTest(){
 
         servicio.registrarCocinado(AñadirHistorialDTO.builder().idUsuario(1).idReceta(1).fecha_cocinado(LocalDate.now()).build());
@@ -111,11 +114,11 @@ public class HistorialCocinaServiceTest {
     }
 
     @Test
+    @DisplayName("Test Unitario = Obtener Historial Semanal - Caso Negativo")
     public void obtenerHistorialSemanalNegativoTest(){
 
         servicio.registrarCocinado(AñadirHistorialDTO.builder().idUsuario(1).idReceta(1).fecha_cocinado(LocalDate.now()).build());
         assertThrows(RuntimeException.class, () -> servicio.obtenerHistorialSemanal(2), "El usuario no existe");
     }
-
 
 }

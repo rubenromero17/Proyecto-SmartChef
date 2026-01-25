@@ -106,9 +106,8 @@ public class RecetaServiceTest {
     }
 
     @Test
-    @DisplayName("Test unitario: buscar recetas por filtro válido devuelve resultados")
+    @DisplayName("Test unitario: buscar recetas usando un filtro que funcione")
     public void buscarRecetasPorFiltroTest(){
-
 
         FiltroRecetasDTO filtroRecetasDTO = new FiltroRecetasDTO();
         filtroRecetasDTO.setIngredientes(Arrays.asList("Harina", "Azúcar"));
@@ -121,9 +120,8 @@ public class RecetaServiceTest {
     }
 
     @Test
-    @DisplayName("Test unitario: buscar recetas por filtro incompatible devuelve lista vacía")
+    @DisplayName("Test unitario: buscar recetas por filtro que no devuelva resultados")
     public void buscarRecetasPorFiltroNegativoTest(){
-        cargardatos();
 
         FiltroRecetasDTO filtroRecetasDTO = new FiltroRecetasDTO();
         filtroRecetasDTO.setIngredientes(Arrays.asList("Harina", "Azúcar"));

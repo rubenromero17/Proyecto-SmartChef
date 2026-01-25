@@ -37,8 +37,7 @@ public class HistorialCocinaService {
 
     @Transactional
     public List<HistorialCocinaDTO> obtenerHistorialSemanal(int idUsuario) {
-        Usuarios usuario = usuariosRepositorio.findById(idUsuario)
-                .orElseThrow(() -> new ElementoNoEncontradoException("Usuario no encontrado"));
+        Usuarios usuario = usuariosRepositorio.findById(idUsuario).orElseThrow(() -> new ElementoNoEncontradoException("Usuario no encontrado"));
 
         LocalDate haceUnaSemana = LocalDate.now().minusDays(7);
         List<HistorialCocina> historial = repositorio.findByUsuarioAndFechaVisitadoAfter(usuario, haceUnaSemana);
@@ -54,7 +53,6 @@ public class HistorialCocinaService {
             }
         return listaDTO;
     }
-
 
 }
 

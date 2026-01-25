@@ -1,17 +1,25 @@
 package com.example.SmartChef_Backend.servicios;
 
-
 import com.example.SmartChef_Backend.dto.UsuarioDTO;
 import com.example.SmartChef_Backend.modelos.Usuarios;
 import com.example.SmartChef_Backend.repositorios.UsuariosRepositorio;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.SpringBootTest;
+
+import java.time.LocalDate;
+import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.mockito.Mockito.any;
+import static org.mockito.Mockito.never;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
+
+import org.mockito.Mockito;
+import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
 public class UsuarioServiceIntegationTest {
@@ -22,28 +30,24 @@ public class UsuarioServiceIntegationTest {
     @Mock
     private UsuariosRepositorio repositorio;
 
-
     @Test
-    public void crearUsuarioIntegrationTest() {
+    @DisplayName("Test Integracion: no se puede crear un usuario con email repetido")
+    public void crearUsuarioConEmailRepetidoTest() {
         UsuarioDTO usuarioDTO = new UsuarioDTO();
-        usuarioDTO.setNombre("Juan Perez");
-        usuarioDTO.setFechaNacimiento(java.time.LocalDate.of(1990, 5, 20));
-        usuarioDTO.setEmail("ruben@gmail.com");
-        usuarioDTO.setContrasena("password123");
+        usuarioDTO.setNombre("Juan Pérez");
+        usuarioDTO.setEmail("juan@example.com");
+        usuarioDTO.setContrasena("123456");
         usuarioDTO.setDireccion("Calle Falsa 123");
-        usuarioDTO.setPreferencias("Vegetariano");
-        usuarioDTO.setUrlImagen("http://example.com/imagen.jpg");
-        usuarioDTO.setFechaRegistro(java.time.LocalDate.now());
+        usuarioDTO.setPreferencias("Vegetariano, Sin Gluten");
+        usuarioDTO.setFechaNacimiento(LocalDate.of(1990, 5, 20));
 
+        Mockito.when(repositorio.existsByEmail("juan@example.com")).thenReturn(true);
 
-        service.crearUsuario(usuarioDTO);
-        //Then (se prueba el test)
+        IllegalArgumentException exception = assertThrows(IllegalArgumentException.class,
+                () -> service.crearUsuario(usuarioDTO));
 
-        Usuarios usuarioBD = repositorio.findByNombre("Juan Perez");
-        assertNotNull(usuarioBD);
-        assertEquals("ruben@gmail.com", usuarioBD.getEmail());
+        assertEquals("El email ya está en uso", exception.getMessage());
 
+        Mockito.verify(repositorio, never()).save(any(Usuarios.class));
     }
-
-
 }

@@ -10,7 +10,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class FavoritayUsuarioDTO {
     @NotNull
-    private Integer idReceta;
+    private Integer dReceta;
     @NotBlank
     private String nombreReceta;
     @NotBlank

@@ -13,7 +13,7 @@ import java.util.Set;
 @NoArgsConstructor
 
 @Entity
-@Table(name="recetas_favoritas", schema = "smartchef")
+@Table(name="recetas_favoritas")
 public class RecetasFavoritas {
 
     @Id

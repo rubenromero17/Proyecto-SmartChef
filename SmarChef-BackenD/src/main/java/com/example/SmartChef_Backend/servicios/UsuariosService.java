@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDate;
+import java.util.List;
 
 @Service
 @AllArgsConstructor
@@ -36,10 +37,11 @@ public class UsuariosService {
         repositorio.save(usuarios);
 
     }
-    @Transactional
-    public void verTodosUsuarios() {
-        repositorio.findAll();
+    @Transactional(readOnly = true)
+    public List<Usuarios> verTodosUsuarios() {
+        return repositorio.findAll();
     }
+
 
 
 }
