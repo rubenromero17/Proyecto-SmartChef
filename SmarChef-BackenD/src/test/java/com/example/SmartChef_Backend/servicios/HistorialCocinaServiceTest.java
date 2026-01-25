@@ -118,7 +118,7 @@ public class HistorialCocinaServiceTest {
     public void obtenerHistorialSemanalNegativoTest(){
 
         servicio.registrarCocinado(AñadirHistorialDTO.builder().idUsuario(1).idReceta(1).fecha_cocinado(LocalDate.now()).build());
-        assertThrows(RuntimeException.class, () -> servicio.obtenerHistorialSemanal(2), "El usuario no existe");
+        assertThrows(RuntimeException.class, () -> servicio.obtenerHistorialSemanal(9808), "El usuario no existe");
     }
 
 }

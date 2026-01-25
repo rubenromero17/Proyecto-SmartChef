@@ -56,8 +56,6 @@ public class RecetaFavoritaServiceIntegrationTest {
         assertDoesNotThrow(() -> servicio.marcarComoFavorita(1, 1));
 
         Mockito.verify(repositorioFavoritas, times(1)).save(any(RecetasFavoritas.class));
-
-
         Mockito.verify(repositorioUsuarios, times(1)).findById(1);
         Mockito.verify(repositorioRecetas, times(1)).findById(1);
         Mockito.verify(repositorioFavoritas, times(1)).existsByUsuarioAndReceta(usuarios, receta);

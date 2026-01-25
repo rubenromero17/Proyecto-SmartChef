@@ -76,15 +76,7 @@ public class ListaComprasServiceTest {
 
         usuariosService.crearUsuario(usuarioDTO);
 
-        UsuarioDTO usuarioDTO1 = new UsuarioDTO();
-        usuarioDTO1.setNombre("Juan Perez");
-        usuarioDTO1.setFechaNacimiento(java.time.LocalDate.of(1990, 5, 20));
-        usuarioDTO1.setEmail("run2@gmail.com");
-        usuarioDTO1.setContrasena("password123");
-        usuarioDTO1.setDireccion("Calle Falsa 123");
-        usuarioDTO1.setPreferencias("Vegetariano");
-        usuarioDTO1.setUrlImagen("http://example.com/imagen.jpg");
-        usuarioDTO1.setFechaRegistro(java.time.LocalDate.now());
+
 
     }
     @Test
@@ -99,6 +91,6 @@ public class ListaComprasServiceTest {
     @Test
     @DisplayName("Test Unitario = Crear Lista de Compras desde Receta - Caso Negativo")
     public void crearListaDesdeRecetaNegativoTest(){
-        assertThrows(RuntimeException.class, () -> service.crearListaDesdeReceta(1,2));
+        assertThrows(RuntimeException.class, () -> service.crearListaDesdeReceta(2,1));
     }
 }

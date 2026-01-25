@@ -146,6 +146,7 @@ public class RecetaServiceIntegrationTest {
         instrucciones.setPaso_numero(1);
         instrucciones.setDescripcion("Precalentar el horno a 180ºC");
 
+
         Mockito.when(repositorioInstrucciones.findByReceta_Id(1)).thenReturn(Collections.singletonList(instrucciones));
 
 

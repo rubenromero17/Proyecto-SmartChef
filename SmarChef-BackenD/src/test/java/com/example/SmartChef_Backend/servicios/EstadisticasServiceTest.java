@@ -45,7 +45,6 @@ public class EstadisticasServiceTest {
     @Autowired
     private RecetasFavoritasService servicioFavoritas;
 
-    @BeforeEach
     public void cargardatos(){
         UsuarioDTO usuarioDTO = new UsuarioDTO();
         usuarioDTO.setNombre("Juan Perez");
