@@ -3,7 +3,8 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  production: false
+  production: true,
+  apiUrl: 'https://proyecto-smartchef.onrender.com' // Tu URL de backend en Render
 };
 
 /*
