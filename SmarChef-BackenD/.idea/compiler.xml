@@ -23,7 +23,7 @@
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
-      <module name="SmartChef-Backend" options="-parameters --add-exports jdk.jfr/jdk.jfr.internal.jfc.model=ALL-UNNAMED --add-exports java.base/jdk.internal.org.objectweb.asm.util=ALL-UNNAMED --add-exports java.base/jdk.internal.classfile.impl.verifier=ALL-UNNAMED" />
+      <module name="SmartChef-Backend" options="-parameters" />
     </option>
   </component>
 </project>
