@@ -17,7 +17,7 @@ export class RecetaService {
 
   obtenerRecetas(): Observable<RecetaTarjeta[]> {
     // Aquí sí tenías la barra, este estaba bien
-    return this.http.get<RecetaTarjeta[]>(`${this.apiUrl}/receta/obtenerRecetas`);
+    return this.http.get<RecetaTarjeta[]>(`${this.apiUrl}/receta/tarjetasRecetas`);
   }
 
   eliminarReceta(id: number) {
