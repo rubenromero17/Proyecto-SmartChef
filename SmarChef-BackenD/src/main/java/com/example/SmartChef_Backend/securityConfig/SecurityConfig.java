@@ -36,7 +36,8 @@ public class SecurityConfig {
         CorsConfiguration config = new CorsConfiguration();
 
         config.setAllowedOrigins(List.of(
-                "https://proyecto-smartchef-1.onrender.com"
+                "https://proyecto-smartchef-1.onrender.com",
+                "https://proyecto-smartchef-.onrender.com"
         ));
 
         config.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE", "OPTIONS"));
