@@ -1,56 +1,43 @@
-import {inject, Injectable} from "@angular/core";
-import {HttpClient} from "@angular/common/http";
-import {Observable} from "rxjs";
-import {Receta} from "../modelos/Receta";
-import {RecetaTarjeta} from "../modelos/RecetaTarjeta";
-import {CrearReceta} from "../modelos/CrearReceta";
-import {environment} from "../../environments/environment";
-
+import { inject, Injectable } from "@angular/core";
+import { HttpClient } from "@angular/common/http";
+import { Observable } from "rxjs";
+import { Receta } from "../modelos/Receta";
+import { RecetaTarjeta } from "../modelos/RecetaTarjeta";
+import { CrearReceta } from "../modelos/CrearReceta";
+import { environment } from "../../environments/environment";
 
 @Injectable({
   providedIn: 'root'
 })
 export class RecetaService {
-
   private http = inject(HttpClient);
-
-
-
-  /**
-   * consultar todos
-   *
-   *
-   * getById
-   *
-   *
-   * Agregar
-   *
-   * Eliminar
-   *
-   * Editar
-   */
+  private apiUrl = environment.apiUrl;
 
   constructor() {}
 
-  private apiUrl = environment.apiUrl;
-
   obtenerRecetas(): Observable<RecetaTarjeta[]> {
+    // Aquí sí tenías la barra, este estaba bien
     return this.http.get<RecetaTarjeta[]>(`${this.apiUrl}/receta/obtenerRecetas`);
   }
+
   eliminarReceta(id: number) {
-    return this.http.delete(`${this.apiUrl}receta/eliminarReceta/${id}`);
+    return this.http.delete(`${this.apiUrl}/receta/eliminarReceta/${id}`);
   }
+
   obtenerRecetaEnDetalle(id: number): Observable<Receta> {
-    return this.http.get<Receta>(`${this.apiUrl}receta/verDetalles/${id}`);
+    return this.http.get<Receta>(`${this.apiUrl}/receta/verDetalles/${id}`);
   }
+
   crearReceta(receta: CrearReceta): Observable<CrearReceta> {
-    return this.http.post<CrearReceta>(`${this.apiUrl}receta/agregarReceta`, receta);
+    return this.http.post<CrearReceta>(`${this.apiUrl}/receta/agregarReceta`, receta);
   }
+
   editarReceta(receta: CrearReceta): Observable<CrearReceta> {
-    return this.http.put<CrearReceta>(`${this.apiUrl}receta/editar/${receta.id}`, receta);
+    return this.http.put<CrearReceta>(`${this.apiUrl}/receta/editar/${receta.id}`, receta);
   }
+
   obtenerRecetaPorId(id: number): Observable<CrearReceta> {
-    return this.http.get<CrearReceta>(`${this.apiUrl}receta/buscarPorId/${id}`);
+    return this.http.get<CrearReceta>(`${this.apiUrl}/receta/buscarPorId/${id}`);
   }
 
   buscarRecetasPorFiltro(filtro: any): Observable<RecetaTarjeta[]> {
@@ -61,10 +48,7 @@ export class RecetaService {
     if (filtro.rapido) params.rapido = filtro.rapido;
     if (filtro.ingredientes && filtro.ingredientes.length > 0) params.ingredientes = filtro.ingredientes;
 
-    return this.http.get<RecetaTarjeta[]>('${this.apiUrl}receta/buscarReceta', { params });
+
+    return this.http.get<RecetaTarjeta[]>(`${this.apiUrl}/receta/buscarReceta`, { params });
   }
-
-
-
-
 }
