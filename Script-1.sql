@@ -1,172 +1,167 @@
-create database smartchef;
-use smartchef;
+-- ===============================
+-- BASE DE DATOS
+-- ===============================
+CREATE DATABASE smartchef;
+USE smartchef;
 
 
-create table usuarios (
-    id_usuario int auto_increment primary key,
-    nombre varchar(100) not null,
-    fecha_nacimiento date,
-    email varchar(150) unique not null,
-    contrasena varchar(255) not null,
-    direccion varchar(100) not null,
-    preferencias ENUM('economica','vegetariana','sinGluten', 'rapido'),
-    url_imagen varchar(255) not null,
-    fecha_registro date
-);
-
-create table recetas (
-    id_receta int auto_increment primary key,
-    nombre varchar(150) not null,
-    descripcion varchar(150),
-    tiempo_preparacion int,
-    url_imagen varchar(255) not null,
-    dificultad ENUM('FACIL', 'MEDIA', 'DIFICIL') NOT null,
-    economica boolean,
-    vegetariana boolean,
-    sin_gluten boolean,
-    rapido boolean
-);
-
-create table ingredientes (
-    id_ingrediente int auto_increment primary key,
-    nombre varchar(100) not null
-   
-);
-
-create table receta_ingredientes (
-	id_receta_ingredientes int auto_increment primary key,
-    id_receta int not null,
-    id_ingrediente int not null,
-    cantidad float,
-    foreign key (id_receta) references recetas(id_receta) on delete cascade,
-    foreign key (id_ingrediente) references ingredientes(id_ingrediente) on delete cascade
-);
-
-create table instrucciones_receta (
-    id_instruccion int auto_increment primary key,
-    id_receta int not null,
-    paso_numero int not null,
-    descripcion text not null,
-    foreign key (id_receta) references recetas(id_receta) on delete cascade
+-- ===============================
+-- TABLA USUARIOS
+-- ===============================
+CREATE TABLE usuarios (
+    id_usuario INT AUTO_INCREMENT PRIMARY KEY,
+    nombre VARCHAR(100) NOT NULL,
+    fecha_nacimiento DATE,
+    email VARCHAR(150) UNIQUE NOT NULL,
+    contrasena VARCHAR(255) NOT NULL,
+    direccion VARCHAR(100) NOT NULL,
+    preferencias ENUM('economica','vegetariana','sinGluten','rapido'),
+    url_imagen VARCHAR(255) NOT NULL,
+    fecha_registro DATE
 );
 
 
-create table listas_compras (
-    id_lista int auto_increment primary key,
-    id_usuario int not null,
-    fecha_creacion date default current_date,
-    foreign key (id_usuario) references usuarios(id_usuario)
+-- ===============================
+-- TABLA RECETAS
+-- ===============================
+CREATE TABLE recetas (
+    id_receta INT AUTO_INCREMENT PRIMARY KEY,
+    nombre VARCHAR(150) NOT NULL,
+    descripcion VARCHAR(150),
+    tiempo_preparacion INT,
+    url_imagen VARCHAR(255) NOT NULL,
+    dificultad ENUM('FACIL','MEDIA','DIFICIL') NOT NULL,
+    economica BOOLEAN,
+    vegetariana BOOLEAN,
+    sin_gluten BOOLEAN,
+    rapido BOOLEAN
 );
 
-create table lista_ingredientes (
-	id_lista_ingredientes int auto_increment primary key,
-    id_lista int not null,
-    id_ingrediente int not null,
-    cantidad float not null,
-    comprado  ENUM('Si', 'No') not null,
-    foreign key (id_lista) references listas_compras(id_lista) on delete cascade,
-    foreign key (id_ingrediente) references ingredientes(id_ingrediente) on delete cascade
+
+-- ===============================
+-- TABLA INGREDIENTES
+-- ===============================
+CREATE TABLE ingredientes (
+    id_ingrediente INT AUTO_INCREMENT PRIMARY KEY,
+    nombre VARCHAR(100) NOT NULL
 );
 
-create table recetas_favoritas (
-	id_recetas_favoritas int auto_increment primary key,
-    id_usuario int not null,
-    id_receta int not null,
-    foreign key (id_usuario) references usuarios(id_usuario) on delete cascade,
-    foreign key (id_receta) references recetas(id_receta) on delete cascade
+
+-- ===============================
+-- TABLA RECETA_INGREDIENTES
+-- ===============================
+CREATE TABLE receta_ingredientes (
+    id_receta_ingredientes INT AUTO_INCREMENT PRIMARY KEY,
+    id_receta INT NOT NULL,
+    id_ingrediente INT NOT NULL,
+    cantidad FLOAT,
+    FOREIGN KEY (id_receta) REFERENCES recetas(id_receta) ON DELETE CASCADE,
+    FOREIGN KEY (id_ingrediente) REFERENCES ingredientes(id_ingrediente) ON DELETE CASCADE
 );
 
-create table historial_cocina (
-    id_historial int auto_increment primary key,
-    id_usuario int not null,
-    id_receta int not null,
-    fecha_visitado date not null,
-    fecha_cocinado date not null,
-    foreign key (id_usuario) references usuarios(id_usuario) on delete cascade,
-    foreign key (id_receta) references recetas(id_receta) on delete cascade
+
+-- ===============================
+-- TABLA INSTRUCCIONES_RECETA
+-- ===============================
+CREATE TABLE instrucciones_receta (
+    id_instruccion INT AUTO_INCREMENT PRIMARY KEY,
+    id_receta INT NOT NULL,
+    paso_numero INT NOT NULL,
+    descripcion TEXT NOT NULL,
+    FOREIGN KEY (id_receta) REFERENCES recetas(id_receta) ON DELETE CASCADE
 );
 
-create table colecciones (
-    id_coleccion int auto_increment primary key,
-    id_usuario int not null,
-    nombre varchar(100) not null,
-    foreign key (id_usuario) references usuarios(id_usuario)
+
+-- ===============================
+-- TABLA LISTAS_COMPRAS
+-- ===============================
+CREATE TABLE listas_compras (
+    id_lista INT AUTO_INCREMENT PRIMARY KEY,
+    id_usuario INT NOT NULL,
+    fecha_creacion DATE DEFAULT CURRENT_DATE,
+    FOREIGN KEY (id_usuario) REFERENCES usuarios(id_usuario)
 );
 
-create table coleccion_recetas (
-	id_coleccion_recetas int auto_increment primary key,
-    id_coleccion int not null,
-    id_receta int not null,
-    foreign key (id_coleccion) references colecciones(id_coleccion) on delete cascade,
-    foreign key (id_receta) references recetas(id_receta)
+
+-- ===============================
+-- TABLA LISTA_INGREDIENTES
+-- ===============================
+CREATE TABLE lista_ingredientes (
+    id_lista_ingredientes INT AUTO_INCREMENT PRIMARY KEY,
+    id_lista INT NOT NULL,
+    id_ingrediente INT NOT NULL,
+    cantidad FLOAT NOT NULL,
+    comprado ENUM('Si','No') NOT NULL,
+    FOREIGN KEY (id_lista) REFERENCES listas_compras(id_lista) ON DELETE CASCADE,
+    FOREIGN KEY (id_ingrediente) REFERENCES ingredientes(id_ingrediente) ON DELETE CASCADE
 );
 
-create table etiquetas (
-    id_etiqueta int auto_increment primary key,
-    nombre varchar(50) unique not null
+
+-- ===============================
+-- TABLA RECETAS_FAVORITAS
+-- ===============================
+CREATE TABLE recetas_favoritas (
+    id_recetas_favoritas INT AUTO_INCREMENT PRIMARY KEY,
+    id_usuario INT NOT NULL,
+    id_receta INT NOT NULL,
+    FOREIGN KEY (id_usuario) REFERENCES usuarios(id_usuario) ON DELETE CASCADE,
+    FOREIGN KEY (id_receta) REFERENCES recetas(id_receta) ON DELETE CASCADE
 );
 
-create table receta_etiquetas (
-	id_receta_etiquetas int auto_increment primary key,
-    id_receta int not null,
-    id_etiqueta int not null,
-    foreign key (id_receta) references recetas(id_receta) on delete cascade,
-    foreign key (id_etiqueta) references etiquetas(id_etiqueta) on delete cascade
+
+-- ===============================
+-- TABLA HISTORIAL_COCINA
+-- ===============================
+CREATE TABLE historial_cocina (
+    id_historial INT AUTO_INCREMENT PRIMARY KEY,
+    id_usuario INT NOT NULL,
+    id_receta INT NOT NULL,
+    fecha_visitado DATE NOT NULL,
+    fecha_cocinado DATE NOT NULL,
+    FOREIGN KEY (id_usuario) REFERENCES usuarios(id_usuario) ON DELETE CASCADE,
+    FOREIGN KEY (id_receta) REFERENCES recetas(id_receta) ON DELETE CASCADE
 );
 
-alter table usuarios 
-	add column url_imagen varchar(255) not null;
 
-alter table recetas
-
-drop table fotos_perfil_usuario;
-
-drop table fotos_recetas;
-
-alter table ingredientes
-	add column cantidad int;
-
-alter table receta_ingredientes
-drop column cantidad;
-
-alter table usuarios
- drop column fecha_registro;
-
-alter table usuarios 
-add column fecha_registro date;
-
-alter table usuarios 
-add column preferencias ENUM('economica','vegetariana','sinGluten', 'rapido');
-
-alter table recetas 
-	drop column economica; 
-alter table recetas 
-	drop column vegetariana; 
-alter table recetas 
-	drop column sin_gluten; 
-alter table recetas 
-	drop column rapido; 
+-- ===============================
+-- TABLA COLECCIONES
+-- ===============================
+CREATE TABLE colecciones (
+    id_coleccion INT AUTO_INCREMENT PRIMARY KEY,
+    id_usuario INT NOT NULL,
+    nombre VARCHAR(100) NOT NULL,
+    FOREIGN KEY (id_usuario) REFERENCES usuarios(id_usuario)
+);
 
 
+-- ===============================
+-- TABLA COLECCION_RECETAS
+-- ===============================
+CREATE TABLE coleccion_recetas (
+    id_coleccion_recetas INT AUTO_INCREMENT PRIMARY KEY,
+    id_coleccion INT NOT NULL,
+    id_receta INT NOT NULL,
+    FOREIGN KEY (id_coleccion) REFERENCES colecciones(id_coleccion) ON DELETE CASCADE,
+    FOREIGN KEY (id_receta) REFERENCES recetas(id_receta)
+);
 
-alter table recetas 
-	add column economica boolean; 
-alter table recetas 
-	add column vegetariana boolean; 
-alter table recetas 
-	add column sin_gluten boolean; 
-alter table recetas 
-	add column rapido boolean; 
 
-alter table receta_ingredientes
-add column cantidad int;
+-- ===============================
+-- TABLA ETIQUETAS
+-- ===============================
+CREATE TABLE etiquetas (
+    id_etiqueta INT AUTO_INCREMENT PRIMARY KEY,
+    nombre VARCHAR(50) UNIQUE NOT NULL
+);
 
-alter table ingredientes 
-drop column cantidad;
 
-alter table recetas_favoritas 
-add table id_recetas_favoritas int auto_increment primary key;
-
-ALTER TABLE receta_ingredientes 
-MODIFY cantidad FLOAT;
-
+-- ===============================
+-- TABLA RECETA_ETIQUETAS
+-- ===============================
+CREATE TABLE receta_etiquetas (
+    id_receta_etiquetas INT AUTO_INCREMENT PRIMARY KEY,
+    id_receta INT NOT NULL,
+    id_etiqueta INT NOT NULL,
+    FOREIGN KEY (id_receta) REFERENCES recetas(id_receta) ON DELETE CASCADE,
+    FOREIGN KEY (id_etiqueta) REFERENCES etiquetas(id_etiqueta) ON DELETE CASCADE
+);
