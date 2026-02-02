@@ -4,6 +4,7 @@ import {Observable} from "rxjs";
 import {Receta} from "../modelos/Receta";
 import {RecetaTarjeta} from "../modelos/RecetaTarjeta";
 import {CrearReceta} from "../modelos/CrearReceta";
+import {environment} from "../../environments/environment";
 
 
 @Injectable({
@@ -12,6 +13,7 @@ import {CrearReceta} from "../modelos/CrearReceta";
 export class RecetaService {
 
   private http = inject(HttpClient);
+
 
 
   /**
@@ -30,23 +32,25 @@ export class RecetaService {
 
   constructor() {}
 
+  private apiUrl = environment.apiUrl;
+
   obtenerRecetas(): Observable<RecetaTarjeta[]> {
-    return this.http.get<RecetaTarjeta[]>(`http://localhost:8080/receta/tarjetasRecetas`);
+    return this.http.get<RecetaTarjeta[]>(`${this.apiUrl}/receta/obtenerRecetas`);
   }
   eliminarReceta(id: number) {
-    return this.http.delete(`http://localhost:8080/receta/eliminarReceta/${id}`);
+    return this.http.delete(`${this.apiUrl}receta/eliminarReceta/${id}`);
   }
   obtenerRecetaEnDetalle(id: number): Observable<Receta> {
-    return this.http.get<Receta>(`http://localhost:8080/receta/verDetalles/${id}`);
+    return this.http.get<Receta>(`${this.apiUrl}receta/verDetalles/${id}`);
   }
   crearReceta(receta: CrearReceta): Observable<CrearReceta> {
-    return this.http.post<CrearReceta>(`http://localhost:8080/receta/agregarReceta`, receta);
+    return this.http.post<CrearReceta>(`${this.apiUrl}receta/agregarReceta`, receta);
   }
   editarReceta(receta: CrearReceta): Observable<CrearReceta> {
-    return this.http.put<CrearReceta>(`http://localhost:8080/receta/editar/${receta.id}`, receta);
+    return this.http.put<CrearReceta>(`${this.apiUrl}receta/editar/${receta.id}`, receta);
   }
   obtenerRecetaPorId(id: number): Observable<CrearReceta> {
-    return this.http.get<CrearReceta>(`http://localhost:8080/receta/buscarPorId/${id}`);
+    return this.http.get<CrearReceta>(`${this.apiUrl}receta/buscarPorId/${id}`);
   }
 
   buscarRecetasPorFiltro(filtro: any): Observable<RecetaTarjeta[]> {
@@ -57,7 +61,7 @@ export class RecetaService {
     if (filtro.rapido) params.rapido = filtro.rapido;
     if (filtro.ingredientes && filtro.ingredientes.length > 0) params.ingredientes = filtro.ingredientes;
 
-    return this.http.get<RecetaTarjeta[]>('http://localhost:8080/receta/buscarReceta', { params });
+    return this.http.get<RecetaTarjeta[]>('${this.apiUrl}receta/buscarReceta', { params });
   }
 
 
