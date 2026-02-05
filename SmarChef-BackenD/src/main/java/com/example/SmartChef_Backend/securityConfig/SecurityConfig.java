@@ -22,6 +22,7 @@ public class SecurityConfig {
         return http
                 .cors(cors -> cors.configurationSource(corsConfigurationSource())) // 👈 ESTA LÍNEA ES LA CLAVE
                 .csrf(csrf -> csrf.disable())
+
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers(HttpMethod.OPTIONS, "/**").permitAll() // 👈 ESTA LÍNEA
                         .requestMatchers("/receta/**").permitAll()
