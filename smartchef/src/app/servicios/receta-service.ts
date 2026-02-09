@@ -16,13 +16,12 @@ export class RecetaService {
   constructor() {}
 
   obtenerRecetas(): Observable<RecetaTarjeta[]> {
-    // Aquí sí tenías la barra, este estaba bien
     return this.http.get<RecetaTarjeta[]>(`${this.apiUrl}/receta/tarjetasRecetas`);
   }
-
-  eliminarReceta(id: number) {
-    return this.http.delete(`${this.apiUrl}/receta/eliminarReceta/${id}`);
+  eliminarReceta(id: number): Observable<void> {
+    return this.http.delete<void>(`${this.apiUrl}/receta/eliminar/${id}`);
   }
+
 
   obtenerRecetaEnDetalle(id: number): Observable<Receta> {
     return this.http.get<Receta>(`${this.apiUrl}/receta/verDetalles/${id}`);
@@ -51,4 +50,6 @@ export class RecetaService {
 
     return this.http.get<RecetaTarjeta[]>(`${this.apiUrl}/receta/buscarReceta`, { params });
   }
+
+
 }

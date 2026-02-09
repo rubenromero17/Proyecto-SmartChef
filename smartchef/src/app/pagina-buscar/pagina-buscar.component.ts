@@ -1,4 +1,4 @@
-import { Component, inject, OnInit } from '@angular/core';
+import {Component, ElementRef, inject, OnInit, ViewChild} from '@angular/core';
 import { Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
@@ -233,6 +233,53 @@ export class PaginaBuscarComponent implements OnInit {
       this.recetas = this.recetasOriginales;
     }
   }
+
+  @ViewChild('video') videoElement!: ElementRef;
+  @ViewChild('canvas') canvasElement!: ElementRef;
+
+  camaraActiva = false;
+  fotoCapturada: string | null = null;
+
+  async iniciarCamara() {
+    try {
+      const stream = await navigator.mediaDevices.getUserMedia({
+        video: { facingMode: 'environment' }
+      });
+
+      this.videoElement.nativeElement.srcObject = stream;
+      this.videoElement.nativeElement.style.display = 'block';
+      this.camaraActiva = true;
+    } catch (err) {
+      console.error("Error al acceder a la cámara: ", err);
+      alert("No se pudo acceder a la cámara. Asegúrate de dar permisos.");
+    }
+  }
+
+  capturarFoto() {
+    const video = this.videoElement.nativeElement;
+    const canvas = this.canvasElement.nativeElement;
+    const context = canvas.getContext('2d');
+
+
+    canvas.width = video.videoWidth;
+    canvas.height = video.videoHeight;
+
+
+    context.drawImage(video, 0, 0, canvas.width, canvas.height);
+
+
+    const dataUrl = canvas.toDataURL('image/png');
+    this.fotoCapturada = dataUrl;
+
+
+    this.nuevaReceta.urlImagen = dataUrl;
+
+    const stream = video.srcObject as MediaStream;
+    stream.getTracks().forEach(track => track.stop());
+    this.videoElement.nativeElement.style.display = 'none';
+    this.camaraActiva = false;
+  }
+
 
 
 

@@ -135,7 +135,6 @@ public class RecetaServiceTest {
     @Test
     @DisplayName("Test unitario: obtener detalles de una receta existente")
     public void verDetallesRecetaTest(){
-
         RecetaDTO receta = servicio.verDetallesRecetas(1);
         assertNotNull(receta, "No se ha podido obtener los detalles de la receta");
     }

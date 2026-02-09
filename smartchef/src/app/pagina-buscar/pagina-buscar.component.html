@@ -80,6 +80,18 @@
         <label for="urlImagen">URL Imagen:</label>
         <input id="urlImagen" [(ngModel)]="nuevaReceta.urlImagen" name="urlImagen" />
 
+        <div class="contenedor-camara">
+          <button type="button" (click)="iniciarCamara()">📷 Abrir Cámara</button>
+
+          <video #video autoplay playsinline style="width: 100%; max-width: 300px; display: none;"></video>
+
+          <button type="button" *ngIf="camaraActiva" (click)="capturarFoto()">Capturar Foto</button>
+
+          <canvas #canvas style="display: none;"></canvas>
+
+          <img *ngIf="fotoCapturada" [src]="fotoCapturada" style="width: 100px; margin-top: 10px; border-radius: 8px;">
+        </div>
+
         <label for="dificultad">Dificultad:</label>
         <select id="dificultad" [(ngModel)]="nuevaReceta.dificultad" name="dificultad" required>
           <option value="FACIL">Fácil</option>
