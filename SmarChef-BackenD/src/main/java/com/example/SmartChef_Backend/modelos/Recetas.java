@@ -29,7 +29,7 @@ public class Recetas {
     @Column (name = "tiempo_preparacion", nullable = false)
     private Integer tiempoPreparacion;
 
-    @Lob
+
     @Column (name= "url_imagen",nullable = false,columnDefinition = "TEXT")
     private String urlImagen;
 
