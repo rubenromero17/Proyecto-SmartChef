@@ -36,7 +36,7 @@ public class RecetaDTO {
     private Integer tiempoPreparacion;
 
     @NotBlank(message = "La URL no puede estar vacia")
-    @Size(max = 255)
+    @Lob
     @URL(message = "La URL debe ser valida")
     private String urlImagen;
 

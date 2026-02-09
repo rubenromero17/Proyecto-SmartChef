@@ -29,7 +29,7 @@ public class Recetas {
     @Column (name = "tiempo_preparacion", nullable = false)
     private Integer tiempoPreparacion;
 
-    @Column (name= "url_imagen",nullable = false)
+    @Column (name= "url_imagen",nullable = false,columnDefinition = "TEXT")
     private String urlImagen;
 
     @Column (name = "dificultad",nullable = false)
